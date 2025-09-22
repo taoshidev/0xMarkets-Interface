@@ -38,7 +38,6 @@ import PositionsOverview from "pages/PositionsOverview/PositionsOverview";
 import { PriceImpactRebatesStatsPage } from "pages/PriceImpactRebatesStats/PriceImpactRebatesStats";
 import Referrals from "pages/Referrals/Referrals";
 import ReferralsTier from "pages/ReferralsTier/ReferralsTier";
-import Stake from "pages/Stake/Stake";
 import Stats from "pages/Stats/Stats";
 import { SyntheticsPage } from "pages/SyntheticsPage/SyntheticsPage";
 import { SyntheticsStats } from "pages/SyntheticsStats/SyntheticsStats";
@@ -117,11 +116,6 @@ export function MainRoutes({ openSettings }: { openSettings: () => void }) {
       <RedirectWithQuery exact from="/monitor/v2" to="/monitor" />
       <Route exact path="/monitor">
         <SyntheticsStats />
-      </Route>
-      <Route exact path="/stake">
-        <SyntheticsStateContextProvider skipLocalReferralCode={false} pageType="stake">
-          <Stake />
-        </SyntheticsStateContextProvider>
       </Route>
       {/* redirect from previous stake(earn) url */}
       <RedirectWithQuery exact from="/earn" to="/stake" />
