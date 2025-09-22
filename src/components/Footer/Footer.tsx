@@ -11,7 +11,7 @@ import { LandingPageFooterMenuEvent } from "lib/userAnalytics/types";
 import ExternalLink from "components/ExternalLink/ExternalLink";
 import { TrackingLink } from "components/TrackingLink/TrackingLink";
 
-import logoImg from "img/logo_GMX.svg";
+import logoImg from "img/logo_0xMarkets.svg";
 
 import { SOCIAL_LINKS, getFooterLinks } from "./constants";
 import { UserFeedbackModal } from "../UserFeedbackModal/UserFeedbackModal";
