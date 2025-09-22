@@ -10,7 +10,7 @@ import { ReferralTopMenuClickEvent } from "lib/userAnalytics/types";
 
 import ExternalLink from "components/ExternalLink/ExternalLink";
 
-import logoImg from "img/logo_GMX.svg";
+import logoImg from "img/logo_0xMarkets.svg";
 
 import { HeaderLink } from "./HeaderLink";
 

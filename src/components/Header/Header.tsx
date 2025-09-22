@@ -11,7 +11,7 @@ import { isHomeSite } from "lib/legacy";
 import { HeaderPromoBanner } from "components/HeaderPromoBanner/HeaderPromoBanner";
 import { OneClickPromoBanner } from "components/OneClickPromoBanner/OneClickPromoBanner";
 
-import logoImg from "img/logo_GMX.svg";
+import logoImg from "img/logo_0xMarkets.svg";
 import logoSmallImg from "img/logo_GMX_small.svg";
 
 import { AppHeaderLinks } from "./AppHeaderLinks";
