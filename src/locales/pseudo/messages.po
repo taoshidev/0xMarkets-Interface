@@ -5563,7 +5563,6 @@ msgstr ""
 msgid "Limit size is required"
 msgstr ""
 
-#: src/pages/Buy/Buy.tsx
 #: src/pages/Home/Home.tsx
 msgid "Protocol Tokens"
 msgstr ""
@@ -6087,10 +6086,6 @@ msgstr ""
 #: src/components/Synthetics/TradeHistory/TradeHistoryRow/utils/position.ts
 #: src/components/Synthetics/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Order execution price takes into account price impact."
-msgstr ""
-
-#: src/pages/Buy/Buy.tsx
-msgid "Buy GLP or GMX"
 msgstr ""
 
 #: src/components/Synthetics/UserIncentiveDistributionList/AboutGlpIncident.tsx

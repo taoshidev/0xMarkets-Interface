@@ -5563,7 +5563,6 @@ msgstr "Du hast eine <0>ausstehende Übertragung</0> an {pendingReceiver}."
 msgid "Limit size is required"
 msgstr ""
 
-#: src/pages/Buy/Buy.tsx
 #: src/pages/Home/Home.tsx
 msgid "Protocol Tokens"
 msgstr ""
@@ -6088,10 +6087,6 @@ msgstr ""
 #: src/components/Synthetics/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Order execution price takes into account price impact."
 msgstr "Der Ausführungspreis der Order berücksichtigt den Preisimpact."
-
-#: src/pages/Buy/Buy.tsx
-msgid "Buy GLP or GMX"
-msgstr ""
 
 #: src/components/Synthetics/UserIncentiveDistributionList/AboutGlpIncident.tsx
 msgid "GLV earns from trading fees (open, close, borrow, liquidations, swaps) and trader losses across GM pools, with auto-compounding for seamless growth (20-30% historical average annualized performance). View real-time earnings, performance, and portfolio value on the <0>Pools page</0>."

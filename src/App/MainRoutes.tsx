@@ -118,12 +118,6 @@ export function MainRoutes({ openSettings }: { openSettings: () => void }) {
         <SyntheticsStats />
       </Route>
       {/* redirect from previous stake(earn) url */}
-      <RedirectWithQuery exact from="/earn" to="/stake" />
-      <Route exact path="/buy">
-        <SyntheticsStateContextProvider skipLocalReferralCode={false} pageType="buy">
-          <Buy />
-        </SyntheticsStateContextProvider>
-      </Route>
       <Route exact path="/pools">
         <SyntheticsStateContextProvider skipLocalReferralCode={false} pageType="pools">
           <Pools />

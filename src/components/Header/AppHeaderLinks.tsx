@@ -60,11 +60,6 @@ export function AppHeaderLinks({ small, openSettings, clickCloseIcon, showRedire
           <Trans>Stats</Trans>
         </HeaderLink>
       </div>
-      <div className="App-header-link-container">
-        <HeaderLink qa="buy" to="/buy" showRedirectModal={showRedirectModal}>
-          <Trans>Buy</Trans>
-        </HeaderLink>
-      </div>
 
       <div className="App-header-link-container">
         <HeaderLink

@@ -5563,7 +5563,6 @@ msgstr "Vous avez un <0>transfert en attente</0> à {pendingReceiver}."
 msgid "Limit size is required"
 msgstr ""
 
-#: src/pages/Buy/Buy.tsx
 #: src/pages/Home/Home.tsx
 msgid "Protocol Tokens"
 msgstr ""

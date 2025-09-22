@@ -5563,7 +5563,6 @@ msgstr "Tienes una transferencia <0>pendiente</0> a {pendingReceiver}."
 msgid "Limit size is required"
 msgstr ""
 
-#: src/pages/Buy/Buy.tsx
 #: src/pages/Home/Home.tsx
 msgid "Protocol Tokens"
 msgstr ""
