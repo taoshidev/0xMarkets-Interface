@@ -409,11 +409,8 @@ function ChartHeaderInfoDesktop() {
   const scrollToRight = useCallback(() => scrollTo(1), [scrollTo]);
 
   return (
-    <div className="Chart-header mb-10 rounded-4 py-8 pr-8">
-      <div className="flex items-center justify-start pl-8">
-        <ChartTokenSelector selectedToken={selectedTokenOption} oneRowLabels={false} />
-      </div>
-      <div className="relative flex overflow-hidden">
+    <div className="Chart-header rounded-4 py-8 flex justify-between">
+      <div className="relative flex overflow-hidden pl-8 flex-1">
         <div className="pointer-events-none absolute z-40 flex h-full w-full flex-row justify-between">
           <div
             className={cx("Chart-top-scrollable-fade-left", {
@@ -445,6 +442,9 @@ function ChartHeaderInfoDesktop() {
           </div>
           {additionalInfo}
         </div>
+      </div>
+      <div className="w-[40rem] min-[1501px]:w-[41.85rem] flex justify-center items-center">
+        <ChartTokenSelector selectedToken={selectedTokenOption} oneRowLabels={false} />
       </div>
     </div>
   );

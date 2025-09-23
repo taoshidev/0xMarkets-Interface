@@ -287,7 +287,7 @@ export function GmListItem({
       <TableTd className="!pr-0">
         <Button
           className="flex-grow !px-30 !py-12"
-          variant="secondary"
+          variant="primary"
           to={`/pools/details?market=${marketOrGlvTokenAddress}`}
         >
           <Trans>Details</Trans>

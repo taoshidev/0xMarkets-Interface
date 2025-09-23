@@ -110,7 +110,9 @@ export function Header({ disconnectAccountAndCloseSettings, openSettings, showRe
                 <img src={logoImg} className="big" alt="GMX Logo" />
                 <img src={logoSmallImg} className="small" alt="GMX Logo" />
               </Link>
-              {isHomeSite() ? (
+            </div>
+            <div className="App-header-container-center">
+            {isHomeSite() ? (
                 <HomeHeaderLinks showRedirectModal={showRedirectModal} />
               ) : (
                 <AppHeaderLinks showRedirectModal={showRedirectModal} />

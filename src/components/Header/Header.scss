@@ -96,6 +96,14 @@
   min-width: 0;
 }
 
+.App-header-container-center {
+  justify-content: center;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
 .App-header-top {
   width: 100%;
   position: relative;
@@ -164,8 +172,8 @@
   color: var(--color-gray-50);
 }
 
-.App-header-container-left .a,
-.App-header-container-left a {
+.App-header-container-center .a,
+.App-header-container-center a {
   padding: 1.8rem 1.7rem;
   display: block;
   color: var(--color-slate-100);
@@ -173,13 +181,13 @@
   line-height: var(--line-height-body-large);
   font-weight: normal;
 }
-.App-header.large .App-header-container-left a {
+.App-header.large .App-header-container-center a {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.App-header-container-left a.active {
+.App-header-container-center a.active {
   color: var(--color-white);
 }
 

@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import "./ConnectWalletButton.scss";
 
 type Props = {
-  imgSrc: string;
+  imgSrc?: string;
   children: ReactNode;
   onClick: () => void;
 };

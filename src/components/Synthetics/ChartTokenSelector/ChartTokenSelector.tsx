@@ -14,7 +14,6 @@ import {
   TokenOption,
   selectTradeboxChooseSuitableMarket,
   selectTradeboxGetMaxLongShortLiquidityPool,
-  selectTradeboxMarketInfo,
   selectTradeboxTradeFlags,
   selectTradeboxTradeType,
 } from "context/SyntheticsStateContext/selectors/tradeboxSelectors";
@@ -24,7 +23,7 @@ import {
   useTokensFavorites,
 } from "context/TokensFavoritesContext/TokensFavoritesContextProvider";
 import { PreferredTradeTypePickStrategy } from "domain/synthetics/markets/chooseSuitableMarket";
-import { getMarketIndexName, getMarketPoolName } from "domain/synthetics/markets/utils";
+import { getMarketIndexName } from "domain/synthetics/markets/utils";
 import { IndexTokensStats } from "domain/synthetics/stats/marketsInfoDataToIndexTokensStats";
 import { PriceDelta, PriceDeltaMap, TokenData, TokensData, use24hPriceDeltaMap } from "domain/synthetics/tokens";
 import { use24hVolumes } from "domain/synthetics/tokens/use24Volumes";
@@ -68,10 +67,7 @@ type Props = {
 
 export default function ChartTokenSelector(props: Props) {
   const { selectedToken, oneRowLabels } = props;
-
-  const marketInfo = useSelector(selectTradeboxMarketInfo);
   const { isSwap } = useSelector(selectTradeboxTradeFlags);
-  const poolName = marketInfo && !isSwap ? getMarketPoolName(marketInfo) : null;
 
   const chevronClassName = oneRowLabels === undefined ? undefined : oneRowLabels ? "!-mt-4" : "!-mt-1 self-start";
 
@@ -100,17 +96,8 @@ export default function ChartTokenSelector(props: Props) {
             >
               <span className="text-body-large">
                 {!isSwap && <>{getTokenVisualMultiplier(selectedToken)}</>}
-                {selectedToken.symbol}/USD
+                {selectedToken.symbol}-USD
               </span>
-              {poolName && (
-                <span
-                  className={cx("text-body-small font-normal text-slate-100 group-hover:text-blue-300", {
-                    "ml-8": oneRowLabels,
-                  })}
-                >
-                  <span>[{poolName}]</span>
-                </span>
-              )}
             </span>
           </span>
         ) : (

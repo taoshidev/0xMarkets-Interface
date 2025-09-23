@@ -118,7 +118,6 @@ export function AppHeaderUser({
                 sendUserAnalyticsConnectWalletClickEvent("Header");
                 openConnectModal();
               }}
-              imgSrc={connectWalletImg}
             >
               {small ? <Trans>Connect</Trans> : <Trans>Connect Wallet</Trans>}
             </ConnectWalletButton>
