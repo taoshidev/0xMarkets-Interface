@@ -38,6 +38,7 @@
   display: grid;
   grid-template-columns: minmax(auto, max-content) auto;
   background-color: var(--color-slate-800);
+  border: 1px solid var(--color-slate-700);
 }
 
 .Favorite-tokens-bar {

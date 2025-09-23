@@ -14,20 +14,8 @@
   display: flex;
   justify-content: space-between;
   position: relative;
-  padding-left: 3.2rem;
-  padding-right: 3.2rem;
-  background: transparent 0% 0% no-repeat padding-box;
-  border-bottom: 1px solid var(--color-slate-700);
-}
-
-.App-header.large::after {
-  height: 1.3rem;
-  width: 100%;
-  content: " ";
-  background: transparent linear-gradient(180deg, #00000030 0%, transparent 100%) 0% 0% no-repeat padding-box;
-  position: absolute;
-  bottom: -1.3rem;
-  left: 0;
+  // padding-left: 3.2rem;
+  // padding-right: 3.2rem;
 }
 
 .App-header.large .App-header-links {
@@ -245,10 +233,6 @@
     grid-template-columns: 1fr auto auto auto auto;
   }
 
-  .App-header-link-main img {
-    height: 2.1rem;
-  }
-
   .App-header.small {
     height: 6.2rem;
     backdrop-filter: blur(4px);
@@ -257,18 +241,6 @@
     position: relative;
     padding-left: 1.6rem;
     padding-right: 1.6rem;
-    background: transparent 0% 0% no-repeat padding-box;
-    border-bottom: 1px solid var(--color-slate-700);
-  }
-
-  .App-header.small::after {
-    height: 1.3rem;
-    width: 100%;
-    content: " ";
-    background: transparent linear-gradient(180deg, #00000030 0%, transparent 100%) 0% 0% no-repeat padding-box;
-    position: absolute;
-    bottom: -1.3rem;
-    left: 0;
   }
 
   a.App-header-user-account {

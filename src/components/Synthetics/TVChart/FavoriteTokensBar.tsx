@@ -40,7 +40,7 @@ export function FavoriteTokensBar() {
   }
 
   return (
-    <div className="Favorite-tokens-bar w-full rounded-4 py-8 flex">
+    <div className="Favorite-tokens-bar bg-slate-800 border border-slate-700 w-full rounded-4 py-8 flex">
       {favoriteChartTokens.map((token) => {
         const tokenData = tokensData?.[token.address];
         const dayPriceDelta = dayPriceDeltaMap?.[token.address];

@@ -141,7 +141,7 @@ export function AppRoutes() {
 
   return (
     <>
-      <div className="App">
+      <div className="App bg-background bg-cover bg-bottom bg-[url('/src/img/background.png')] bg-no-repeat">
         <div className="App-content">
           <Header
             disconnectAccountAndCloseSettings={disconnectAccountAndCloseSettings}

@@ -166,13 +166,9 @@ function ChartHeaderInfoMobile() {
   ]);
 
   return (
-    <div className="mb-10 rounded-4 bg-slate-800 ">
+    <div className="mb-8 rounded-4 bg-slate-800 border border-slate-700">
       <div className="p-16">
-        <div className="flex items-start justify-between">
-          <div className="inline-flex">
-            <ChartTokenSelector selectedToken={selectedTokenOption} oneRowLabels={false} />
-          </div>
-
+        <div className="flex items-center justify-between">
           <div className="flex cursor-pointer flex-row items-start gap-8" role="button" onClick={toggleDetailsVisible}>
             <div className="flex flex-col">
               <div className="mr-4">{avgPrice}</div>
@@ -185,6 +181,9 @@ function ChartHeaderInfoMobile() {
                 <BiChevronDown className="-ml-6 -mt-2" size={24} />
               )}
             </span>
+          </div>
+          <div className="inline-flex">
+            <ChartTokenSelector selectedToken={selectedTokenOption} oneRowLabels={false} />
           </div>
         </div>
       </div>

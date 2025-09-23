@@ -11,8 +11,8 @@ import { isHomeSite } from "lib/legacy";
 import { HeaderPromoBanner } from "components/HeaderPromoBanner/HeaderPromoBanner";
 import { OneClickPromoBanner } from "components/OneClickPromoBanner/OneClickPromoBanner";
 
+import logoSmallImg from "img/logo.svg";
 import logoImg from "img/logo_0xMarkets.svg";
-import logoSmallImg from "img/logo_GMX_small.svg";
 
 import { AppHeaderLinks } from "./AppHeaderLinks";
 import { AppHeaderUser } from "./AppHeaderUser";
@@ -104,7 +104,7 @@ export function Header({ disconnectAccountAndCloseSettings, openSettings, showRe
       )}
       <header data-qa="header">
         {!isMobile && (
-          <div className="App-header large">
+          <div className="App-header large px-8">
             <div className="App-header-container-left">
               <Link className="App-header-link-main" to="/">
                 <img src={logoImg} className="big" alt="GMX Logo" />
@@ -142,8 +142,8 @@ export function Header({ disconnectAccountAndCloseSettings, openSettings, showRe
             >
               <div className="App-header-container-left">
                 <div className="App-header-link-main clickable" onClick={toggleDrawer}>
-                  <img src={logoImg} className="big" alt="GMX Logo" />
-                  <img src={logoSmallImg} className="small" alt="GMX Logo" />
+                  <img src={logoImg} className="big" alt="0xMarkets Logo" />
+                  <img src={logoSmallImg} className="small" alt="0xMarkets Logo" />
                 </div>
               </div>
               <div className="App-header-container-right">

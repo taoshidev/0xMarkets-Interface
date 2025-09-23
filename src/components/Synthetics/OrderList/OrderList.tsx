@@ -189,7 +189,7 @@ export function OrderList({
     <div ref={ref}>
       {(isContainerSmall || isScreenSmall) && !isLoading && (
         <div className="flex flex-col gap-8">
-          <div className="flex flex-wrap items-center justify-between gap-8 bg-slate-950">
+          <div className="flex flex-wrap items-center justify-between gap-8 px-8">
             {isContainerSmall ? (
               <div className="flex gap-8">
                 <Button variant="secondary" onClick={onSelectAllOrders}>

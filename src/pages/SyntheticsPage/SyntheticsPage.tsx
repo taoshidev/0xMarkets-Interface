@@ -363,7 +363,7 @@ export function SyntheticsPage(p: Props) {
           </div>
 
           {isMobile && (
-            <div className="Exchange-lists small min-w-0" data-qa="trade-table-small">
+            <div className="Exchange-lists small min-w-0 rounded-4 bg-slate-800 border border-slate-700" data-qa="trade-table-small">
               <div className="Exchange-list-tab-container">
                 <Tabs
                   options={tabsOptions}

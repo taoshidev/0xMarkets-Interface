@@ -17,21 +17,9 @@ $app-card-padding: 1.5rem;
   display: flex;
   justify-content: space-between;
   position: relative;
-  padding-left: 3.2rem;
-  padding-right: 3.2rem;
-  background: transparent 0% 0% no-repeat padding-box;
-  border-bottom: 1px solid var(--color-slate-700);
+  // padding-left: 3.2rem;
+  // padding-right: 3.2rem;
   z-index: 1;
-}
-
-.App-header.large::after {
-  height: 1.3rem;
-  width: 100%;
-  content: " ";
-  background: transparent linear-gradient(180deg, #00000030 0%, transparent 100%) 0% 0% no-repeat padding-box;
-  position: absolute;
-  bottom: -1.3rem;
-  left: 0;
 }
 
 .App-header.large .App-header-links {
@@ -1129,18 +1117,6 @@ button.App-button {
     position: relative;
     padding-left: 1.6rem;
     padding-right: 1.6rem;
-    background: transparent 0% 0% no-repeat padding-box;
-    border-bottom: 1px solid var(--color-slate-700);
-  }
-
-  .App-header.small::after {
-    height: 1.3rem;
-    width: 100%;
-    content: " ";
-    background: transparent linear-gradient(180deg, #00000030 0%, transparent 100%) 0% 0% no-repeat padding-box;
-    position: absolute;
-    bottom: -1.3rem;
-    left: 0;
   }
 
   .Page-title-section {
