@@ -66,6 +66,8 @@ import { useIsCurtainOpen } from "components/Synthetics/TradeBox/Curtain";
 import { TradeBoxResponsiveContainer } from "components/Synthetics/TradeBox/TradeBoxResponsiveContainer";
 import { TradeHistory } from "components/Synthetics/TradeHistory/TradeHistory";
 import { Chart } from "components/Synthetics/TVChart/Chart";
+import { ChartHeader } from "components/Synthetics/TVChart/ChartHeader";
+import { FavoriteTokensBar } from "components/Synthetics/TVChart/FavoriteTokensBar";
 import Tabs from "components/Tabs/Tabs";
 
 export type Props = {
@@ -89,6 +91,8 @@ export function SyntheticsPage(p: Props) {
   useExternalSwapHandler();
 
   const isMobile = useMedia("(max-width: 1100px)");
+  const isSmallMobile = useMedia("(max-width: 700px)");
+
 
   const [isSettling, setIsSettling] = useState(false);
   const [listSection, setListSection] = useLocalStorageSerializeKey(
@@ -263,12 +267,105 @@ export function SyntheticsPage(p: Props) {
         "!pb-[333px]": isMobile,
       })}
     >
-      <div className="-mt-15 grid grow grid-cols-[1fr_auto] gap-12 px-32 pt-0 max-[1100px]:grid-cols-1 max-[800px]:p-10">
-        {isMobile && <OneClickPromoBanner openSettings={openSettings} />}
-        <div className="Exchange-left flex flex-col">
-          <Chart />
-          {!isMobile && (
-            <div className="Exchange-lists large" data-qa="trade-table-large">
+      <div>
+        
+        <div className="-mt-15 flex grow flex-col gap-5 px-8 pt-0 max-[800px]:p-10">
+          {isMobile && <OneClickPromoBanner openSettings={openSettings} />}
+          
+          <FavoriteTokensBar />
+          
+          <ChartHeader isMobile={isMobile} />
+
+          <div className="grid grow grid-cols-[1fr_auto] gap-5 max-[1100px]:grid-cols-1">
+            <div className="Exchange-left flex flex-col">
+              <Chart />
+
+              {!isMobile && (
+                <div className="Exchange-lists large mt-5 rounded-4" data-qa="trade-table-large">
+                  <div className="Exchange-list-tab-container">
+                    <Tabs
+                      options={tabsOptions}
+                      selectedValue={listSection}
+                      onChange={handleTabChange}
+                      type="inline"
+                      className="Exchange-list-tabs"
+                      qa="exchange-list-tabs"
+                    />
+                    <div className="align-right Exchange-should-show-position-lines">
+                      {listSection === ListSection.Orders && selectedOrderKeys.length > 0 && (
+                        <button
+                          className="muted cancel-order-btn text-body-medium"
+                          disabled={isCancelOrdersProcessing}
+                          type="button"
+                          onClick={onCancelSelectedOrders}
+                        >
+                          <Plural value={selectedOrderKeys.length} one="Cancel order" other="Cancel # orders" />
+                        </button>
+                      )}
+                      <Checkbox
+                        isChecked={shouldShowPositionLines}
+                        setIsChecked={setShouldShowPositionLines}
+                        className={cx("muted chart-positions", { active: shouldShowPositionLines })}
+                      >
+                        <span>
+                          <Trans>Chart positions</Trans>
+                        </span>
+                      </Checkbox>
+                    </div>
+                  </div>
+
+                  {listSection === ListSection.Positions && (
+                    <PositionList
+                      onOrdersClick={handlePositionListOrdersClick}
+                      onSelectPositionClick={onSelectPositionClick}
+                      onClosePositionClick={setClosingPositionKey}
+                      openSettings={openSettings}
+                      onCancelOrder={onCancelOrder}
+                    />
+                  )}
+                  {listSection === ListSection.Orders && (
+                    <OrderList
+                      selectedOrdersKeys={selectedOrderKeys}
+                      setSelectedOrderKeys={setSelectedOrderKeys}
+                      selectedPositionOrderKey={selectedPositionOrderKey}
+                      setSelectedPositionOrderKey={setSelectedPositionOrderKey}
+                      marketsDirectionsFilter={marketsDirectionsFilter}
+                      setMarketsDirectionsFilter={setMarketsDirectionsFilter}
+                      orderTypesFilter={orderTypesFilter}
+                      setOrderTypesFilter={setOrderTypesFilter}
+                      onCancelSelectedOrders={onCancelSelectedOrders}
+                    />
+                  )}
+                  {listSection === ListSection.Trades && <TradeHistory account={account} />}
+                  {listSection === ListSection.Claims && renderClaims()}
+                </div>
+              )}
+            </div>
+
+            {isMobile ? (
+              <>
+                <div className="absolute">
+                  <TradeBoxResponsiveContainer />
+                </div>
+                {isSwap && !isTwap && (
+                  <SwapCard maxLiquidityUsd={swapOutLiquidity} fromToken={fromToken} toToken={toToken} />
+                )}
+              </>
+            ) : (
+              <div className="w-[40rem] min-[1501px]:w-[41.85rem] h-full">
+                <TradeBoxResponsiveContainer />
+
+                <div className="mt-12 flex flex-col gap-12">
+                  {isSwap && !isTwap && (
+                    <SwapCard maxLiquidityUsd={swapOutLiquidity} fromToken={fromToken} toToken={toToken} />
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {isMobile && (
+            <div className="Exchange-lists small min-w-0" data-qa="trade-table-small">
               <div className="Exchange-list-tab-container">
                 <Tabs
                   options={tabsOptions}
@@ -276,31 +373,8 @@ export function SyntheticsPage(p: Props) {
                   onChange={handleTabChange}
                   type="inline"
                   className="Exchange-list-tabs"
-                  qa="exchange-list-tabs"
                 />
-                <div className="align-right Exchange-should-show-position-lines">
-                  {listSection === ListSection.Orders && selectedOrderKeys.length > 0 && (
-                    <button
-                      className="muted cancel-order-btn text-body-medium"
-                      disabled={isCancelOrdersProcessing}
-                      type="button"
-                      onClick={onCancelSelectedOrders}
-                    >
-                      <Plural value={selectedOrderKeys.length} one="Cancel order" other="Cancel # orders" />
-                    </button>
-                  )}
-                  <Checkbox
-                    isChecked={shouldShowPositionLines}
-                    setIsChecked={setShouldShowPositionLines}
-                    className={cx("muted chart-positions", { active: shouldShowPositionLines })}
-                  >
-                    <span>
-                      <Trans>Chart positions</Trans>
-                    </span>
-                  </Checkbox>
-                </div>
               </div>
-
               {listSection === ListSection.Positions && (
                 <PositionList
                   onOrdersClick={handlePositionListOrdersClick}
@@ -328,65 +402,6 @@ export function SyntheticsPage(p: Props) {
             </div>
           )}
         </div>
-
-        {isMobile ? (
-          <>
-            <div className="absolute">
-              <TradeBoxResponsiveContainer />
-            </div>
-            {isSwap && !isTwap && (
-              <SwapCard maxLiquidityUsd={swapOutLiquidity} fromToken={fromToken} toToken={toToken} />
-            )}
-          </>
-        ) : (
-          <div className="w-[40rem] min-[1501px]:w-[41.85rem]">
-            <TradeBoxResponsiveContainer />
-
-            <div className="mt-12 flex flex-col gap-12">
-              {isSwap && !isTwap && (
-                <SwapCard maxLiquidityUsd={swapOutLiquidity} fromToken={fromToken} toToken={toToken} />
-              )}
-            </div>
-          </div>
-        )}
-
-        {isMobile && (
-          <div className="Exchange-lists small min-w-0" data-qa="trade-table-small">
-            <div className="Exchange-list-tab-container">
-              <Tabs
-                options={tabsOptions}
-                selectedValue={listSection}
-                onChange={handleTabChange}
-                type="inline"
-                className="Exchange-list-tabs"
-              />
-            </div>
-            {listSection === ListSection.Positions && (
-              <PositionList
-                onOrdersClick={handlePositionListOrdersClick}
-                onSelectPositionClick={onSelectPositionClick}
-                onClosePositionClick={setClosingPositionKey}
-                openSettings={openSettings}
-                onCancelOrder={onCancelOrder}
-              />
-            )}
-            {listSection === ListSection.Orders && (
-              <OrderList
-                selectedOrdersKeys={selectedOrderKeys}
-                setSelectedOrderKeys={setSelectedOrderKeys}
-                selectedPositionOrderKey={selectedPositionOrderKey}
-                setSelectedPositionOrderKey={setSelectedPositionOrderKey}
-                marketsDirectionsFilter={marketsDirectionsFilter}
-                setMarketsDirectionsFilter={setMarketsDirectionsFilter}
-                orderTypesFilter={orderTypesFilter}
-                setOrderTypesFilter={setOrderTypesFilter}
-                onCancelSelectedOrders={onCancelSelectedOrders}
-              />
-            )}
-            {listSection === ListSection.Trades && <TradeHistory account={account} />}
-            {listSection === ListSection.Claims && renderClaims()}
-          </div>
-        )}
       </div>
       <PositionSeller />
       <PositionEditor />

@@ -65,6 +65,7 @@
 
 .Exchange-lists.large {
   display: block;
+  background-color: var(--color-slate-800);
 }
 
 .Exchange-lists.small {
