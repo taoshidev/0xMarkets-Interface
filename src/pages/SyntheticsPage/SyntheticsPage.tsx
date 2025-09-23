@@ -266,9 +266,7 @@ export function SyntheticsPage(p: Props) {
       className={cx("Exchange page-layout", {
         "!pb-[333px]": isMobile,
       })}
-    >
-      <div>
-        
+    >        
         <div className="-mt-15 flex grow flex-col gap-5 px-8 pt-0 max-[800px]:p-10">
           {isMobile && <OneClickPromoBanner openSettings={openSettings} />}
           
@@ -281,7 +279,7 @@ export function SyntheticsPage(p: Props) {
               <Chart />
 
               {!isMobile && (
-                <div className="Exchange-lists large mt-5 rounded-4" data-qa="trade-table-large">
+                <div className="Exchange-lists large mt-5 rounded-4 h-full mb-5" data-qa="trade-table-large">
                   <div className="Exchange-list-tab-container">
                     <Tabs
                       options={tabsOptions}
@@ -352,7 +350,7 @@ export function SyntheticsPage(p: Props) {
                 )}
               </>
             ) : (
-              <div className="w-[40rem] min-[1501px]:w-[41.85rem] h-full">
+              <div className="w-[40rem] min-[1501px]:w-[41.85rem] mb-5">
                 <TradeBoxResponsiveContainer />
 
                 <div className="mt-12 flex flex-col gap-12">
@@ -402,12 +400,11 @@ export function SyntheticsPage(p: Props) {
             </div>
           )}
         </div>
-      </div>
       <PositionSeller />
       <PositionEditor />
       <InterviewModal type="trader" isVisible={isInterviewModalVisible} setIsVisible={setIsInterviewModalVisible} />
       <NpsModal />
-      <Footer isMobileTradePage={isMobile} />
+      {/* <Footer isMobileTradePage={isMobile} /> */}
     </div>
   );
 }
