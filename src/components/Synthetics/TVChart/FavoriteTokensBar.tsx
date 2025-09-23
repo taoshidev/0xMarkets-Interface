@@ -1,6 +1,7 @@
 import cx from "classnames";
 import { useCallback } from "react";
 import type { Address } from "viem";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { useSelector } from "context/SyntheticsStateContext/utils";
 import { selectAvailableChartTokens } from "context/SyntheticsStateContext/selectors/chartSelectors";
@@ -41,44 +42,50 @@ export function FavoriteTokensBar() {
 
   return (
     <div className="Favorite-tokens-bar bg-slate-800 border border-slate-700 w-full rounded-4 py-8 flex">
-      {favoriteChartTokens.map((token) => {
-        const tokenData = tokensData?.[token.address];
-        const dayPriceDelta = dayPriceDeltaMap?.[token.address];
-        const averagePrice = tokenData ? getMidPrice(tokenData.prices) : undefined;
-        const formattedPrice = averagePrice
-          ? formatUsdPrice(averagePrice, {
-              visualMultiplier: tokenData?.visualMultiplier,
-            })
-          : undefined;
+      <AnimatePresence mode="popLayout">
+        {favoriteChartTokens.map((token) => {
+          const tokenData = tokensData?.[token.address];
+          const dayPriceDelta = dayPriceDeltaMap?.[token.address];
+          const averagePrice = tokenData ? getMidPrice(tokenData.prices) : undefined;
+          const formattedPrice = averagePrice
+            ? formatUsdPrice(averagePrice, {
+                visualMultiplier: tokenData?.visualMultiplier,
+              })
+            : undefined;
 
-        return (
-          <button
-            key={token.address}
-            className="flex-shrink-0 px-16 py-8"
-            onClick={() => handleTokenClick(token.address)}
-          >
-            <div className="text-body-small font-medium text-slate-100 whitespace-nowrap">
-              {getTokenVisualMultiplier(token)}
-              {token.symbol}-USD
-              {formattedPrice && (
-                <span className="ml-8 text-slate-300">
-                  {formattedPrice}
-                </span>
-              )}
-              {dayPriceDelta?.deltaPercentageStr && (
-                <span
-                  className={cx("ml-8", {
-                    "positive": dayPriceDelta.deltaPercentage > 0,
-                    "negative": dayPriceDelta.deltaPercentage < 0,
-                  })}
-                >
-                  {dayPriceDelta.deltaPercentageStr}
-                </span>
-              )}
-            </div>
-          </button>
-        );
-      })}
+          return (
+            <motion.button
+              key={token.address}
+              className="flex-shrink-0 px-16 py-8"
+              onClick={() => handleTokenClick(token.address)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="text-body-small font-medium text-slate-100 whitespace-nowrap">
+                {getTokenVisualMultiplier(token)}
+                {token.symbol}-USD
+                {formattedPrice && (
+                  <span className="ml-8 text-slate-300">
+                    {formattedPrice}
+                  </span>
+                )}
+                {dayPriceDelta?.deltaPercentageStr && (
+                  <span
+                    className={cx("ml-8", {
+                      "positive": dayPriceDelta.deltaPercentage > 0,
+                      "negative": dayPriceDelta.deltaPercentage < 0,
+                    })}
+                  >
+                    {dayPriceDelta.deltaPercentageStr}
+                  </span>
+                )}
+              </div>
+            </motion.button>
+          );
+        })}
+      </AnimatePresence>
     </div>
   );
 }
