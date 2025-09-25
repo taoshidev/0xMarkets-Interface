@@ -35,7 +35,7 @@ export default function ToggleSwitch({
         {beforeSwitchContent}
         <div
           className={cx("group relative w-36 cursor-pointer rounded-full border transition-all duration-300", {
-            "border-blue-400 bg-blue-400": isChecked,
+            "border-green-300 bg-green-300": isChecked,
             "bg-fill-slate-700 border-slate-600": !isChecked,
             "pointer-events-none": disabled,
           })}
