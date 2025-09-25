@@ -35,11 +35,9 @@ export default function Pagination({ page, pageCount, topMargin = true, onPageCh
   const middleButtons = getPageNumbers(page, pageCount).map((pageNumber) => {
     return (
       <Button
-        variant="secondary"
+        variant={pageNumber === page ? "primary" : "secondary"}
         key={pageNumber}
-        className={cx("flex h-32 w-32 items-center justify-center rounded-8 p-8 font-medium", {
-          "!bg-blue-400 !text-white": pageNumber === page,
-        })}
+        className={cx("flex h-32 w-32 items-center justify-center rounded-8 p-8 font-medium")}
         onClick={() => onPageChange(pageNumber)}
       >
         {pageNumber}

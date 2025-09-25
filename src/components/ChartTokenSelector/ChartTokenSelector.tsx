@@ -14,7 +14,6 @@ import {
   TokenOption,
   selectTradeboxChooseSuitableMarket,
   selectTradeboxGetMaxLongShortLiquidityPool,
-  selectTradeboxMarketInfo,
   selectTradeboxTradeFlags,
   selectTradeboxTradeType,
 } from "context/SyntheticsStateContext/selectors/tradeboxSelectors";
@@ -24,7 +23,7 @@ import {
   useTokensFavorites,
 } from "context/TokensFavoritesContext/TokensFavoritesContextProvider";
 import { PreferredTradeTypePickStrategy } from "domain/synthetics/markets/chooseSuitableMarket";
-import { getMarketBaseName, getMarketPoolName } from "domain/synthetics/markets/utils";
+import { getMarketBaseName } from "domain/synthetics/markets/utils";
 import { IndexTokensStats } from "domain/synthetics/stats/marketsInfoDataToIndexTokensStats";
 import { PriceDelta, PriceDeltaMap, TokenData, TokensData, use24hPriceDeltaMap } from "domain/synthetics/tokens";
 import { use24hVolumes } from "domain/synthetics/tokens/use24Volumes";
@@ -66,10 +65,7 @@ type Props = {
 
 export default function ChartTokenSelector(props: Props) {
   const { selectedToken, oneRowLabels } = props;
-
-  const marketInfo = useSelector(selectTradeboxMarketInfo);
   const { isSwap } = useSelector(selectTradeboxTradeFlags);
-  const poolName = marketInfo && !isSwap ? getMarketPoolName(marketInfo) : null;
 
   const { isMobile } = useBreakpoints();
 
@@ -83,7 +79,7 @@ export default function ChartTokenSelector(props: Props) {
       desktopPanelClassName={cx("max-w-[100vw] shadow-md", { "w-[520px]": isSwap, "w-[880px]": !isSwap })}
       chevronClassName="hidden"
       label={
-        <Button variant="secondary">
+        <Button variant="link">
           {selectedToken ? (
             <span
               className={cx("inline-flex gap-12 whitespace-nowrap pl-0 text-[13px]", {
@@ -108,17 +104,8 @@ export default function ChartTokenSelector(props: Props) {
                   >
                     <span className="text-start text-[13px] font-medium text-typography-primary">
                       {!isSwap && <>{getTokenVisualMultiplier(selectedToken)}</>}
-                      {selectedToken.symbol}/USD
+                      {selectedToken.symbol}-USD
                     </span>
-                    {poolName && (
-                      <span
-                        className={cx("text-12 font-normal text-typography-secondary", {
-                          "ml-4": oneRowLabels,
-                        })}
-                      >
-                        <span>[{poolName}]</span>
-                      </span>
-                    )}
 
                     {isSwap && !oneRowLabels ? (
                       <div className="text-blue-300">

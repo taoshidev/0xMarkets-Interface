@@ -10,8 +10,6 @@ import { useChainId } from "lib/chains";
 import { AccountDashboard } from "pages/AccountDashboard/AccountDashboard";
 import { buildAccountDashboardUrl } from "pages/AccountDashboard/buildAccountDashboardUrl";
 import { AccountsRouter } from "pages/Actions/ActionsRouter";
-import Buy from "pages/Buy/Buy";
-import BuyGMX from "pages/BuyGMX/BuyGMX";
 import ClaimEsGmx from "pages/ClaimEsGmx/ClaimEsGmx";
 import DashboardV2 from "pages/Dashboard/DashboardV2";
 import Ecosystem from "pages/Ecosystem/Ecosystem";
@@ -25,7 +23,6 @@ import { PoolsDetails } from "pages/PoolsDetails/PoolsDetails";
 import { PriceImpactRebatesStatsPage } from "pages/PriceImpactRebatesStats/PriceImpactRebatesStats";
 import Referrals from "pages/Referrals/Referrals";
 import ReferralsTier from "pages/ReferralsTier/ReferralsTier";
-import Stake from "pages/Stake/Stake";
 import Stats from "pages/Stats/Stats";
 import { SyntheticsPage } from "pages/SyntheticsPage/SyntheticsPage";
 import { SyntheticsStats } from "pages/SyntheticsStats/SyntheticsStats";
@@ -58,8 +55,8 @@ export function MainRoutes({ openSettings }: { openSettings: () => void }) {
       {/* redirect from previous dashboard url */}
       <RedirectWithQuery exact from="/dashboard" to="/stats" />
       <RedirectWithQuery exact from="/monitor/v2" to="/monitor" />
-      {/* redirect from previous stake(earn) url */}
-      <RedirectWithQuery exact from="/earn" to="/stake" />
+
+
       <RedirectWithQuery from="/v2" to="/trade" />
 
       <Route exact path="/">
@@ -85,18 +82,6 @@ export function MainRoutes({ openSettings }: { openSettings: () => void }) {
         <SyntheticsStats />
       </Route>
 
-      <Route exact path="/stake">
-        <SyntheticsStateContextProvider skipLocalReferralCode={false} pageType="stake">
-          <Stake />
-        </SyntheticsStateContextProvider>
-      </Route>
-
-      <Route exact path="/buy">
-        <SyntheticsStateContextProvider skipLocalReferralCode={false} pageType="buy">
-          <Buy />
-        </SyntheticsStateContextProvider>
-      </Route>
-
       <Route exact path="/pools">
         <SyntheticsStateContextProvider skipLocalReferralCode={false} pageType="pools">
           <Pools />
@@ -120,9 +105,7 @@ export function MainRoutes({ openSettings }: { openSettings: () => void }) {
       <Route exact path="/jobs">
         <Jobs />
       </Route>
-      <Route exact path="/buy_gmx">
-        <BuyGMX />
-      </Route>
+
       <Route exact path="/ecosystem">
         <Ecosystem />
       </Route>

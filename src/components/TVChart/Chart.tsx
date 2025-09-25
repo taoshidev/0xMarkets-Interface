@@ -59,7 +59,7 @@ export function Chart() {
 
   return (
     <div className="ExchangeChart tv Synthetics-chart flex flex-col">
-      <div className="flex grow flex-col overflow-hidden rounded-8 bg-slate-900">
+      <div className="flex grow flex-col overflow-hidden rounded-8 border border-slate-800 bg-slate-750">
         {isSwap ? (
           tab === "MARKET_GRAPH" ? (
             TAB_CONTENTS.MARKET_GRAPH

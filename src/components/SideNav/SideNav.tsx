@@ -11,12 +11,10 @@ import CollapseIcon from "img/collapse.svg?react";
 import DashboardIcon from "img/dashboard.svg?react";
 import DatabaseIcon from "img/database.svg?react";
 import DocsIcon from "img/docs.svg?react";
-import EarnIcon from "img/earn.svg?react";
 import EcosystemIcon from "img/ecosystem.svg?react";
-import BuyIcon from "img/ic_buy.svg?react";
 import LeaderboardIcon from "img/leaderboard.svg?react";
-import logoIcon from "img/logo-icon.svg";
 import LogoText from "img/logo-text.svg?react";
+import logoIcon from "img/logo_0xMarkets.svg";
 import ReferralsIcon from "img/referrals.svg?react";
 import TradeIcon from "img/trade.svg?react";
 
@@ -31,7 +29,7 @@ function SideNav({ className }: { className?: string }) {
 
   return (
     <nav
-      className={cx("flex h-full shrink-0 flex-col bg-slate-950", className, {
+      className={cx("flex h-full shrink-0 flex-col border border-slate-800 bg-slate-750", className, {
         "w-[172px] max-xl:w-[144px]": !isCollapsed,
       })}
     >
@@ -143,9 +141,7 @@ export function MenuSection({
   const mainNavItems = [
     { icon: <TradeIcon />, label: t`Trade`, key: "trade", to: "/trade" },
     { icon: <DatabaseIcon />, label: t`Pools`, key: "pools", to: "/pools" },
-    { icon: <EarnIcon />, label: t`Stake`, key: "stake", to: "/stake" },
     { icon: <DashboardIcon />, label: t`Stats`, key: "stats", to: "/stats" },
-    { icon: <BuyIcon />, label: t`Buy`, key: "buy", to: "/buy" },
     { icon: <ReferralsIcon />, label: t`Referrals`, key: "referrals", to: "/referrals" },
     { icon: <LeaderboardIcon />, label: t`Leaderboard`, key: "leaderboard", to: "/leaderboard" },
     { icon: <EcosystemIcon />, label: t`Ecosystem`, key: "ecosystem", to: "/ecosystem" },

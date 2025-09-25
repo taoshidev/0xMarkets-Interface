@@ -155,8 +155,8 @@ export default function TVChartContainer({
       locale: defaultChartProps.locale,
       loading_screen:
         theme === "light"
-          ? { backgroundColor: "#FFFFFF", foregroundColor: "#2962ff" }
-          : defaultChartProps.loading_screen,
+          ? { backgroundColor: "#030E17", foregroundColor: "#2962ff" }
+          : { backgroundColor: "#030E17", foregroundColor: "#2962ff" },
       enabled_features: defaultChartProps.enabled_features,
       disabled_features: isMobile
         ? defaultChartProps.disabled_features.concat(disabledFeaturesOnMobile)

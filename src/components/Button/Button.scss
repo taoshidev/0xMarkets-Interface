@@ -21,7 +21,7 @@
 
   &.primary {
     background: var(--primary-btn-bg);
-    color: var(--color-white);
+    color: var(--main-bg-color);
     border-radius: 8px;
 
     &:not([disabled]):hover {
@@ -35,7 +35,7 @@
 
   &.primary-action {
     background: var(--primary-btn-bg);
-    color: var(--color-white);
+    color: var(--main-bg-color);
     border-radius: 8px;
     min-height: 40px;
     line-height: normal;
@@ -87,6 +87,7 @@
     background-color: transparent;
     border-radius: 8px;
     color: var(--color-slate-100);
+    border: 1px solid rgba(217, 210, 255, 0.14);
     position: relative;
     letter-spacing: 0;
 

@@ -29,16 +29,6 @@ export function getFooterLinks(isHome) {
       // { label: "Jobs", link: "/jobs", isAppLink: true },
     ],
     app: [
-      {
-        label: (
-          <>
-            <V1Icon />
-            {t`V1 Interface`}
-          </>
-        ),
-        link: "https://v1.app.gmx.io/#/v1",
-        external: true,
-      },
       { label: t`Media Kit`, link: "https://docs.gmx.io/docs/community/media-kit", external: true },
       { label: t`Charts by TradingView`, link: "https://www.tradingview.com/", external: true },
       // { label: "Jobs", link: "/jobs" },
@@ -54,11 +44,3 @@ export const SOCIAL_LINKS: SocialLink[] = [
   { link: "https://t.me/GMX_IO", name: "Telegram", icon: <TelegramIcon className="size-16" /> },
   { link: "https://discord.gg/H5PeQru3Aa", name: "Discord", icon: <DiscordIcon className="size-16" /> },
 ];
-
-function V1Icon() {
-  return (
-    <div className="rounded-2 bg-typography-secondary px-3 py-2 text-[8px] font-bold text-white dark:text-black">
-      V1
-    </div>
-  );
-}

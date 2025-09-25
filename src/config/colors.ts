@@ -20,10 +20,10 @@ export const colors: ColorTree = {
     500: { light: "#C4C6D5", dark: "#646a8f" },
     600: { light: "#D4D4E2", dark: "#363a59" },
     700: { light: "#DADAE7", dark: "#22243a" },
-    750: { light: "#D4D6E2", dark: "#17182c" },
-    800: { light: "#EDEDF2", dark: "#1e2033" },
+    750: { light: "rgba(236, 232, 255, 0.03)", dark: "rgba(236, 232, 255, 0.03)", type: "rgba" },
+    800: { light: "rgba(236, 232, 255, 0.03)", dark: "rgba(236, 232, 255, 0.03)", type: "rgba" },
     900: { light: "#FCFCFC", dark: "#121421" },
-    950: { light: "#EEEEF4", dark: "#090A14" },
+    950: { light: "#EEEEF4", dark: "#030E17" },
   },
   gray: {
     50: { light: "rgba(0, 0, 0, 0.95)", dark: "rgba(255, 255, 255, 0.95)", type: "rgba" },
@@ -63,11 +63,11 @@ export const colors: ColorTree = {
   white: { light: "#ffffff", dark: "#ffffff" },
   black: { light: "#000000", dark: "#000000" },
   button: {
-    secondary: { light: "#E0E0E8", dark: "#23263b" },
+    secondary: { light: "#E0E0E8", dark: "#383A59" },
     secondaryHover: { light: "#dadce8", dark: "#282d46" },
-    secondaryDisabled: { light: "#E0E0E8", dark: "#1e2033" },
+    secondaryDisabled: { light: "#E0E0E8", dark: "#ff0000" },
     primaryHover: { light: "#293ce4", dark: "#2a3de5" },
-    primaryActive: { light: "#2637ce", dark: "#2536cd" },
+    primaryActive: { light: "#2637ce", dark: "#00D1CD" },
   },
   fill: {
     surfaceElevated50: { light: "#EDEDF280", dark: "#1E203380" },

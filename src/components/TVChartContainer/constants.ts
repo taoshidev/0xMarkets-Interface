@@ -26,9 +26,9 @@ const createChartStyleOverrides = (upColor: string, downColor: string): Partial<
   }, {});
 
 export const chartOverridesDark: Partial<WidgetOverrides> = {
-  "paneProperties.background": "#121421",
-  "paneProperties.backgroundGradientStartColor": "#121421",
-  "paneProperties.backgroundGradientEndColor": "#121421",
+  "paneProperties.background": "#030E17",
+  "paneProperties.backgroundGradientStartColor": "#030E17",
+  "paneProperties.backgroundGradientEndColor": "#030E17",
   "paneProperties.backgroundType": "solid",
   "paneProperties.vertGridProperties.color": "#363A5960",
   "paneProperties.vertGridProperties.style": 2,
@@ -41,9 +41,9 @@ export const chartOverridesDark: Partial<WidgetOverrides> = {
 };
 
 export const chartOverridesLight: Partial<WidgetOverrides> = {
-  "paneProperties.background": "#FFFFFF",
-  "paneProperties.backgroundGradientStartColor": "#FFFFFF",
-  "paneProperties.backgroundGradientEndColor": "#FFFFFF",
+  "paneProperties.background": "#030E17",
+  "paneProperties.backgroundGradientStartColor": "#030E17",
+  "paneProperties.backgroundGradientEndColor": "#030E17",
   "paneProperties.backgroundType": "solid",
   "paneProperties.vertGridProperties.color": "#E0E0E0",
   "paneProperties.vertGridProperties.style": 2,
@@ -97,7 +97,7 @@ export const defaultChartProps = {
   enabled_features: enabledFeatures,
   disabled_features: disabledFeatures,
   custom_css_url: "/tradingview-chart.css",
-  loading_screen: { backgroundColor: "#121421", foregroundColor: "#2962ff" },
+  loading_screen: { backgroundColor: "#030E17", foregroundColor: "#2962ff" },
   favorites: {},
   custom_formatters: {
     timeFormatter: {

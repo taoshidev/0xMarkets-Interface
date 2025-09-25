@@ -6,7 +6,6 @@ import { TokensData } from "./tokens";
 export enum TradeType {
   Long = "Long",
   Short = "Short",
-  Swap = "Swap",
 }
 
 export enum TradeMode {

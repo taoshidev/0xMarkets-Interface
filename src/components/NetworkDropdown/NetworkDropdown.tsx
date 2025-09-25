@@ -98,7 +98,7 @@ function DesktopDropdown({
           <>
             <Menu.Button as="div" data-qa="networks-dropdown-handle">
               <Button
-                variant="secondary"
+                variant="ghost"
                 size="controlled"
                 className="flex h-40 items-center gap-8 px-15 pr-12 max-md:h-32 max-md:p-6"
               >

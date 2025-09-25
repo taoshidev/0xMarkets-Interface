@@ -75,6 +75,7 @@ import { TradeBoxResponsiveContainer } from "components/TradeBox/TradeBoxRespons
 import { TradeHistory } from "components/TradeHistory/TradeHistory";
 import { Chart } from "components/TVChart/Chart";
 import ChartHeader from "components/TVChart/ChartHeader";
+import { FavoriteTokenBar } from "components/FavoriteTokenBar/FavoriteTokenBar";
 
 import logoIcon from "img/logo-icon.svg";
 import LogoText from "img/logo-text.svg?react";
@@ -329,9 +330,7 @@ export function SyntheticsPage(p: Props) {
                 <img src={logoIcon} alt="GMX Logo" />
                 <LogoText className="max-md:hidden" />
               </Link>
-            ) : (
-              <ChartHeader />
-            )
+            ) : null
           }
         />
       }
@@ -339,19 +338,19 @@ export function SyntheticsPage(p: Props) {
       contentClassName="max-w-[none] md:pb-0 md:pt-0"
       pageWrapperClassName="!pl-0 max-lg:!pl-8 max-md:!pl-0"
     >
-      {isTablet ? <ChartHeader /> : null}
+      <FavoriteTokenBar />
+      <ChartHeader />
       <div className="flex gap-8 pt-0 max-lg:flex-col lg:grow">
         <div className="Exchange-left flex grow flex-col gap-8">
           <OneClickPromoBanner openSettings={openSettings} />
           <Chart />
           {!isTablet && (
-            <div className="flex grow flex-col overflow-hidden rounded-8" data-qa="trade-table-large">
+            <div className="flex grow flex-col overflow-hidden rounded-8 border border-slate-800 bg-slate-750" data-qa="trade-table-large">
               <Tabs
                 options={tabsOptions}
                 selectedValue={listSection}
                 onChange={handleTabChange}
                 type="block"
-                className="bg-slate-900"
                 qa="exchange-list-tabs"
                 rightContent={actions}
               />
@@ -402,7 +401,7 @@ export function SyntheticsPage(p: Props) {
             )}
           </>
         ) : (
-          <div className="w-[40rem] shrink-0 max-xl:w-[36rem]">
+          <div className="w-[40rem] shrink-0 max-xl:w-[36rem] border border border-slate-800 bg-slate-750 rounded-8">
             <TradeBoxResponsiveContainer />
 
             {isSwap && !isTwap && (

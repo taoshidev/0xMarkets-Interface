@@ -26,7 +26,7 @@ export function AppHeaderUser({ openSettings, menuToggle }: Props) {
 
   if (!active || !account) {
     return (
-      <div className="flex items-center gap-8">
+      <div className="flex items-center gap-8 py-16">
         {openConnectModal ? (
           <>
             <ConnectWalletButton
@@ -35,7 +35,7 @@ export function AppHeaderUser({ openSettings, menuToggle }: Props) {
                 openConnectModal();
               }}
             >
-              <Trans>Connect wallet</Trans>
+              <Trans>Connect Wallet</Trans>
             </ConnectWalletButton>
             <OneClickButton openSettings={openSettings} />
             <NetworkDropdown chainId={visualChainId} networkOptions={NETWORK_OPTIONS} openSettings={openSettings} />
@@ -47,7 +47,7 @@ export function AppHeaderUser({ openSettings, menuToggle }: Props) {
   }
 
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex items-center gap-8 py-16">
       <div data-qa="user-address">
         <AddressDropdown account={account} />
       </div>

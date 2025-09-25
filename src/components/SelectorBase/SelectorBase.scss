@@ -18,8 +18,10 @@
     font-size: var(--font-size-body-medium);
 
     border-radius: 8px;
-    background-color: var(--dark-blue-bg);
-    border: 0.5px solid var(--color-slate-600);
+    
+    background-color: rgba(5, 14, 22, 0.3);
+    backdrop-filter: blur(34px);
+    border: 1px solid var(--color-slate-800);
     overflow: hidden;
   }
 }

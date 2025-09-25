@@ -15,9 +15,9 @@ export default function PoolsCard({
   className?: string;
 }) {
   return (
-    <div className={cx("overflow-hidden rounded-6 bg-slate-900", className)}>
+    <div className={cx("overflow-hidden rounded-8 border border-slate-800 bg-slate-750", className)}>
       <div className="flex h-full flex-col">
-        <div className="flex flex-col gap-8 border-b-1/2 border-slate-600 p-16">
+        <div className="flex flex-col gap-8 border-b-1/2 border-slate-800 p-16">
           <span className="text-h3 font-medium max-md:text-body-medium">{title}</span>
           <span className="text-body-medium text-typography-secondary max-md:text-body-small">{description}</span>
         </div>

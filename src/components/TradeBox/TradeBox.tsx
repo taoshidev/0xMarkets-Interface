@@ -950,7 +950,7 @@ export function TradeBox({ isMobile }: { isMobile: boolean }) {
 
   return (
     <form className="flex flex-col gap-8" onSubmit={handleFormSubmit} ref={formRef}>
-      <div className="flex flex-col gap-12 rounded-b-8 bg-slate-900 py-12 pb-16">
+      <div className="flex flex-col gap-12 rounded-b-8 py-12 pb-16">
         <div className="flex flex-col gap-12 px-12">
           <div className="flex items-center justify-between">
             <Tabs
@@ -959,7 +959,7 @@ export function TradeBox({ isMobile }: { isMobile: boolean }) {
               selectedValue={tradeMode}
               onChange={onSelectTradeMode}
               qa="trade-mode"
-              className="bg-slate-900 text-13"
+              className="text-13"
               regularOptionClassname="grow"
             />
             <div className="flex items-center gap-4">
@@ -1106,7 +1106,7 @@ export function TradeBox({ isMobile }: { isMobile: boolean }) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-14 rounded-8 bg-slate-900 p-12 pb-16">
+      <div className="flex flex-col gap-14 rounded-8 p-12 pb-16">
         {isSwap && !isTwap && <MinReceiveRow allowedSlippage={allowedSlippage} />}
         {isTrigger && selectedPosition && decreaseAmounts?.receiveUsd !== undefined && (
           <SyntheticsInfoRow

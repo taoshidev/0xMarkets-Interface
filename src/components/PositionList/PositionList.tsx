@@ -86,7 +86,7 @@ export function PositionList(p: Props) {
       {!isMobile && (
         <TableScrollFadeContainer
           disableScrollFade={positions.length === 0}
-          className="flex grow flex-col bg-slate-900"
+          className="flex grow flex-col"
         >
           <Table className="!w-[max(100%,900px)] table-fixed">
             <thead className="text-body-medium">

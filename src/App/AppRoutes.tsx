@@ -117,7 +117,7 @@ export function AppRoutes() {
 
   return (
     <>
-      <div className="App w-full">
+      <div className="App w-full bg-cover bg-center bg-[url('/src/img/background.png')] bg-no-repeat">
         <MainRoutes openSettings={openSettings} />
       </div>
       <ToastContainer

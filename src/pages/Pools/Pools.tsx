@@ -1,6 +1,5 @@
 import cx from "classnames";
 
-import { BOTANIX } from "config/chains";
 import { useGmMarketsApy } from "domain/synthetics/markets/useGmMarketsApy";
 import { usePerformanceAnnualized } from "domain/synthetics/markets/usePerformanceAnnualized";
 import { usePerformanceSnapshots } from "domain/synthetics/markets/usePerformanceSnapshots";
@@ -11,7 +10,6 @@ import { formatUsd } from "lib/numbers";
 
 import AppPageLayout from "components/AppPageLayout/AppPageLayout";
 import { ChainContentHeader } from "components/ChainContentHeader/ChainContentHeader";
-import { GlvList } from "components/GmList/GlvList";
 import { GmList } from "components/GmList/GmList";
 
 import PoolsTimeRangeFilter from "./PoolsTimeRangeFilter";
@@ -42,8 +40,6 @@ export default function Pools() {
 
   const isMobile = usePoolsIsMobilePage();
 
-  const isBotanix = chainId === BOTANIX;
-
   return (
     <AppPageLayout header={<ChainContentHeader />}>
       <div
@@ -65,19 +61,6 @@ export default function Pools() {
       </div>
 
       <div className="flex grow flex-col gap-16 lg:overflow-hidden">
-        {!isBotanix && (
-          <GlvList
-            marketsTokensApyData={marketsTokensApyData}
-            marketsTokensIncentiveAprData={marketsTokensIncentiveAprData}
-            glvTokensIncentiveAprData={glvTokensIncentiveAprData}
-            marketsTokensLidoAprData={marketsTokensLidoAprData}
-            glvTokensApyData={glvApyInfoData}
-            performance={performance}
-            performanceSnapshots={performanceSnapshots}
-            isDeposit
-          />
-        )}
-
         <GmList
           glvTokensApyData={glvApyInfoData}
           glvTokensIncentiveAprData={glvTokensIncentiveAprData}
