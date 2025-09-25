@@ -263,7 +263,7 @@ export function OrderList({
       )}
 
       {!isContainerSmall && (
-        <TableScrollFadeContainer disableScrollFade={orders.length === 0} className="flex grow flex-col bg-slate-900">
+        <TableScrollFadeContainer disableScrollFade={orders.length === 0} className="flex grow flex-col">
           <Table className="!w-[max(100%,580px)] table-fixed">
             <thead>
               <TableTheadTr>

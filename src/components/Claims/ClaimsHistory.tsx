@@ -112,7 +112,7 @@ export function ClaimsHistory() {
   );
 
   return (
-    <div className="flex grow flex-col bg-slate-900">
+    <div className="flex grow flex-col">
       <div className="flex items-center justify-between gap-8 pl-20 pr-8 pt-8">
         {!isMobile ? (
           <span className="text-body-medium font-medium">

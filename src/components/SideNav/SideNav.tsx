@@ -29,7 +29,7 @@ function SideNav({ className }: { className?: string }) {
 
   return (
     <nav
-      className={cx("flex h-full shrink-0 flex-col border border-slate-800 bg-slate-750", className, {
+      className={cx("flex h-full shrink-0 flex-col border border-slate-800 bg-slate-750 rounded-8", className, {
         "w-[172px] max-xl:w-[144px]": !isCollapsed,
       })}
     >
@@ -63,8 +63,8 @@ export function LogoSection({ isCollapsed }: { isCollapsed: boolean | undefined 
   return (
     <Link
       to="/"
-      className={cx("flex cursor-pointer items-center justify-center gap-5 pb-16 pt-10 text-typography-primary", {
-        "pl-12 pr-20": !isCollapsed,
+      className={cx("flex cursor-pointer items-center justify-center gap-5 text-typography-primary", {
+        "py-24 px-16 mb-4": !isCollapsed,
       })}
     >
       <img src={logoIcon} alt="GMX Logo" />
@@ -89,7 +89,7 @@ export function NavItem({ icon, label, isActive = false, isCollapsed = false, on
       <div
         className={cx(
           `relative flex cursor-pointer items-center gap-8
-          rounded-8 px-12 py-10 text-typography-secondary group-hover:bg-blue-400/20 group-hover:text-blue-400
+          px-12 py-10 text-typography-secondary group-hover:bg-blue-400/20 group-hover:text-blue-400
           dark:group-hover:bg-slate-700 dark:group-hover:text-typography-primary`,
           {
             "bg-blue-400/20 !text-blue-400 dark:bg-slate-700 dark:!text-typography-primary": isActive,

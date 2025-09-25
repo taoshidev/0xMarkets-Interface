@@ -336,7 +336,6 @@ export function SyntheticsPage(p: Props) {
       }
       className="max-lg:pb-40"
       contentClassName="max-w-[none] md:pb-0 md:pt-0"
-      pageWrapperClassName="!pl-0 max-lg:!pl-8 max-md:!pl-0"
     >
       <FavoriteTokenBar />
       <ChartHeader />
@@ -424,7 +423,7 @@ export function SyntheticsPage(p: Props) {
                 selectedValue={listSection}
                 onChange={handleTabChange}
                 type="block"
-                className={cx("w-[max(100%,420px)] rounded-t-8 bg-slate-900", {
+                className={cx("w-[max(100%,420px)] rounded-t-8 border border-slate-800 bg-slate-750", {
                   "mb-8 rounded-b-8": [ListSection.Positions, ListSection.Orders].includes(listSection as ListSection),
                 })}
                 regularOptionClassname={cx({

@@ -60,12 +60,12 @@ export default function RegularTab<V extends string | number>({
   return (
     <button
       className={cx(
-        `-mb-[0.5px] flex items-baseline justify-center gap-8 border-b-[2.5px] border-b-[transparent] px-20 pb-9 pt-11
+        `-mb-[0.5px] flex items-baseline justify-center gap-8 border-b border-b-[transparent] px-20 pb-9 pt-11
         font-medium text-typography-secondary first:rounded-tl-8 last:rounded-tr-8 hover:text-typography-primary`,
         optionClassName,
         regularOptionClassname,
         {
-          "border-b-blue-300 !text-typography-primary": isActive,
+          "border-b-green-300 !text-typography-primary": isActive,
         }
       )}
       onClick={() => onOptionClick?.(option.value)}
