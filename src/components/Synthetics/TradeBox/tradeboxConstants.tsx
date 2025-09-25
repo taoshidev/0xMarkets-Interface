@@ -33,7 +33,6 @@ export const tradeTypeLabels = {
  */
 export const tradeTypeClassNames = {
   [TradeType.Long]: {
-    active: "!bg-[#1F3445] border-b border-b-green-500",
     regular: "border-b border-b-[transparent]",
   },
   [TradeType.Short]: {

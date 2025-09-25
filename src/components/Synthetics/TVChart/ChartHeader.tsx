@@ -435,8 +435,8 @@ function ChartHeaderInfoDesktop() {
           </div>
         </div>
         <div className="Chart-top-scrollable" ref={scrollableRef}>
-          <div className="Chart-price">
-            <div className="text-body-medium mb-4">{avgPrice}</div>
+          <div className="Chart-price flex flex-row items-center gap-8">
+            <div className="text-body-large">{avgPrice}</div>
             <div className="text-body-small">{dayPriceDelta}</div>
           </div>
           {additionalInfo}

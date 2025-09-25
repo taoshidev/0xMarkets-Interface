@@ -854,9 +854,8 @@ export function TradeBox({ isMobile }: { isMobile: boolean }) {
   const keepLeverage = useSelector(selectTradeboxKeepLeverage);
   const keepLeverageChecked = decreaseAmounts?.isFullClose ? false : keepLeverage ?? false;
   const setKeepLeverage = useSelector(selectTradeboxSetKeepLeverage);
-  const settingsWarningDotVisible = useSelector(selectSettingsWarningDotVisible);
 
-  const { setIsSettingsVisible, isLeverageSliderEnabled } = useSettings();
+  const { isLeverageSliderEnabled } = useSettings();
 
   const { shouldShowWarning: shouldShowOneClickTradingWarning } = useExpressTradingWarnings({
     expressParams: submitButtonState.expressParams,
@@ -891,7 +890,7 @@ export function TradeBox({ isMobile }: { isMobile: boolean }) {
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between px-16">
         <Tabs
           options={tabsOptions}
           regularOptionClassname="py-10"
@@ -902,16 +901,9 @@ export function TradeBox({ isMobile }: { isMobile: boolean }) {
         />
         <div className="flex gap-4">
           <TradeInfoIcon isMobile={isMobile} tradeType={tradeType} tradePlace="tradebox" />
-          <div className="relative">
-            <SettingsIcon24
-              className="cursor-pointer text-slate-100 gmx-hover:text-white"
-              onClick={() => setIsSettingsVisible(true)}
-            />
-            {settingsWarningDotVisible && <div className="absolute bottom-6 right-3 h-6 w-6 rounded-full bg-red-400" />}
-          </div>
         </div>
       </div>
-      <form onSubmit={handleFormSubmit} ref={formRef} className="text-body-medium flex grow flex-col">
+      <form onSubmit={handleFormSubmit} ref={formRef} className="text-body-medium flex grow flex-col px-16">
         <div className="flex flex-col gap-2">
           {(isSwap || isIncrease) && renderTokenInputs()}
           {isTrigger && renderDecreaseSizeInput()}

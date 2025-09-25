@@ -47,7 +47,7 @@ function AddressDropdown({ account, accountUrl, disconnectAccountAndCloseSetting
   return (
     <Menu>
       <Menu.Button as="div">
-        <button className="App-cta small transparent address-btn">
+        <button className="App-cta bg-slate-800 small address-btn">
           <div className="user-avatar">
             <Avatar size={20} ensName={ensName} address={account} />
           </div>

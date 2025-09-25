@@ -253,7 +253,7 @@ function MarketsList() {
   return (
     <>
       <SelectorBaseMobileHeaderContent>
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-row gap-8">
           <SearchInput
             className="w-full *:!text-body-medium"
             value={searchKeyword}
@@ -269,7 +269,7 @@ function MarketsList() {
 
       {!isMobile && (
         <>
-          <div className="m-16 flex justify-between gap-16">
+          <div className="m-16 flex flex-col justify-between gap-16">
             <SearchInput
               className="w-full *:!text-body-medium"
               value={searchKeyword}

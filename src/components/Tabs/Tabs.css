@@ -2,11 +2,10 @@
   display: grid;
   grid-auto-flow: column;
   font-size: var(--font-size-body-medium);
-  border-radius: 3px;
+  border-radius: 8px 8px 0 0;
   overflow: hidden;
   color: var(--color-slate-100);
-  background: var(--color-cold-blue-900);
-  box-shadow: inset 0px 0px 30px 5px rgba(255, 255, 255, 0.01);
+  border-bottom: 1px solid var(--color-gray-800);
 }
 
 .Tab-option-icon {
@@ -33,7 +32,8 @@
 .Tab.Tab__block .Tab-option.active {
   opacity: 1;
   pointer-events: none;
-  background: var(--color-cold-blue-500);
+  background: var(--color-green-800);
+  border-bottom: 1px solid var(--color-green-700);
   color: var(--color-white);
 }
 

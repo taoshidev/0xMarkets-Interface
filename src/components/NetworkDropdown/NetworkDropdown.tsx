@@ -108,7 +108,7 @@ function NavIcons({ selectorLabel }) {
 
 function DesktopDropdown({ setActiveModal, selectorLabel, networkOptions, openSettings }) {
   return (
-    <div className="App-header-network">
+    <div className="App-header-network bg-slate-800">
       <Menu>
         <Menu.Button as="div" className="network-dropdown px-6 py-5" data-qa="networks-dropdown-handle">
           <NavIcons selectorLabel={selectorLabel} />

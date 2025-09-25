@@ -1,11 +1,11 @@
 import "./OneClickButton.scss";
 
-import OneClickIcon from "img/ic_one_click.svg?react";
+import SettingsIcon24 from "img/ic_settings_24.svg?react";
 
 export function OneClickButton({ openSettings }: { openSettings: () => void }) {
   return (
-    <div className="OneClickButton" onClick={openSettings}>
-      <OneClickIcon className="OneClickButton-icon" />
+    <div className="OneClickButton bg-slate-800" onClick={openSettings}>
+      <SettingsIcon24 size={16} className="OneClickButton-icon" />
     </div>
   );
 }

@@ -15,7 +15,6 @@ import useWallet from "lib/wallets/useWallet";
 
 import { OneClickButton } from "components/OneClickButton/OneClickButton";
 
-import connectWalletImg from "img/ic_wallet_24.svg";
 
 import { HeaderLink } from "./HeaderLink";
 import AddressDropdown from "../AddressDropdown/AddressDropdown";
