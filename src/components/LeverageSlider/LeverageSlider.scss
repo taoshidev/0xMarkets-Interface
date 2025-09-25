@@ -1,4 +1,4 @@
-$blue: var(--color-blue-300);
+$green: var(--color-green-300);
 $gray: var(--color-slate-600);
 
 .LeverageSlider {
@@ -39,7 +39,7 @@ $gray: var(--color-slate-600);
   .rc-slider-track {
     border-radius: 0;
     height: 4px;
-    background-color: var(--color-blue-300);
+    background-color: var(--color-green-300);
   }
 
   .rc-slider-dot {
@@ -52,11 +52,11 @@ $gray: var(--color-slate-600);
     top: -1px;
   }
   .rc-slider-dot-active {
-    border-color: var(--color-blue-300);
+    border-color: var(--color-green-300);
   }
   .rc-slider-handle {
     background-color: var(--color-slate-800);
-    border: solid 2px $blue;
+    border: solid 2px $green;
     width: 8px;
     height: 8px;
     box-sizing: content-box;

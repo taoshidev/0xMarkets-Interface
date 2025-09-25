@@ -52,7 +52,7 @@ export const colors: ColorTree = {
   },
   green: {
     100: { light: "#109375", dark: "#A4F9D9" },
-    300: { light: "#56dba8", dark: "#56dba8" },
+    300: { light: "rgba(1, 209, 208, 1)", dark: "rgba(1, 209, 208, 1)", type: "rgba" },
     400: { light: "#8CF3CB", dark: "#8CF3CB" },
     500: { light: "#109375", dark: "#0FDE8D" },
     600: { light: "#DFEFEB", dark: "#1F3445" },
