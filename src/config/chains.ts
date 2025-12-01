@@ -5,6 +5,7 @@ import {
   AnyChainId,
   ARBITRUM_SEPOLIA,
   BOTANIX,
+  LOCALHOST,
   ContractsChainId,
   CONTRACTS_CHAIN_IDS as SDK_CONTRACTS_CHAIN_IDS,
   CONTRACTS_CHAIN_IDS_DEV as SDK_CONTRACTS_CHAIN_IDS_DEV,
@@ -37,6 +38,7 @@ export const IS_NETWORK_DISABLED: Record<ContractsChainId, boolean> = {
   [ARBITRUM_SEPOLIA]: false,
   [AVALANCHE_FUJI]: false,
   [BOTANIX]: false,
+  [LOCALHOST]: false,
 };
 
 export const NETWORK_EXECUTION_TO_CREATE_FEE_FACTOR = {
@@ -114,6 +116,19 @@ const constants = {
     // contract requires that execution fee be strictly greater than instead of gte
     DECREASE_ORDER_EXECUTION_GAS_FEE: parseEther("0.0100001"),
   },
+  [LOCALHOST]: {
+    nativeTokenSymbol: "ETH",
+    wrappedTokenSymbol: "WETH",
+    defaultCollateralSymbol: "USDC",
+    defaultFlagOrdersEnabled: true,
+    positionReaderPropsLength: 9,
+    v2: true,
+
+    SWAP_ORDER_EXECUTION_GAS_FEE: parseEther("0.0003"),
+    INCREASE_ORDER_EXECUTION_GAS_FEE: parseEther("0.0003"),
+    // contract requires that execution fee be strictly greater than instead of gte
+    DECREASE_ORDER_EXECUTION_GAS_FEE: parseEther("0.000300001"),
+  },
 } satisfies Record<ContractsChainId, Record<string, any>>;
 
 const ALCHEMY_WHITELISTED_DOMAINS = ["gmx.io", "app.gmx.io", "gmxapp.io"];
@@ -161,6 +176,7 @@ export const RPC_PROVIDERS: Record<AnyChainId | typeof ETH_MAINNET, string[]> = 
     // "https://rpc.botanixlabs.com",
     "https://rpc.ankr.com/botanix_mainnet",
   ],
+  [LOCALHOST]: ["http://127.0.0.1:8545"],
 };
 
 export const FALLBACK_PROVIDERS: Record<AnyChainId, string[]> = {
@@ -176,6 +192,7 @@ export const FALLBACK_PROVIDERS: Record<AnyChainId, string[]> = {
   [SOURCE_BASE_MAINNET]: [getAlchemyBaseMainnetHttpUrl("fallback")],
   [SOURCE_OPTIMISM_SEPOLIA]: [getAlchemyOptimismSepoliaHttpUrl("fallback")],
   [SOURCE_SEPOLIA]: [getAlchemyBaseSepoliaHttpUrl("fallback")],
+  [LOCALHOST]: ["http://127.0.0.1:8545"],
 };
 
 export const PRIVATE_RPC_PROVIDERS: Partial<Record<AnyChainId, string[]>> = {
@@ -307,6 +324,8 @@ export function getExplorerUrl(chainId: number | "layerzero" | "layerzero-testne
       return "https://botanixscan.io/";
     case SOURCE_BASE_MAINNET:
       return "https://basescan.org/";
+    case LOCALHOST:
+      return "http://127.0.0.1:8545/";
     case "layerzero":
       return "https://layerzeroscan.com/";
     case "layerzero-testnet":

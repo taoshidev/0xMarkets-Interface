@@ -2,7 +2,7 @@ import { zeroAddress } from "viem";
 
 import type { Token, TokenAddressTypesMap, TokenCategory } from "types/tokens";
 
-import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX } from "./chains";
+import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, LOCALHOST } from "./chains";
 import { getContract } from "./contracts";
 
 export const NATIVE_TOKEN_ADDRESS = zeroAddress;
@@ -1918,6 +1918,97 @@ export const TOKENS: { [chainId: number]: Token[] } = {
       isPlatformToken: true,
     },
   ],
+  [LOCALHOST]: [
+    {
+      name: "Ethereum",
+      symbol: "ETH",
+      decimals: 18,
+      address: zeroAddress,
+      wrappedAddress: "0x1613beB3B2C4f22Ee086B2b38C1476A3cE7f78E8",
+      isNative: true,
+      isShortable: true,
+      categories: ["layer1"],
+      imageUrl: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
+      coingeckoUrl: "https://www.coingecko.com/en/coins/ethereum",
+    },
+    {
+      name: "Wrapped ETH",
+      symbol: "WETH",
+      address: "0x1613beB3B2C4f22Ee086B2b38C1476A3cE7f78E8",
+      decimals: 18,
+      isWrapped: true,
+      baseSymbol: "ETH",
+      categories: ["layer1"],
+      imageUrl: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
+      coingeckoUrl: "https://www.coingecko.com/en/coins/ethereum",
+    },
+    {
+      name: "Wrapped Bitcoin",
+      symbol: "BTC",
+      address: "0x95401dc811bb5740090279Ba06cfA8fcF6113778",
+      decimals: 8,
+      imageUrl: "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1746042828",
+      coingeckoUrl: "https://www.coingecko.com/en/coins/bitcoin",
+    },
+    {
+      name: "USD Coin",
+      symbol: "USDC",
+      address: "0x70e0bA845a1A0F2DA3359C97E0285013525FFC49",
+      decimals: 6,
+      isStable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/6319/thumb/USD_Coin_icon.png?1547042389",
+      coingeckoUrl: "https://www.coingecko.com/en/coins/usd-coin",
+    },
+    {
+      name: "Tether USD",
+      symbol: "USDT",
+      address: "0x99bbA657f2BbC93c02D617f8bA121cB8Fc104Acf",
+      decimals: 6,
+      isStable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/325/thumb/Tether-logo.png",
+      coingeckoUrl: "https://www.coingecko.com/en/coins/tether",
+    },
+    /** Placeholder tokens */
+    {
+      name: "GMX",
+      symbol: "GMX",
+      address: "0x851356ae760d987E095750cCeb3bC6014560891C",
+      decimals: 18,
+      imageUrl: "https://assets.coingecko.com/coins/images/18323/small/arbit.png?1631532468",
+      isPlatformToken: true,
+    },
+    {
+      name: "Escrowed GMX",
+      symbol: "ESGMX",
+      address: "<esgmx-address>",
+      decimals: 18,
+      isPlatformToken: true,
+    },
+    {
+      name: "GMX LP",
+      symbol: "GLP",
+      address: "<glp-address>",
+      decimals: 18,
+      imageUrl: "https://github.com/gmx-io/gmx-assets/blob/main/GMX-Assets/PNG/GLP_LOGO%20ONLY.png?raw=true",
+      isPlatformToken: true,
+    },
+    {
+      name: "GMX Market tokens",
+      symbol: "GM",
+      address: "<market-token-address>",
+      decimals: 18,
+      imageUrl: "https://raw.githubusercontent.com/gmx-io/gmx-assets/main/GMX-Assets/PNG/GM_LOGO.png",
+      isPlatformToken: true,
+    },
+    {
+      name: "GLV Market tokens",
+      symbol: "GLV",
+      address: "<market-token-address>",
+      decimals: 18,
+      imageUrl: "https://raw.githubusercontent.com/gmx-io/gmx-assets/main/GMX-Assets/PNG/GLV_LOGO.png",
+      isPlatformToken: true,
+    },
+  ],
 };
 
 export const TOKEN_COLOR_MAP = {
@@ -1963,7 +2054,7 @@ export const TOKENS_BY_SYMBOL_MAP: { [chainId: number]: { [symbol: string]: Toke
 export const WRAPPED_TOKENS_MAP: { [chainId: number]: Token } = {};
 export const NATIVE_TOKENS_MAP: { [chainId: number]: Token } = {};
 
-const CHAIN_IDS = [ARBITRUM, AVALANCHE, AVALANCHE_FUJI, BOTANIX, ARBITRUM_SEPOLIA];
+const CHAIN_IDS = [ARBITRUM, AVALANCHE, AVALANCHE_FUJI, BOTANIX, ARBITRUM_SEPOLIA, LOCALHOST];
 
 for (let j = 0; j < CHAIN_IDS.length; j++) {
   const chainId = CHAIN_IDS[j];

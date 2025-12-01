@@ -1,4 +1,4 @@
-import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, ContractsChainId } from "./chains";
+import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, LOCALHOST, ContractsChainId } from "./chains";
 
 const ORACLE_KEEPER_URLS: Record<ContractsChainId, string> = {
   [ARBITRUM]: "https://arbitrum-api.gmxinfra.io",
@@ -10,6 +10,9 @@ const ORACLE_KEEPER_URLS: Record<ContractsChainId, string> = {
   [BOTANIX]: "https://botanix-api.gmxinfra.io",
 
   [ARBITRUM_SEPOLIA]: "https://dolphin-app-a2dup.ondigitalocean.app",
+
+  // For localhost, you may need to run your own oracle keeper or use mock prices
+  [LOCALHOST]: "http://127.0.0.1:3000",
 };
 
 const ORACLE_KEEPER_FALLBACK_URLS: Record<ContractsChainId, string[]> = {
@@ -22,6 +25,8 @@ const ORACLE_KEEPER_FALLBACK_URLS: Record<ContractsChainId, string[]> = {
   [BOTANIX]: ["https://botanix-api-fallback.gmxinfra.io", "https://botanix-api-fallback.gmxinfra2.io"],
 
   [ARBITRUM_SEPOLIA]: ["https://dolphin-app-a2dup.ondigitalocean.app"],
+
+  [LOCALHOST]: ["http://127.0.0.1:3000"],
 };
 
 export function getOracleKeeperUrl(chainId: number) {

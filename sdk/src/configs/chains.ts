@@ -6,6 +6,7 @@ import {
   avalancheFuji,
   base,
   Chain,
+  localhost as viemLocalhost,
   optimismSepolia,
   sepolia,
 } from "viem/chains";
@@ -22,6 +23,7 @@ import {
   SOURCE_OPTIMISM_SEPOLIA,
   SOURCE_SEPOLIA,
   SOURCE_BASE_MAINNET,
+  LOCALHOST,
 } from "./chainIds";
 export {
   AVALANCHE,
@@ -33,17 +35,19 @@ export {
   SOURCE_OPTIMISM_SEPOLIA,
   SOURCE_SEPOLIA,
   SOURCE_BASE_MAINNET,
+  LOCALHOST,
 };
 
 export const CONTRACTS_CHAIN_IDS: ContractsChainId[] = [ARBITRUM, AVALANCHE, BOTANIX];
-export const CONTRACTS_CHAIN_IDS_DEV: ContractsChainId[] = [...CONTRACTS_CHAIN_IDS, AVALANCHE_FUJI, ARBITRUM_SEPOLIA];
+export const CONTRACTS_CHAIN_IDS_DEV: ContractsChainId[] = [...CONTRACTS_CHAIN_IDS, AVALANCHE_FUJI, ARBITRUM_SEPOLIA, LOCALHOST];
 
 export type ContractsChainId =
   | typeof ARBITRUM
   | typeof AVALANCHE
   | typeof AVALANCHE_FUJI
   | typeof BOTANIX
-  | typeof ARBITRUM_SEPOLIA;
+  | typeof ARBITRUM_SEPOLIA
+  | typeof LOCALHOST;
 
 export type SettlementChainId = typeof ARBITRUM_SEPOLIA | typeof ARBITRUM | typeof AVALANCHE;
 export type SourceChainId = typeof SOURCE_OPTIMISM_SEPOLIA | typeof SOURCE_SEPOLIA | typeof SOURCE_BASE_MAINNET;
@@ -57,7 +61,8 @@ export type ChainName =
   | "Optimism Sepolia"
   | "Sepolia"
   | "Botanix"
-  | "Base";
+  | "Base"
+  | "Localhost";
 
 export const CHAIN_NAMES_MAP: Record<AnyChainId, ChainName> = {
   [ARBITRUM]: "Arbitrum",
@@ -68,6 +73,7 @@ export const CHAIN_NAMES_MAP: Record<AnyChainId, ChainName> = {
   [SOURCE_OPTIMISM_SEPOLIA]: "Optimism Sepolia",
   [SOURCE_SEPOLIA]: "Sepolia",
   [SOURCE_BASE_MAINNET]: "Base",
+  [LOCALHOST]: "Localhost",
 };
 
 export const HIGH_EXECUTION_FEES_MAP: Record<ContractsChainId, number> = {
@@ -76,6 +82,7 @@ export const HIGH_EXECUTION_FEES_MAP: Record<ContractsChainId, number> = {
   [AVALANCHE_FUJI]: 5, // 5 USD
   [BOTANIX]: 5, // 5 USD
   [ARBITRUM_SEPOLIA]: 5, // 5 USD
+  [LOCALHOST]: 5, // 5 USD
 };
 
 // added to maxPriorityFeePerGas
@@ -103,6 +110,7 @@ export const MAX_PRIORITY_FEE_PER_GAS_MAP: Record<ContractsChainId, bigint | und
   [AVALANCHE_FUJI]: 1500000000n,
   [ARBITRUM_SEPOLIA]: 1500000000n,
   [BOTANIX]: 7n,
+  [LOCALHOST]: 1500000000n,
 };
 
 export const EXCESSIVE_EXECUTION_FEES_MAP: Partial<Record<ContractsChainId, number>> = {
@@ -110,6 +118,7 @@ export const EXCESSIVE_EXECUTION_FEES_MAP: Partial<Record<ContractsChainId, numb
   [AVALANCHE]: 10, // 10 USD
   [AVALANCHE_FUJI]: 10, // 10 USD
   [BOTANIX]: 10, // 10 USD
+  [LOCALHOST]: 10, // 10 USD
 };
 
 // avoid botanix gas spikes when chain is not actively used
@@ -173,6 +182,26 @@ export const botanix: Chain = defineChain({
   },
 });
 
+export const localhost: Chain = defineChain({
+  id: LOCALHOST,
+  name: "Localhost",
+  nativeCurrency: {
+    name: "Ether",
+    symbol: "ETH",
+    decimals: 18,
+  },
+  rpcUrls: {
+    default: {
+      http: ["http://127.0.0.1:8545"],
+    },
+  },
+  contracts: {
+    multicall3: {
+      address: "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    },
+  },
+});
+
 const VIEM_CHAIN_BY_CHAIN_ID: Record<AnyChainId, Chain> = {
   [AVALANCHE_FUJI]: avalancheFuji,
   [ARBITRUM]: arbitrum,
@@ -182,6 +211,7 @@ const VIEM_CHAIN_BY_CHAIN_ID: Record<AnyChainId, Chain> = {
   [SOURCE_OPTIMISM_SEPOLIA]: optimismSepolia,
   [SOURCE_SEPOLIA]: sepolia,
   [SOURCE_BASE_MAINNET]: base,
+  [LOCALHOST]: localhost,
 };
 
 export function getChainName(chainId: number): ChainName {
@@ -205,7 +235,7 @@ export function isContractsChain(chainId: number, dev = false): chainId is Contr
 }
 
 export function isTestnetChain(chainId: number): boolean {
-  return [AVALANCHE_FUJI, ARBITRUM_SEPOLIA].includes(chainId);
+  return [AVALANCHE_FUJI, ARBITRUM_SEPOLIA, LOCALHOST].includes(chainId);
 }
 
 export const EXECUTION_FEE_CONFIG_V2: {
@@ -233,6 +263,10 @@ export const EXECUTION_FEE_CONFIG_V2: {
   [BOTANIX]: {
     shouldUseMaxPriorityFeePerGas: true,
     defaultBufferBps: 3000, // 30%
+  },
+  [LOCALHOST]: {
+    shouldUseMaxPriorityFeePerGas: false,
+    defaultBufferBps: 1000, // 10%
   },
 };
 
@@ -275,6 +309,13 @@ export const GAS_LIMITS_STATIC_CONFIG: Record<ContractsChainId, StaticGasLimitsC
     gmxAccountCollateralGasLimit: 400_000n,
   },
   [BOTANIX]: {
+    createOrderGasLimit: 1_000_000n,
+    updateOrderGasLimit: 800_000n,
+    cancelOrderGasLimit: 700_000n,
+    tokenPermitGasLimit: 90_000n,
+    gmxAccountCollateralGasLimit: 0n,
+  },
+  [LOCALHOST]: {
     createOrderGasLimit: 1_000_000n,
     updateOrderGasLimit: 800_000n,
     cancelOrderGasLimit: 700_000n,
