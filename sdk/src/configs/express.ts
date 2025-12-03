@@ -2,7 +2,7 @@ import { Token } from "types/tokens";
 import { expandDecimals, USD_DECIMALS } from "utils/numbers";
 import { periodToSeconds } from "utils/time";
 
-import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, ContractsChainId } from "./chains";
+import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, LOCALHOST, ContractsChainId } from "./chains";
 import { getTokenBySymbol, getWrappedToken } from "./tokens";
 
 export const SUBACCOUNT_MESSAGE =
@@ -32,6 +32,7 @@ const GAS_PAYMENT_TOKENS: Record<ContractsChainId, string[]> = {
     getTokenBySymbol(ARBITRUM_SEPOLIA, "WETH").address,
   ],
   [BOTANIX]: [getTokenBySymbol(BOTANIX, "pBTC").address],
+  [LOCALHOST]: [getTokenBySymbol(LOCALHOST, "USDC").address, getTokenBySymbol(LOCALHOST, "WETH").address],
 };
 
 export function getGasPaymentTokens(chainId: number): string[] {

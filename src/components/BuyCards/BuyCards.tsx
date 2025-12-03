@@ -10,6 +10,7 @@ import {
   AVALANCHE,
   AVALANCHE_FUJI,
   BOTANIX,
+  LOCALHOST,
   ContractsChainId,
   getChainName,
 } from "config/chains";
@@ -43,6 +44,7 @@ const NETWORK_ICONS: Record<ContractsChainId, React.ComponentType<{ className?: 
   [BOTANIX]: BotanixIcon,
   [AVALANCHE_FUJI]: AvalancheIcon,
   [ARBITRUM_SEPOLIA]: ArbitrumSepoliaIcon,
+  [LOCALHOST]: ArbitrumIcon,
 };
 
 function calculateMaxApr(apr: MarketTokensAPRData, incentiveApr: MarketTokensAPRData) {

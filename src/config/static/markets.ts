@@ -6,7 +6,7 @@
 */
 import { MARKETS as SDK_MARKETS } from "sdk/configs/markets";
 
-import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, ContractsChainId } from "./chains";
+import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, LOCALHOST, ContractsChainId } from "./chains";
 
 type MarketUiConfig = {
   enabled: boolean;
@@ -639,6 +639,7 @@ const MARKETS_UI_CONFIGS: Record<ContractsChainId, Record<string, MarketUiConfig
       enabled: true,
     },
   },
+  [LOCALHOST]: {},
 };
 
 export const MARKETS = Object.keys(MARKETS_UI_CONFIGS).reduce(

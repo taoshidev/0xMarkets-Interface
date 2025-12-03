@@ -7,6 +7,7 @@ import {
   AVALANCHE,
   AVALANCHE_FUJI,
   BOTANIX,
+  LOCALHOST,
   SOURCE_BASE_MAINNET,
   SOURCE_OPTIMISM_SEPOLIA,
   SOURCE_SEPOLIA,
@@ -114,6 +115,18 @@ export const BATCH_CONFIGS: Record<
       multicall: {
         batchSize: 1024 * 1024,
         wait: 100,
+      },
+    },
+  },
+  [LOCALHOST]: {
+    http: {
+      batchSize: 0,
+      wait: 0,
+    },
+    client: {
+      multicall: {
+        batchSize: 1024 * 1024,
+        wait: 0,
       },
     },
   },
