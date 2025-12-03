@@ -5,6 +5,7 @@ import {
   AVALANCHE,
   AVALANCHE_FUJI,
   BOTANIX,
+  LOCALHOST,
   SOURCE_BASE_MAINNET,
   SOURCE_OPTIMISM_SEPOLIA,
   SOURCE_SEPOLIA,
@@ -78,6 +79,13 @@ const ICONS: Record<number | "common", ChainIcons> = {
     gm: gmIcon,
     esgmx: esGMXIcon,
   },
+  [LOCALHOST]: {
+    network: arbitrum,
+    gmx: gmxArbitrum,
+    glp: glpArbitrum,
+    esgmx: esGMXArbitrumIcon,
+    gm: gmArbitrum,
+  },
   common: {
     gmx: gmxIcon,
     gmxOutline: gmxOutlineIcon,
@@ -98,6 +106,7 @@ export const CHAIN_ID_TO_NETWORK_ICON: Record<AnyChainId | 0, string> = {
   [SOURCE_OPTIMISM_SEPOLIA]: optimismSepolia,
   [SOURCE_SEPOLIA]: sepolia,
   [BOTANIX]: botanix,
+  [LOCALHOST]: arbitrum,
 };
 
 /**

@@ -15,6 +15,7 @@ import {
   AVALANCHE,
   AVALANCHE_FUJI,
   BOTANIX,
+  LOCALHOST,
   ContractsChainId,
   getExplorerUrl,
 } from "config/chains";
@@ -72,6 +73,7 @@ export const NETWORKS_BY_CHAIN_IDS: Record<ContractsChainId, string> = {
   [AVALANCHE_FUJI]: "fuji",
   [ARBITRUM_SEPOLIA]: "arbitrum-sepolia",
   [BOTANIX]: "botanix",
+  [LOCALHOST]: "localhost",
 };
 
 const NETWORKS = mapValues(invert(NETWORKS_BY_CHAIN_IDS), Number) as Record<string, ContractsChainId>;

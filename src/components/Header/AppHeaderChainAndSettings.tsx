@@ -8,6 +8,7 @@ import {
   AVALANCHE,
   AVALANCHE_FUJI,
   BOTANIX,
+  LOCALHOST,
   SOURCE_BASE_MAINNET,
   SOURCE_OPTIMISM_SEPOLIA,
   SOURCE_SEPOLIA,
@@ -96,6 +97,12 @@ if (isDevelopment()) {
       value: SOURCE_SEPOLIA,
       icon: getChainIcon(SOURCE_SEPOLIA),
       color: "#aa00ff",
+    },
+    {
+      label: getChainName(LOCALHOST),
+      value: LOCALHOST,
+      icon: getChainIcon(LOCALHOST),
+      color: "#627eea",
     }
   );
 }

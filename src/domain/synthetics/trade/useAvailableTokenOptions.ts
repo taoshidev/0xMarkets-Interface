@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { zeroAddress } from "viem";
 
-import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX } from "config/chains";
+import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, LOCALHOST } from "config/chains";
 import { getSortedMarketsAddressesKey } from "config/localStorage";
 import { SORTED_MARKETS } from "config/static/sortedMarkets";
 import { GlvAndGmMarketsInfoData, Market, MarketInfo, MarketsData, isMarketInfo } from "domain/synthetics/markets";
@@ -72,6 +72,7 @@ const FORCE_ALLOWED_COLLATERAL_TOKENS: Record<ContractsChainId, string[]> = {
   [ARBITRUM]: [],
   [AVALANCHE_FUJI]: [],
   [ARBITRUM_SEPOLIA]: [],
+  [LOCALHOST]: [],
 };
 
 export function useAvailableTokenOptions(
