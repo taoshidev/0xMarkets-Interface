@@ -82,9 +82,9 @@ msgstr "Aceptar"
 msgid "Approval signed"
 msgstr "Aprobación firmada"
 
-#: src/components/Footer/Footer.tsx
+#: src/components/Footer/constants.tsx
 msgid "Leave Feedback"
-msgstr ""
+msgstr "Dejar comentarios"
 
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Daily Loss"
@@ -1504,6 +1504,10 @@ msgstr "El valor USD de las comisiones se calcula en el momento en que se ganan 
 #: src/components/PositionSeller/PositionSeller.tsx
 msgid "Max"
 msgstr "Máx."
+
+#: src/components/PositionItem/PositionItem.tsx
+msgid "Mark price is {0}% away from liquidation price."
+msgstr ""
 
 #: src/pages/Ecosystem/Ecosystem.tsx
 msgid "Projects integrated with 0xMarkets."

@@ -5,14 +5,22 @@ import react from "@vitejs/plugin-react";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
 import path from "path";
 import { visualizer } from "rollup-plugin-visualizer";
-import { defineConfig, type PluginOption } from "vite";
+import { createLogger, defineConfig, type PluginOption } from "vite";
 import { analyzer } from "vite-bundle-analyzer";
 import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { BREAKPOINTS } from "./src/lib/breakpoints";
 
+const logger = createLogger();
+const loggerWarn = logger.warn.bind(logger);
+logger.warn = (msg, options) => {
+  if (msg.includes("Error when using sourcemap")) return;
+  loggerWarn(msg, options);
+};
+
 export default defineConfig(({ mode }) => {
   return {
+    customLogger: logger,
     worker: {
       format: "es",
     },
@@ -50,6 +58,7 @@ export default defineConfig(({ mode }) => {
     ],
     resolve: {
       alias: {
+        buffer: "buffer/",
         App: path.resolve(__dirname, "src/App"),
         components: path.resolve(__dirname, "src/components"),
         config: path.resolve(__dirname, "src/config"),

@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import { useMemo } from "react";
 
-import { MARKETS, isMarketEnabled } from "config/markets";
+import { MARKETS, isMarketComingSoon, isMarketEnabled } from "config/markets";
 import { convertTokenAddress, getToken } from "sdk/configs/tokens";
 
 import { MarketsData } from "./types";
@@ -26,6 +26,10 @@ export function useMarkets(chainId: number): MarketsResult {
         const market = enabledMarketConfig;
 
         if (!isMarketEnabled(chainId, market.marketTokenAddress)) {
+          return acc;
+        }
+
+        if (isMarketComingSoon(chainId, market.marketTokenAddress)) {
           return acc;
         }
 

@@ -82,9 +82,9 @@ msgstr ""
 msgid "Approval signed"
 msgstr ""
 
-#: src/components/Footer/Footer.tsx
+#: src/components/Footer/constants.tsx
 msgid "Leave Feedback"
-msgstr ""
+msgstr "Ŀëàvë Ƒëëđbàçķ"
 
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Daily Loss"
@@ -1503,6 +1503,10 @@ msgstr ""
 #: src/components/PositionEditor/PositionEditor.tsx
 #: src/components/PositionSeller/PositionSeller.tsx
 msgid "Max"
+msgstr ""
+
+#: src/components/PositionItem/PositionItem.tsx
+msgid "Mark price is {0}% away from liquidation price."
 msgstr ""
 
 #: src/pages/Ecosystem/Ecosystem.tsx

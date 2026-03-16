@@ -89,6 +89,7 @@
     "react-calendar": "6.0.0",
     "react-dom": "18.2.0",
     "react-helmet": "6.1.0",
+    "react-helmet-async": "3.0.0",
     "react-hot-toast": "2.2.0",
     "react-jazzicon": "1.0.4",
     "react-loading-skeleton": "3.3.1",

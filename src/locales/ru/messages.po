@@ -82,9 +82,9 @@ msgstr "Согласен"
 msgid "Approval signed"
 msgstr "Одобрение подписано"
 
-#: src/components/Footer/Footer.tsx
+#: src/components/Footer/constants.tsx
 msgid "Leave Feedback"
-msgstr ""
+msgstr "Оставить отзыв"
 
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Daily Loss"
@@ -1504,6 +1504,10 @@ msgstr "Стоимость комиссий в USD рассчитывается 
 #: src/components/PositionSeller/PositionSeller.tsx
 msgid "Max"
 msgstr "Макс"
+
+#: src/components/PositionItem/PositionItem.tsx
+msgid "Mark price is {0}% away from liquidation price."
+msgstr ""
 
 #: src/pages/Ecosystem/Ecosystem.tsx
 msgid "Projects integrated with 0xMarkets."

@@ -48,3 +48,7 @@ CLAUDE.md
 .serena
 .claude
 claude.md
+
+.env
+.env-cmdrc
+.env.local

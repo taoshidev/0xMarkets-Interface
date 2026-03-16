@@ -82,9 +82,9 @@ msgstr "동의하기"
 msgid "Approval signed"
 msgstr "승인 서명 완료"
 
-#: src/components/Footer/Footer.tsx
+#: src/components/Footer/constants.tsx
 msgid "Leave Feedback"
-msgstr ""
+msgstr "피드백 남기기"
 
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Daily Loss"
@@ -1504,6 +1504,10 @@ msgstr "수수료의 USD 가치는 적립 시 계산되며 인센티브를 포�
 #: src/components/PositionSeller/PositionSeller.tsx
 msgid "Max"
 msgstr "최대"
+
+#: src/components/PositionItem/PositionItem.tsx
+msgid "Mark price is {0}% away from liquidation price."
+msgstr ""
 
 #: src/pages/Ecosystem/Ecosystem.tsx
 msgid "Projects integrated with 0xMarkets."

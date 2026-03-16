@@ -82,9 +82,9 @@ msgstr "同意する"
 msgid "Approval signed"
 msgstr "承認署名完了"
 
-#: src/components/Footer/Footer.tsx
+#: src/components/Footer/constants.tsx
 msgid "Leave Feedback"
-msgstr ""
+msgstr "フィードバックを送る"
 
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Daily Loss"
@@ -1504,6 +1504,10 @@ msgstr "手数料のUSD価値は獲得時に計算され、インセンティブ
 #: src/components/PositionSeller/PositionSeller.tsx
 msgid "Max"
 msgstr "最大"
+
+#: src/components/PositionItem/PositionItem.tsx
+msgid "Mark price is {0}% away from liquidation price."
+msgstr ""
 
 #: src/pages/Ecosystem/Ecosystem.tsx
 msgid "Projects integrated with 0xMarkets."

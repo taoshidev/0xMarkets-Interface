@@ -26,6 +26,7 @@ export function getFooterLinks(isHome) {
     app: [
       { label: t`Faucet`, link: "https://faucet.0xMarkets.io", external: true },
       { label: t`Charts by TradingView`, link: "https://www.tradingview.com/", external: true },
+      { label: t`Leave Feedback`, link: "https://discord.gg/XtKESzrBvs", external: true },
     ],
   };
   return FOOTER_LINKS[isHome ? "home" : "app"];

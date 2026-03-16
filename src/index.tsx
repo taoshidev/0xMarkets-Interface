@@ -9,6 +9,8 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
+import { HelmetProvider } from "react-helmet-async";
+
 import WalletProvider from "lib/wallets/WalletProvider";
 
 import App from "./App/App";
@@ -18,6 +20,7 @@ const history = createBrowserHistory();
 
 Sentry.init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
+  enabled: import.meta.env.PROD,
   environment: import.meta.env.MODE,
   release: import.meta.env.VITE_APP_VERSION,
   sendDefaultPii: true,
@@ -33,13 +36,15 @@ Sentry.init({
 
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Router>
-      <Sentry.ErrorBoundary fallback={<p>Something went wrong.</p>}>
-        <WalletProvider>
-          <App />
-        </WalletProvider>
-      </Sentry.ErrorBoundary>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <Sentry.ErrorBoundary fallback={<p>Something went wrong.</p>}>
+          <WalletProvider>
+            <App />
+          </WalletProvider>
+        </Sentry.ErrorBoundary>
+      </Router>
+    </HelmetProvider>
   </React.StrictMode>
 );
 

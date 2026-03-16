@@ -1,5 +1,5 @@
 import { t } from "@lingui/macro";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 function SEO(props) {
   const { children, ...customMeta } = props;

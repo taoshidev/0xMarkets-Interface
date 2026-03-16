@@ -82,7 +82,7 @@ msgstr "Agree"
 msgid "Approval signed"
 msgstr "Approval signed"
 
-#: src/components/Footer/Footer.tsx
+#: src/components/Footer/constants.tsx
 msgid "Leave Feedback"
 msgstr "Leave Feedback"
 
@@ -1504,6 +1504,10 @@ msgstr "The fees' USD value is calculated at the time they are earned and does n
 #: src/components/PositionSeller/PositionSeller.tsx
 msgid "Max"
 msgstr "Max"
+
+#: src/components/PositionItem/PositionItem.tsx
+msgid "Mark price is {0}% away from liquidation price."
+msgstr "Mark price is {0}% away from liquidation price."
 
 #: src/pages/Ecosystem/Ecosystem.tsx
 msgid "Projects integrated with 0xMarkets."

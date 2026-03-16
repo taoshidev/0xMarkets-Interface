@@ -155,7 +155,7 @@ function useMarketsValuesRequest({
           // Skip invalid market
           if (!readerValues || !dataStoreValues || readerErrors || dataStoreErrors) {
             // eslint-disable-next-line no-console
-            console.log("market info error", marketAddress, readerErrors, dataStoreErrors, readerValues);
+            console.warn("market info error", marketAddress, readerErrors, dataStoreErrors, readerValues);
             return acc;
           }
           const market = getByKey(marketsData, marketAddress)!;

@@ -325,7 +325,7 @@ export class Metrics {
         }
       });
 
-      this.performanceObserver.observe({ entryTypes: ["longtask"], buffered: true });
+      this.performanceObserver.observe({ type: "longtask", buffered: true });
     } catch (error) {
       this.pushError(error, "subscribeToLongTasks");
       this.performanceObserver?.disconnect();

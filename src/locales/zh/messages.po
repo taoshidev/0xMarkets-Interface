@@ -82,9 +82,9 @@ msgstr "同意"
 msgid "Approval signed"
 msgstr "批准已签名"
 
-#: src/components/Footer/Footer.tsx
+#: src/components/Footer/constants.tsx
 msgid "Leave Feedback"
-msgstr ""
+msgstr "留下反馈"
 
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Daily Loss"
@@ -1504,6 +1504,10 @@ msgstr "费用的 USD 值在赚取时计算，不包括激励。"
 #: src/components/PositionSeller/PositionSeller.tsx
 msgid "Max"
 msgstr "最大"
+
+#: src/components/PositionItem/PositionItem.tsx
+msgid "Mark price is {0}% away from liquidation price."
+msgstr ""
 
 #: src/pages/Ecosystem/Ecosystem.tsx
 msgid "Projects integrated with 0xMarkets."
