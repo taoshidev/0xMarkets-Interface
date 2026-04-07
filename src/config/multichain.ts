@@ -19,7 +19,7 @@ import {
 } from "config/chains";
 import { LayerZeroEndpointId } from "domain/multichain/types";
 import { numberToBigint } from "lib/numbers";
-import { isSettlementChain, isSourceChain, SOURCE_CHAINS } from "sdk/configs/multichain";
+import { isSettlementChain, isSourceChain } from "sdk/configs/multichain";
 import { convertTokenAddress, getTokenBySymbol } from "sdk/configs/tokens";
 
 export * from "sdk/configs/multichain";

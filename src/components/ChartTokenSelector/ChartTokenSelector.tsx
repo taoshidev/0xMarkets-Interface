@@ -729,13 +729,13 @@ function ComingSoonRow({
   market,
   isMobile,
   rowVerticalPadding,
-  rowHorizontalPadding,
+  _rowHorizontalPadding,
   tdClassName,
 }: {
   market: ComingSoonMarket;
   isMobile: boolean;
   rowVerticalPadding: string;
-  rowHorizontalPadding: string;
+  _rowHorizontalPadding: string;
   tdClassName: string;
 }) {
   return (

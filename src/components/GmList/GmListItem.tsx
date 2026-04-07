@@ -20,11 +20,11 @@ import {
   getMarketPoolName,
 } from "domain/synthetics/markets";
 import { isGlvInfo } from "domain/synthetics/markets/glv";
+import { GlvOrMarketInfo, MarketInfo } from "domain/synthetics/markets/types";
 import { useDaysConsideredInMarketsApr } from "domain/synthetics/markets/useDaysConsideredInMarketsApr";
 import { PerformanceData } from "domain/synthetics/markets/usePerformanceAnnualized";
 import { PerformanceSnapshot, PerformanceSnapshotsData } from "domain/synthetics/markets/usePerformanceSnapshots";
 import { useUserEarnings } from "domain/synthetics/markets/useUserEarnings";
-import { GlvOrMarketInfo, MarketInfo } from "domain/synthetics/markets/types";
 import { TokenData, convertToUsd, getTokenData } from "domain/synthetics/tokens";
 import { bigintToNumber, formatPercentage, formatUsd, PRECISION_DECIMALS } from "lib/numbers";
 import { EMPTY_ARRAY, getByKey } from "lib/objects";
@@ -37,8 +37,8 @@ import { AprInfo } from "components/AprInfo/AprInfo";
 import Button from "components/Button/Button";
 import FavoriteStar from "components/FavoriteStar/FavoriteStar";
 import { TableTdActionable, TableTrActionable } from "components/Table/Table";
-import { GmTokensBalanceInfo } from "./GmTokensTotalBalanceInfo";
 import { PoolTokenIcon } from "components/TokenIcon/PoolTokenIcon";
+import { GmTokensBalanceInfo } from "./GmTokensTotalBalanceInfo";
 import GmAssetDropdown from "../GmAssetDropdown/GmAssetDropdown";
 import { SyntheticsInfoRow } from "../SyntheticsInfoRow";
 import { FeeApyLabel } from "./FeeApyLabel";
@@ -55,7 +55,7 @@ function computeUtilization(marketOrGlv: GlvOrMarketInfo | undefined): number | 
   if (!marketOrGlv || isGlvInfo(marketOrGlv)) return null;
   const market = marketOrGlv as MarketInfo;
   const poolValue = market.poolValueMax;
-  if (!poolValue || poolValue === 0n) return null;
+  if (poolValue === 0n) return null;
   const totalInterest = market.longInterestUsd + market.shortInterestUsd;
   // Both values are in USD with PRECISION (30 decimals), same scale — safe to divide
   const utilizationBps = bigMath.mulDiv(totalInterest, 10000n, poolValue);
@@ -76,7 +76,7 @@ function computePoolFill(marketOrGlv: GlvOrMarketInfo | undefined): {
   if (!marketOrGlv || isGlvInfo(marketOrGlv)) return null;
   const market = marketOrGlv as MarketInfo;
   const maxTotal = market.maxLongPoolAmount + market.maxShortPoolAmount;
-  if (!maxTotal || maxTotal === 0n) return null;
+  if (maxTotal === 0n) return null;
   const currentTotal = market.longPoolAmount + market.shortPoolAmount;
   const fillBps = bigMath.mulDiv(currentTotal, 10000n, maxTotal);
   return {
@@ -391,7 +391,7 @@ export function GmListItem({
       </TableTdActionable>
 
       <TableTdActionable className="w-[11%]">
-        <div className={`apy-value ${apy && apy > 0n ? "apy-positive" : ""}`}>
+        <div className={`apy-value ${apy !== undefined && apy > 0n ? "apy-positive" : ""}`}>
           <AprInfo apy={apy} incentiveApr={incentiveApr} lidoApr={lidoApr} marketAddress={token.address} />
         </div>
       </TableTdActionable>

@@ -11,7 +11,6 @@ import {
   useLeaderboardTimeframeTypeState,
   useLeaderboardTiming,
 } from "context/SyntheticsStateContext/hooks/leaderboardHooks";
-import { TestnetBanner } from "./TestnetBanner";
 import {
   selectLeaderboardIsLoading,
   selectLeaderboardSearchAddress,
@@ -30,6 +29,7 @@ import { CompetitionPrizes } from "./CompetitionPrizes";
 import { LeaderboardAccountsTable } from "./LeaderboardAccountsTable";
 import { LeaderboardNavigation } from "./LeaderboardNavigation";
 import { LeaderboardPositionsTable } from "./LeaderboardPositionsTable";
+import { TestnetBanner } from "./TestnetBanner";
 
 const competitionsTabs = [0, 1];
 const leaderboardTimeframeTabs = [2, 1, 0];

@@ -140,7 +140,7 @@ export function TradeBox({ isMobile }: { isMobile: boolean }) {
   const isWrapOrUnwrap = useSelector(selectTradeboxIsWrapOrUnwrap);
 
   const chainId = useSelector(selectChainId);
-  const srcChainId = useSelector(selectSrcChainId);
+  const _srcChainId = useSelector(selectSrcChainId);
   const { account } = useWallet();
 
   const { shouldDisableValidationForTesting: shouldDisableValidation } = useSettings();

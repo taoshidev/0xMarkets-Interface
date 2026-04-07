@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef } from "react";
+
 import { LOCALHOST, BASE_SEPOLIA } from "config/chains";
 import { getSortedMarketsAddressesKey } from "config/localStorage";
 import { isMarketComingSoon } from "config/markets";

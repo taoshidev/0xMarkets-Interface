@@ -4,10 +4,10 @@ import "styles/tailwind.css";
 import "lib/monkeyPatching";
 
 import * as Sentry from "@sentry/react";
+import { createBrowserHistory } from "history";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
-import { createBrowserHistory } from "history";
 
 import WalletProvider from "lib/wallets/WalletProvider";
 

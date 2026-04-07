@@ -42,7 +42,7 @@ export class KeeperWebSocketManager {
         if (message.type === "ticker" || message.type === "candle") {
           this.emit(message.type, message.data);
         }
-      } catch {
+      } catch (_e) {
         // Ignore malformed messages
       }
     };

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import type { ConnectionState } from "./types";
+
 import { KeeperWebSocketManager, getKeeperWebSocketUrl } from "./KeeperWebSocketManager";
+import type { ConnectionState } from "./types";
 
 const manager = new KeeperWebSocketManager(getKeeperWebSocketUrl());
 manager.connect();

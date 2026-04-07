@@ -62,7 +62,7 @@ import Checkbox from "components/Checkbox/Checkbox";
 import { Claims } from "components/Claims/Claims";
 import { InterviewModal } from "components/InterviewModal/InterviewModal";
 import { NpsModal } from "components/NpsModal/NpsModal";
-import { OneClickPromoBanner } from "components/OneClickPromoBanner/OneClickPromoBanner";
+// import { OneClickPromoBanner } from "components/OneClickPromoBanner/OneClickPromoBanner";
 import { OrderList } from "components/OrderList/OrderList";
 import { PositionEditor } from "components/PositionEditor/PositionEditor";
 import { PositionList } from "components/PositionList/PositionList";
@@ -77,8 +77,8 @@ import { Chart } from "components/TVChart/Chart";
 import ChartHeader from "components/TVChart/ChartHeader";
 import { FavoriteTokenBar } from "components/FavoriteTokenBar/FavoriteTokenBar";
 
-import logoIcon from "img/logo_0xMarkets.svg";
 import LogoText from "img/logo-text.svg?react";
+import logoIcon from "img/logo_0xMarkets.svg";
 
 export type Props = {
   openSettings: () => void;

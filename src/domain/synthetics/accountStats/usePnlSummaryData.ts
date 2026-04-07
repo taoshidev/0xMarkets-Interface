@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import { useMemo } from "react";
-import type { Address } from "viem";
 import useSWR from "swr";
+import type { Address } from "viem";
 
 import { useShowDebugValues } from "context/SyntheticsStateContext/hooks/settingsHooks";
 import { EMPTY_ARRAY } from "lib/objects";

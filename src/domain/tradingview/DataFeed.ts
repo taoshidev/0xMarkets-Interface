@@ -20,9 +20,8 @@ import {
   multiplyBarValues,
   parseSymbolName,
 } from "domain/tradingview/utils";
-import { getKeeperWebSocketManager } from "lib/keeperWebSocket";
+import { getKeeperWebSocketManager, KeeperWebSocketManager } from "lib/keeperWebSocket";
 import type { CandleData } from "lib/keeperWebSocket";
-import { KeeperWebSocketManager } from "lib/keeperWebSocket";
 import { parseError } from "lib/errors";
 import { getRequestId, LoadingFailedEvent, LoadingStartEvent, LoadingSuccessEvent, metrics } from "lib/metrics";
 import { OracleFetcher } from "lib/oracleKeeperFetcher/types";
@@ -248,7 +247,7 @@ export class DataFeed extends EventTarget implements IBasicDataFeed {
     // Use WebSocket candle listener for V2 non-stable tokens
     if (this.tradePageVersion === 2 && !isStable) {
       const symbol = symbolInfo.ticker!;
-      let lastBarTime = 0;
+      let _lastBarTime = 0;
 
       this.activeSubscriptions[symbol] = { onTick, lastBar: null, visualMultiplier };
 
@@ -269,7 +268,7 @@ export class DataFeed extends EventTarget implements IBasicDataFeed {
           close,
         };
 
-        lastBarTime = candle.minuteTs;
+        _lastBarTime = candle.minuteTs;
         const multipliedBar = multiplyBarValues(formatTimeInBarToMs(bar), visualMultiplier);
         if (this.activeSubscriptions[symbol]) {
           this.activeSubscriptions[symbol].lastBar = multipliedBar;

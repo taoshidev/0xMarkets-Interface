@@ -87,7 +87,7 @@ export function GmList({
   // For "My Pools" tab: further filter to tokens where user has a balance
   const displayTokens = useMemo(() => {
     if (activeTab !== "my") return filteredGmTokens;
-    return filteredGmTokens.filter((token) => token.balance && token.balance > 0n);
+    return filteredGmTokens.filter((token) => token.balance !== undefined && token.balance > 0n);
   }, [filteredGmTokens, activeTab]);
 
   const { currentPage, currentData, pageCount, setCurrentPage } = usePagination(

@@ -4,7 +4,6 @@ import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, 
 import { useAccount } from "wagmi";
 
 import { SourceChainId } from "config/chains";
-import { isDevelopment } from "config/env";
 import { isSourceChain } from "config/multichain";
 import { useChainId } from "lib/chains";
 import {

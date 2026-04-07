@@ -176,7 +176,6 @@ export function SyntheticsEventsProvider({ children }: { children: ReactNode }) 
   const [watchedTxnHashes, setWatchedTxnHashes] = useState<Set<string>>(new Set());
 
   const watchOrderTxn = useCallback((txnHash: string) => {
-    console.warn("[receipt-watcher] Watching TX receipt:", txnHash);
     setWatchedTxnHashes((prev) => {
       const next = new Set(prev);
       next.add(txnHash);
@@ -288,7 +287,6 @@ export function SyntheticsEventsProvider({ children }: { children: ReactNode }) 
   // use ref to avoid re-subscribing on state changes
   eventLogHandlers.current = {
     OrderCreated: (eventData: EventLogData, txnParams: EventTxnParams) => {
-      console.warn("[events] OrderCreated received via handler, txnHash:", txnParams.transactionHash, "key:", eventData.bytes32Items.items.key);
       updateNativeTokenBalance();
 
       const uiFeeReceiver = eventData.addressItems.items.uiFeeReceiver;
@@ -384,7 +382,6 @@ export function SyntheticsEventsProvider({ children }: { children: ReactNode }) 
     },
 
     OrderExecuted: (eventData: EventLogData, txnParams: EventTxnParams) => {
-      console.warn("[events] OrderExecuted received via handler, txnHash:", txnParams.transactionHash, "key:", eventData.bytes32Items.items.key);
       updateNativeTokenBalance();
 
       const key = eventData.bytes32Items.items.key;

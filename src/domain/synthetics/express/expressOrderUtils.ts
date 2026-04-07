@@ -418,10 +418,10 @@ export async function estimateExpressParams({
 }
 
 export function getIsValidExpressParams({
-  chainId,
+  chainId: _chainId,
   gasPaymentValidations,
   subaccountValidations,
-  isSponsoredCall,
+  isSponsoredCall: _isSponsoredCall,
 }: {
   chainId: number;
   isSponsoredCall: boolean;

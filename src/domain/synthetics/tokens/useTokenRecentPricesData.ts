@@ -97,7 +97,7 @@ export function useTokenRecentPricesRequest(chainId: number): TokenPricesDataRes
         let tokenConfig: Token;
         try {
           tokenConfig = getToken(chainId, priceItem.tokenAddress);
-        } catch {
+        } catch (_e) {
           continue;
         }
         result[tokenConfig.address] = {

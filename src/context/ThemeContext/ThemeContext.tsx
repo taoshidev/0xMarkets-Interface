@@ -27,7 +27,7 @@ const DEFAULT_THEME_MODE = "dark";
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [themeMode, setThemeModeState] = useLocalStorageSerializeKey<ThemeMode>("app-theme-mode", DEFAULT_THEME_MODE);
   const prefersDarkMode = useMedia("(prefers-color-scheme: dark)");
-  const systemTheme: ResolvedTheme = prefersDarkMode ? "dark" : "light";
+  const _systemTheme: ResolvedTheme = prefersDarkMode ? "dark" : "light";
 
   // Force dark mode — light mode is not yet polished
   const theme: ResolvedTheme = "dark";

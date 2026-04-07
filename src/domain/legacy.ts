@@ -8,9 +8,12 @@ export function useUserStat(_chainId) {
   return null;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const noop = () => {};
+
 export function useGmxPrice(_chainId, _libraries, _active) {
   const gmxPrice = undefined;
-  const mutate = useCallback(() => {}, []);
+  const mutate = useCallback(noop, []);
 
   return {
     gmxPrice,
@@ -23,13 +26,13 @@ export function useGmxPrice(_chainId, _libraries, _active) {
 export function useTotalGmxSupply() {
   return {
     total: undefined,
-    mutate: () => {},
+    mutate: noop,
   };
 }
 
 export function useTotalGmxStaked() {
   let totalStakedGmx = useRef(BN_ZERO);
-  const mutate = useCallback(() => {}, []);
+  const mutate = useCallback(noop, []);
 
   return {
     total: totalStakedGmx.current,
@@ -39,7 +42,7 @@ export function useTotalGmxStaked() {
 
 export function useTotalGmxInLiquidity() {
   let totalGMX = useRef(BN_ZERO);
-  const mutate = useCallback(() => {}, []);
+  const mutate = useCallback(noop, []);
 
   return {
     total: totalGMX.current,

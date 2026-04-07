@@ -1,7 +1,7 @@
 import ButtonLink from "components/Button/ButtonLink";
 
-import logoIcon from "img/logo_0xMarkets.svg";
 import LogoText from "img/logo-text.svg?react";
+import logoIcon from "img/logo_0xMarkets.svg";
 
 export function AppHeaderLogo() {
   return (

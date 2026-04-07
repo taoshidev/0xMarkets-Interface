@@ -2,6 +2,7 @@ import { Trans } from "@lingui/macro";
 import { useMemo } from "react";
 
 import { formatTokenAmount, formatUsd } from "lib/numbers";
+
 import type { CarthaVaultData } from "domain/synthetics/markets/useCarthaVaults";
 
 /** Scale USDC (6 decimals) to USD_DECIMALS (30 decimals) for formatUsd */
@@ -31,14 +32,14 @@ export function CarthaVaultCards({ vaults }: { vaults: CarthaVaultData[] }) {
     <div className="px-8 pb-12 max-md:px-12 max-md:pb-8">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {groups.map(({ parent, children }) => (
-          <CarthaVaultCard key={parent.address} parent={parent} children={children} />
+          <CarthaVaultCard key={parent.address} parent={parent} subVaults={children} />
         ))}
       </div>
     </div>
   );
 }
 
-function CarthaVaultCard({ parent, children }: { parent: CarthaVaultData; children: CarthaVaultData[] }) {
+function CarthaVaultCard({ parent, subVaults }: { parent: CarthaVaultData; subVaults: CarthaVaultData[] }) {
   const hasBalance = parent.userBalance > 0n;
 
   return (
@@ -79,9 +80,9 @@ function CarthaVaultCard({ parent, children }: { parent: CarthaVaultData; childr
         )}
 
         {/* Child vaults */}
-        {children.length > 0 && (
+        {subVaults.length > 0 && (
           <div className="flex flex-col gap-2 border-t border-[#383a55] pt-12">
-            {children.map((child) => (
+            {subVaults.map((child) => (
               <CarthaChildRow key={child.address} vault={child} />
             ))}
           </div>

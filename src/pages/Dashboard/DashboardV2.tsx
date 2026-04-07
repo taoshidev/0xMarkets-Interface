@@ -16,7 +16,7 @@ import { PlatformStats } from "./PlatformStats";
 import "./DashboardV2.css";
 
 export default function DashboardV2() {
-  const { chainId } = useChainId();
+  const { chainId: _chainId } = useChainId();
 
   return (
     <SEO title={getPageTitle(t`Stats`)}>

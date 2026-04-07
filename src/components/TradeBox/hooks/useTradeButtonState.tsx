@@ -709,7 +709,7 @@ function NoSwapPathTooltipContent({
   collateralToken,
   fromToken,
   chainId,
-  toToken,
+  toToken: _toToken,
 }: {
   collateralToken: TokenData | undefined;
   fromToken: TokenData | undefined;
@@ -718,7 +718,7 @@ function NoSwapPathTooltipContent({
 }) {
   const { setFromTokenAddress, setToTokenAddress, setTradeType, setTradeMode } = useSelector(selectTradeboxState);
 
-  const makeHandleSwapClick = useCallback(
+  const _makeHandleSwapClick = useCallback(
     (fromTokenSymbol: string, toTokenSymbol: string) => () => {
       setTradeType(TradeType.Swap);
       setTradeMode(TradeMode.Market);

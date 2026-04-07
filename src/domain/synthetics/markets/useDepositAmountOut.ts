@@ -1,5 +1,5 @@
-import { useMemo } from "react";
 import { ethers } from "ethers";
+import { useMemo } from "react";
 
 import { getContract } from "config/contracts";
 import { UI_FEE_RECEIVER_ACCOUNT } from "config/ui";
@@ -7,9 +7,9 @@ import { ContractCallsConfig, useMulticall } from "lib/multicall";
 import type { ContractsChainId } from "sdk/configs/chains";
 import { SwapPricingType } from "sdk/types/orders";
 
+import { getContractMarketPrices } from "./utils";
 import { MarketInfo } from "./types";
 import { TokensData } from "../tokens/types";
-import { getContractMarketPrices } from "./utils";
 
 /**
  * Calls SyntheticsReader.getDepositAmountOut() to get the exact on-chain

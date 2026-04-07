@@ -521,7 +521,7 @@ export function GmStatusNotification({
     setIsCancelling(true);
     try {
       await cancelDepositTxn(chainId, signer, depositStatusKey);
-    } catch {
+    } catch (_e) {
       setIsCancelling(false);
     }
   };
@@ -531,7 +531,7 @@ export function GmStatusNotification({
     setIsCancellingWithdrawal(true);
     try {
       await cancelWithdrawalTxn(chainId, signer, withdrawalStatusKey);
-    } catch {
+    } catch (_e) {
       setIsCancellingWithdrawal(false);
     }
   };

@@ -2,12 +2,11 @@ import { ethers } from "ethers";
 import { useEffect, useRef } from "react";
 
 import { getContract } from "config/contracts";
+import { parseEventLogData } from "context/WebsocketContext/subscribeToEvents";
 import { updateByKey } from "lib/objects";
 import { getProvider } from "lib/rpc";
 import { abis } from "sdk/abis";
 import type { ContractsChainId } from "sdk/configs/chains";
-
-import { parseEventLogData } from "context/WebsocketContext/subscribeToEvents";
 
 import type { DepositStatuses, EventLogData, EventTxnParams, OrderStatuses, WithdrawalStatuses, MultiTransactionStatus } from "./types";
 import { EXECUTION_TIMEOUT_HASH } from "./types";
@@ -116,26 +115,20 @@ export function useExecutionPolling({
     // Don't start interval if nothing needs polling
     if (!hasPendingOps && !hasWatchedTxns) return;
 
-    console.warn(
-      "[execution-polling] Starting unified poll loop.",
-      "watchedTxns:", watchedTxnHashes.size,
-      "pendingOps:", hasPendingOps
-    );
-
     const poll = async () => {
       const currentChainId = chainIdRef.current;
 
       let provider: ethers.JsonRpcProvider;
       try {
         provider = getProvider(undefined, currentChainId);
-      } catch {
+      } catch (_e) {
         return;
       }
 
       let eventEmitterAddress: string;
       try {
         eventEmitterAddress = getContract(currentChainId as ContractsChainId, "EventEmitter");
-      } catch {
+      } catch (_e) {
         return;
       }
 
@@ -150,8 +143,6 @@ export function useExecutionPolling({
         try {
           const receipt = await provider.getTransactionReceipt(txnHash);
           if (!receipt) continue;
-
-          console.warn("[execution-polling] Receipt found for TX:", txnHash, "logs:", receipt.logs.length);
 
           // Remove from watch list
           setWatchedTxnHashes((prev) => {
@@ -193,14 +184,13 @@ export function useExecutionPolling({
                 continue;
               }
 
-              console.warn("[execution-polling] Parsed event:", eventName, "from TX:", txnHash);
               const parsedData = parseEventLogData(rawEventData);
               eventLogHandlersRef.current.current[eventName]?.(parsedData, txnOpts);
-            } catch {
+            } catch (_e) {
               // Skip unparseable logs
             }
           }
-        } catch {
+        } catch (_e) {
           // Receipt not available yet, will retry on next poll
         }
       }
@@ -211,11 +201,7 @@ export function useExecutionPolling({
       // Poll for pending deposits
       const pendingDeposits = getPendingOperations(depositStatusesRef.current);
       for (const pending of pendingDeposits) {
-        console.warn("[execution-polling] Polling for pending operation:", pending.key, "type:", "deposit", "elapsed:", now - pending.createdAt, "ms");
-      }
-      for (const pending of pendingDeposits) {
         if (now - pending.createdAt > MAX_WAIT_MS) {
-          console.warn("[execution-polling] Operation timed out:", pending.key, "after", now - pending.createdAt, "ms");
           setDepositStatuses((old) => updateByKey(old, pending.key, { cancelledTxnHash: EXECUTION_TIMEOUT_HASH }));
           continue;
         }
@@ -229,7 +215,6 @@ export function useExecutionPolling({
             eventEmitter,
             pending.key,
             (key, txnHash, isExecuted, cancelledReason) => {
-              console.warn("[execution-polling] Found event via RPC poll:", isExecuted ? "executed" : "cancelled", "key:", key, "txnHash:", txnHash);
               if (isExecuted) {
                 setDepositStatuses((old) => updateByKey(old, key, { executedTxnHash: txnHash }));
               } else {
@@ -237,7 +222,7 @@ export function useExecutionPolling({
               }
             }
           );
-        } catch {
+        } catch (_e) {
           // Will retry on next interval
         }
       }
@@ -245,11 +230,7 @@ export function useExecutionPolling({
       // Poll for pending withdrawals
       const pendingWithdrawals = getPendingOperations(withdrawalStatusesRef.current);
       for (const pending of pendingWithdrawals) {
-        console.warn("[execution-polling] Polling for pending operation:", pending.key, "type:", "withdrawal", "elapsed:", now - pending.createdAt, "ms");
-      }
-      for (const pending of pendingWithdrawals) {
         if (now - pending.createdAt > MAX_WAIT_MS) {
-          console.warn("[execution-polling] Operation timed out:", pending.key, "after", now - pending.createdAt, "ms");
           setWithdrawalStatuses((old) => updateByKey(old, pending.key, { cancelledTxnHash: EXECUTION_TIMEOUT_HASH }));
           continue;
         }
@@ -263,7 +244,6 @@ export function useExecutionPolling({
             eventEmitter,
             pending.key,
             (key, txnHash, isExecuted, cancelledReason) => {
-              console.warn("[execution-polling] Found event via RPC poll:", isExecuted ? "executed" : "cancelled", "key:", key, "txnHash:", txnHash);
               if (isExecuted) {
                 setWithdrawalStatuses((old) => updateByKey(old, key, { executedTxnHash: txnHash }));
               } else {
@@ -271,7 +251,7 @@ export function useExecutionPolling({
               }
             }
           );
-        } catch {
+        } catch (_e) {
           // Will retry on next interval
         }
       }
@@ -279,11 +259,7 @@ export function useExecutionPolling({
       // Poll for pending orders
       const pendingOrders = getPendingOperations(orderStatusesRef.current);
       for (const pending of pendingOrders) {
-        console.warn("[execution-polling] Polling for pending operation:", pending.key, "type:", "order", "elapsed:", now - pending.createdAt, "ms");
-      }
-      for (const pending of pendingOrders) {
         if (now - pending.createdAt > MAX_WAIT_MS) {
-          console.warn("[execution-polling] Operation timed out:", pending.key, "after", now - pending.createdAt, "ms");
           setOrderStatuses((old) => updateByKey(old, pending.key, { cancelledTxnHash: EXECUTION_TIMEOUT_HASH }));
           continue;
         }
@@ -297,7 +273,6 @@ export function useExecutionPolling({
             eventEmitter,
             pending.key,
             (key, txnHash, isExecuted, cancelledReason) => {
-              console.warn("[execution-polling] Found event via RPC poll:", isExecuted ? "executed" : "cancelled", "key:", key, "txnHash:", txnHash);
               if (isExecuted) {
                 setOrderStatuses((old) => updateByKey(old, key, { executedTxnHash: txnHash }));
               } else {
@@ -305,7 +280,7 @@ export function useExecutionPolling({
               }
             }
           );
-        } catch {
+        } catch (_e) {
           // Will retry on next interval
         }
       }
@@ -354,8 +329,6 @@ async function pollForEvents(
     topics: [validTopics, eventNameHashes],
   });
 
-  console.warn("[execution-polling] pollForEvents: got", logs.length, "logs from blocks", fromBlock, "to latest, looking for key:", operationKey);
-
   for (const log of logs) {
     try {
       const parsed = eventEmitter.interface.parseLog({
@@ -390,8 +363,6 @@ async function pollForEvents(
       const items = eventLogData?.bytes32Items?.items;
       const keyItem = items?.find((item: { key: string; value: string }) => item.key === "key");
 
-      console.warn("[execution-polling] pollForEvents: log event:", eventName, "parsed.name:", parsed.name, "bytes32Items.items type:", typeof items, "isArray:", Array.isArray(items), "length:", items?.length, "keyItem:", keyItem ? { key: keyItem.key, value: keyItem.value } : "NOT_FOUND");
-
       if (!keyItem || keyItem.value !== operationKey) continue;
 
       // Determine the event name hash (topic[1] in the log)
@@ -406,8 +377,7 @@ async function pollForEvents(
 
       onFound(operationKey, log.transactionHash, isExecuted, cancelledReason);
       return; // Found a match, stop searching
-    } catch (e) {
-      console.warn("[execution-polling] pollForEvents: error parsing log:", e);
+    } catch (_e) {
       continue;
     }
   }

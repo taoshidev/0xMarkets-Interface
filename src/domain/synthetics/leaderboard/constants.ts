@@ -1,4 +1,5 @@
 import { BASE_SEPOLIA } from "config/chains";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { expandDecimals } from "lib/numbers";
 
 import { LeaderboardPageConfig, LeaderboardPageKey } from "./types";

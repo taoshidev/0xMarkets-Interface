@@ -1,6 +1,5 @@
-import { t, Trans } from "@lingui/macro";
-import { useState } from "react";
 import cx from "classnames";
+import { useState } from "react";
 
 import { useGmMarketsApy } from "domain/synthetics/markets/useGmMarketsApy";
 import { usePerformanceAnnualized } from "domain/synthetics/markets/usePerformanceAnnualized";

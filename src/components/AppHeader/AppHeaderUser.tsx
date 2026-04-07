@@ -5,10 +5,9 @@ import { useChainId } from "lib/chains";
 import { sendUserAnalyticsConnectWalletClickEvent } from "lib/userAnalytics";
 import useWallet from "lib/wallets/useWallet";
 
+import Button from "components/Button/Button";
 import { NETWORK_OPTIONS } from "components/Header/AppHeaderChainAndSettings";
 import { OneClickButton } from "components/OneClickButton/OneClickButton";
-
-import Button from "components/Button/Button";
 
 import { AddressDropdown } from "../AddressDropdown/AddressDropdown";
 import ConnectWalletButton from "../ConnectWalletButton/ConnectWalletButton";

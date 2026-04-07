@@ -3,9 +3,9 @@ import { toPng } from "html-to-image";
 import { useCallback, useRef, useState } from "react";
 
 import { LeaderboardAccount } from "domain/synthetics/leaderboard";
+import { shortenAddress } from "lib/legacy";
 import { formatAmount, USD_DECIMALS } from "lib/numbers";
 import { bigMath } from "sdk/utils/bigmath";
-import { shortenAddress } from "lib/legacy";
 
 import logoSrc from "img/logo_0xMarkets.svg";
 

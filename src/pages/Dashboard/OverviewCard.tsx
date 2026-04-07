@@ -7,7 +7,6 @@ import { usePositionsTotalCollateral } from "domain/synthetics/positions/usePosi
 import useV2Stats from "domain/synthetics/stats/useV2Stats";
 import { useChainId } from "lib/chains";
 import { formatAmountHuman } from "lib/numbers";
-import { sumBigInts } from "lib/sumBigInts";
 
 import { AppCard, AppCardSection, AppCardSplit } from "components/AppCard/AppCard";
 import TooltipComponent from "components/Tooltip/Tooltip";
@@ -15,7 +14,7 @@ import TooltipComponent from "components/Tooltip/Tooltip";
 import { getFormattedFeesDuration } from "./getFormattedFeesDuration";
 
 export function OverviewCard() {
-  const { chainId } = useChainId();
+  const { chainId: _chainId } = useChainId();
 
   const v2Overview = useV2Stats(BASE_SEPOLIA);
 

@@ -49,6 +49,7 @@ export function TestnetBanner() {
   const pageKey = useLeaderboardPageKey();
   const page = LEADERBOARD_PAGES[pageKey];
   const { isEndInFuture, isStartInFuture, timeframe } = useLeaderboardTiming();
+  const keeperBalance = useKeeperUsd0Balance();
 
   const durationLabel = useMemo(() => {
     const fmt = (ts: number) =>
@@ -67,7 +68,6 @@ export function TestnetBanner() {
 
   const { title, description, prizePool, network, faucetUrl } = page;
   const hasEnded = !isEndInFuture && !isStartInFuture;
-  const keeperBalance = useKeeperUsd0Balance();
   const formattedBalance = keeperBalance !== undefined
     ? Number(formatUnits(keeperBalance, 18)).toLocaleString("en-US", { maximumFractionDigits: 0 })
     : "…";
@@ -233,7 +233,7 @@ export function TestnetBanner() {
 
 function BannerCountdown({
   isStartInFuture,
-  isEndInFuture,
+  isEndInFuture: _isEndInFuture,
   hasEnded,
   timeframe,
 }: {

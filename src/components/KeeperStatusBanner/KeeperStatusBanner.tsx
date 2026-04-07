@@ -26,7 +26,7 @@ export function KeeperStatusBanner() {
         if (mounted) {
           setIsKeeperDown(!response.ok);
         }
-      } catch {
+      } catch (_e) {
         if (mounted) {
           setIsKeeperDown(true);
         }

@@ -2,8 +2,9 @@ import { useMemo } from "react";
 
 import { useMulticall } from "lib/multicall";
 import type { ContractCallsConfig } from "lib/multicall/types";
-import useWallet from "lib/wallets/useWallet";
 import { FREQUENT_MULTICALL_REFRESH_INTERVAL } from "lib/timeConstants";
+import useWallet from "lib/wallets/useWallet";
+
 import type { ContractsChainId } from "sdk/configs/chains";
 import type { AbiId } from "sdk/abis";
 import {
