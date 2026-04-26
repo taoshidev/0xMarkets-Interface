@@ -308,8 +308,10 @@ function useMarketsConfigsRequest({
             maxPnlFactorForTradersLong: dataStoreValues.maxPnlFactorForTradersLong.returnValues[0],
             maxPnlFactorForTradersShort: dataStoreValues.maxPnlFactorForTradersShort.returnValues[0],
 
-            minCollateralFactor: dataStoreValues.minCollateralFactor.returnValues[0],
-            minCollateralFactorForLiquidation: dataStoreValues.minCollateralFactorForLiquidation.returnValues[0],
+            maxLeverage: dataStoreValues.maxLeverage.returnValues[0],
+            mmrTuning: dataStoreValues.mmrTuning.returnValues[0],
+            minMmr: dataStoreValues.minMmr.returnValues[0],
+            maxMmr: dataStoreValues.maxMmr.returnValues[0],
 
             minCollateralFactorForOpenInterestLong:
               dataStoreValues.minCollateralFactorForOpenInterestLong.returnValues[0],

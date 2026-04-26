@@ -54,12 +54,14 @@ export const MIN_POSITION_IMPACT_POOL_AMOUNT_KEY = hashString("MIN_POSITION_IMPA
 export const POSITION_IMPACT_POOL_DISTRIBUTION_RATE_KEY = hashString("POSITION_IMPACT_POOL_DISTRIBUTION_RATE");
 export const SWAP_IMPACT_POOL_AMOUNT_KEY = hashString("SWAP_IMPACT_POOL_AMOUNT");
 export const MIN_COLLATERAL_USD_KEY = hashString("MIN_COLLATERAL_USD");
-export const MIN_COLLATERAL_FACTOR_KEY = hashString("MIN_COLLATERAL_FACTOR");
 export const MIN_COLLATERAL_FACTOR_FOR_OPEN_INTEREST_MULTIPLIER_KEY = hashString(
   "MIN_COLLATERAL_FACTOR_FOR_OPEN_INTEREST_MULTIPLIER"
 );
 export const MIN_POSITION_SIZE_USD_KEY = hashString("MIN_POSITION_SIZE_USD");
 export const MAX_LEVERAGE_KEY = hashString("MAX_LEVERAGE");
+export const MMR_TUNING_KEY = hashString("MMR_TUNING");
+export const MIN_MMR_KEY = hashString("MIN_MMR");
+export const MAX_MMR_KEY = hashString("MAX_MMR");
 export const DEPOSIT_GAS_LIMIT_KEY = hashString("DEPOSIT_GAS_LIMIT");
 export const WITHDRAWAL_GAS_LIMIT_KEY = hashString("WITHDRAWAL_GAS_LIMIT");
 export const INCREASE_ORDER_GAS_LIMIT_KEY = hashString("INCREASE_ORDER_GAS_LIMIT");
@@ -91,7 +93,6 @@ export const SUBACCOUNT_ORDER_ACTION = hashString("SUBACCOUNT_ORDER_ACTION");
 export const SUBACCOUNT_INTEGRATION_ID = hashString("SUBACCOUNT_INTEGRATION_ID");
 export const SUBACCOUNT_AUTO_TOP_UP_AMOUNT = hashString("SUBACCOUNT_AUTO_TOP_UP_AMOUNT");
 export const GLV_MAX_MARKET_TOKEN_BALANCE_USD = hashString("GLV_MAX_MARKET_TOKEN_BALANCE_USD");
-export const MIN_COLLATERAL_FACTOR_FOR_LIQUIDATION_KEY = hashString("MIN_MAINTAIN_COLLATERAL_FACTOR");
 export const GLV_MAX_MARKET_TOKEN_BALANCE_AMOUNT = hashString("GLV_MAX_MARKET_TOKEN_BALANCE_AMOUNT");
 export const IS_GLV_MARKET_DISABLED = hashString("IS_GLV_MARKET_DISABLED");
 export const GLV_SHIFT_LAST_EXECUTED_AT = hashString("GLV_SHIFT_LAST_EXECUTED_AT");
@@ -306,14 +307,6 @@ export function swapOrderGasLimitKey() {
 
 export function accountOrderListKey(account: string) {
   return hashData(["bytes32", "address"], [ACCOUNT_ORDER_LIST_KEY, account]);
-}
-
-export function minCollateralFactorKey(market: string) {
-  return hashData(["bytes32", "address"], [MIN_COLLATERAL_FACTOR_KEY, market]);
-}
-
-export function minCollateralFactorForLiquidationKey(market: string) {
-  return hashData(["bytes32", "address"], [MIN_COLLATERAL_FACTOR_FOR_LIQUIDATION_KEY, market]);
 }
 
 export function minCollateralFactorForOpenInterest(market: string, isLong: boolean) {

@@ -13,7 +13,7 @@ import {
   getPriceImpactForPosition,
   getProportionalPendingImpactValues,
 } from "./fees";
-import { getCappedPoolPnl, getMarketPnl, getOpenInterestUsd, getPoolUsdWithoutPnl } from "./markets";
+import { getCappedPoolPnl, getDynamicMmr, getMarketPnl, getOpenInterestUsd, getPoolUsdWithoutPnl } from "./markets";
 import { applyFactor, expandDecimals, PRECISION } from "./numbers";
 import { convertToUsd, getIsEquivalentTokens } from "./tokens";
 
@@ -223,7 +223,8 @@ export function getLiquidationPrice(p: {
     }
   }
 
-  let liquidationCollateralUsd = applyFactor(sizeInUsd, marketInfo.minCollateralFactorForLiquidation || marketInfo.minCollateralFactor);
+  const dynamicMmr = getDynamicMmr(sizeInUsd, collateralUsd, marketInfo);
+  let liquidationCollateralUsd = applyFactor(sizeInUsd, dynamicMmr);
   if (liquidationCollateralUsd < minCollateralUsd) {
     liquidationCollateralUsd = minCollateralUsd;
   }
@@ -353,10 +354,12 @@ export function getMinCollateralFactorForPosition(position: PositionInfoLoaded, 
     ? marketInfo.minCollateralFactorForOpenInterestLong
     : marketInfo.minCollateralFactorForOpenInterestShort;
   let minCollateralFactor = bigMath.mulDiv(openInterest, minCollateralFactorMultiplier, PRECISION);
-  const minCollateralFactorForMarket = marketInfo.minCollateralFactor;
+  const minCollateralFactorForMaxLeverage = marketInfo.maxLeverage > 0n
+    ? (PRECISION * PRECISION) / marketInfo.maxLeverage
+    : 0n;
 
-  if (minCollateralFactorForMarket > minCollateralFactor) {
-    minCollateralFactor = minCollateralFactorForMarket;
+  if (minCollateralFactorForMaxLeverage > minCollateralFactor) {
+    minCollateralFactor = minCollateralFactorForMaxLeverage;
   }
 
   return minCollateralFactor;

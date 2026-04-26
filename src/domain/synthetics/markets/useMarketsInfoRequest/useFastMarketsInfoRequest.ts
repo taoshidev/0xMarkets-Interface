@@ -172,8 +172,10 @@ export function useFastMarketsInfoRequest(chainId: number) {
             minPositionImpactPoolAmount: BigInt(mInfo.minPositionImpactPoolAmount),
             positionImpactPoolDistributionRate: BigInt(mInfo.positionImpactPoolDistributionRate),
 
-            minCollateralFactor: BigInt(mInfo.minCollateralFactor),
-            minCollateralFactorForLiquidation: BigInt(mInfo.minCollateralFactor),
+            maxLeverage: mInfo.maxLeverage ? BigInt(mInfo.maxLeverage) : 0n,
+            mmrTuning: mInfo.mmrTuning ? BigInt(mInfo.mmrTuning) : 0n,
+            minMmr: mInfo.minMmr ? BigInt(mInfo.minMmr) : 0n,
+            maxMmr: mInfo.maxMmr ? BigInt(mInfo.maxMmr) : 0n,
             minCollateralFactorForOpenInterestLong: BigInt(mInfo.minCollateralFactorForOpenInterestLong),
             minCollateralFactorForOpenInterestShort: BigInt(mInfo.minCollateralFactorForOpenInterestShort),
 

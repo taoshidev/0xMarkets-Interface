@@ -19,9 +19,11 @@ import {
   MAX_POOL_USD_FOR_DEPOSIT_KEY,
   MAX_POSITION_IMPACT_FACTOR_FOR_LIQUIDATIONS_KEY,
   MAX_POSITION_IMPACT_FACTOR_KEY,
-  MIN_COLLATERAL_FACTOR_FOR_LIQUIDATION_KEY,
+  MAX_LEVERAGE_KEY,
+  MAX_MMR_KEY,
   MIN_COLLATERAL_FACTOR_FOR_OPEN_INTEREST_MULTIPLIER_KEY,
-  MIN_COLLATERAL_FACTOR_KEY,
+  MIN_MMR_KEY,
+  MMR_TUNING_KEY,
   MIN_FUNDING_FACTOR_PER_SECOND,
   MIN_POSITION_IMPACT_POOL_AMOUNT_KEY,
   OPEN_INTEREST_IN_TOKENS_KEY,
@@ -201,13 +203,21 @@ export function hashMarketConfigKeys(market: MarketConfig) {
       ["bytes32", "address"],
       [LENT_POSITION_IMPACT_POOL_AMOUNT_KEY, marketAddress],
     ],
-    minCollateralFactor: [
+    maxLeverage: [
       ["bytes32", "address"],
-      [MIN_COLLATERAL_FACTOR_KEY, marketAddress],
+      [MAX_LEVERAGE_KEY, marketAddress],
     ],
-    minCollateralFactorForLiquidation: [
+    mmrTuning: [
       ["bytes32", "address"],
-      [MIN_COLLATERAL_FACTOR_FOR_LIQUIDATION_KEY, marketAddress],
+      [MMR_TUNING_KEY, marketAddress],
+    ],
+    minMmr: [
+      ["bytes32", "address"],
+      [MIN_MMR_KEY, marketAddress],
+    ],
+    maxMmr: [
+      ["bytes32", "address"],
+      [MAX_MMR_KEY, marketAddress],
     ],
     minCollateralFactorForOpenInterestLong: [
       ["bytes32", "address", "bool"],

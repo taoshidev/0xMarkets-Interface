@@ -17,7 +17,7 @@ import {
 import {
   MarketInfo,
   getAvailableUsdLiquidityForPosition,
-  getMaxAllowedLeverageByMinCollateralFactor,
+  getMaxAllowedLeverageByMarketMaxLeverage,
   getTradeboxLeverageSliderMarks,
 } from "domain/synthetics/markets";
 import { PreferredTradeTypePickStrategy, chooseSuitableMarket } from "domain/synthetics/markets/chooseSuitableMarket";
@@ -1209,8 +1209,8 @@ export const selectTradeboxSelectedCollateralTokenSymbol = createSelector((q) =>
 });
 
 export const selectTradeboxMaxLeverage = createSelector((q) => {
-  const minCollateralFactor = q((s) => s.tradebox.marketInfo?.minCollateralFactor);
-  return getMaxAllowedLeverageByMinCollateralFactor(minCollateralFactor);
+  const maxLeverage = q((s) => s.tradebox.marketInfo?.maxLeverage);
+  return getMaxAllowedLeverageByMarketMaxLeverage(maxLeverage);
 });
 
 export const selectTradeboxLeverageSliderMarks = createSelector((q) => {

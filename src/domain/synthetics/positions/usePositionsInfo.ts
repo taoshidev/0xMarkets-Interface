@@ -19,7 +19,7 @@ import {
   MarketsInfoData,
   getMarketIndexName,
   getMarketPoolName,
-  getMaxAllowedLeverageByMinCollateralFactor,
+  getMaxAllowedLeverageByMarketMaxLeverage,
 } from "../markets";
 import { TokensData, convertToTokenAmount, convertToUsd } from "../tokens";
 import { getAcceptablePriceInfo, getMarkPrice } from "../trade";
@@ -219,7 +219,7 @@ export function usePositionsInfoRequest(
       });
 
       const maxAllowedLeverage = marketInfo
-        ? getMaxAllowedLeverageByMinCollateralFactor(marketInfo.minCollateralFactor)
+        ? getMaxAllowedLeverageByMarketMaxLeverage(marketInfo.maxLeverage)
         : undefined;
 
       const hasLowCollateral =

@@ -2,25 +2,28 @@ import { describe, expect, it } from "vitest";
 
 import { BASIS_POINTS_DIVISOR } from "config/factors";
 
-import { getMaxLeverageByMinCollateralFactor } from "./markets";
+import { getMaxLeverageByMarketMaxLeverage } from "./markets";
+
+const PRECISION = 10n ** 30n;
 
 describe("domain/synthetics/utils", () => {
-  it("getMaxLeverageByMinCollateralFactor", () => {
-    expect(getMaxLeverageByMinCollateralFactor(undefined)).toBe(100 * BASIS_POINTS_DIVISOR);
-    expect(getMaxLeverageByMinCollateralFactor(0n)).toBe(100 * BASIS_POINTS_DIVISOR);
+  it("getMaxLeverageByMarketMaxLeverage", () => {
+    expect(getMaxLeverageByMarketMaxLeverage(undefined)).toBe(100 * BASIS_POINTS_DIVISOR);
+    expect(getMaxLeverageByMarketMaxLeverage(0n)).toBe(100 * BASIS_POINTS_DIVISOR);
 
-    expect(getMaxLeverageByMinCollateralFactor(10000000000000000000000000000n)).toBe(100 * BASIS_POINTS_DIVISOR);
+    // 100x
+    expect(getMaxLeverageByMarketMaxLeverage(100n * PRECISION)).toBe(100 * BASIS_POINTS_DIVISOR);
 
-    expect(getMaxLeverageByMinCollateralFactor(6666666666666666666666666666n)).toBe(150 * BASIS_POINTS_DIVISOR);
-    expect(getMaxLeverageByMinCollateralFactor(6660000000000000000000000000n)).toBe(150 * BASIS_POINTS_DIVISOR);
-    expect(getMaxLeverageByMinCollateralFactor(6670000000000000000000000000n)).toBe(150 * BASIS_POINTS_DIVISOR);
+    // 150x
+    expect(getMaxLeverageByMarketMaxLeverage(150n * PRECISION)).toBe(150 * BASIS_POINTS_DIVISOR);
 
-    expect(getMaxLeverageByMinCollateralFactor(5000000000000000000000000000n)).toBe(200 * BASIS_POINTS_DIVISOR);
-    expect(getMaxLeverageByMinCollateralFactor(4999999999999999999999999999n)).toBe(200 * BASIS_POINTS_DIVISOR);
+    // 200x
+    expect(getMaxLeverageByMarketMaxLeverage(200n * PRECISION)).toBe(200 * BASIS_POINTS_DIVISOR);
 
-    expect(getMaxLeverageByMinCollateralFactor(8333333333333333333333333333n)).toBe(120 * BASIS_POINTS_DIVISOR);
-    expect(getMaxLeverageByMinCollateralFactor(8330000000000000000000000000n)).toBe(120 * BASIS_POINTS_DIVISOR);
+    // 120x
+    expect(getMaxLeverageByMarketMaxLeverage(120n * PRECISION)).toBe(120 * BASIS_POINTS_DIVISOR);
 
-    expect(getMaxLeverageByMinCollateralFactor(4000000000000000000000000000n)).toBe(250 * BASIS_POINTS_DIVISOR);
+    // 250x
+    expect(getMaxLeverageByMarketMaxLeverage(250n * PRECISION)).toBe(250 * BASIS_POINTS_DIVISOR);
   });
 });

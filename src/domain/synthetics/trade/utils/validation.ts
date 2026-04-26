@@ -10,7 +10,7 @@ import {
   getGlvDisplayName,
   getMarketIndexName,
   getMarketPoolName,
-  getMaxAllowedLeverageByMinCollateralFactor,
+  getMaxAllowedLeverageByMarketMaxLeverage,
   getMintableMarketTokens,
   getOpenInterestUsd,
   getSellableMarketToken,
@@ -266,7 +266,7 @@ export function getIncreaseError(p: {
     return [t`Select a market`];
   }
 
-  if (marketInfo.minCollateralFactor === 0n) {
+  if (marketInfo.maxLeverage === 0n) {
     return [t`Market unavailable`];
   }
 
@@ -383,7 +383,7 @@ export function getIncreaseError(p: {
     }
   }
 
-  const maxAllowedLeverage = getMaxAllowedLeverageByMinCollateralFactor(marketInfo?.minCollateralFactor);
+  const maxAllowedLeverage = getMaxAllowedLeverageByMarketMaxLeverage(marketInfo?.maxLeverage);
 
   if (nextLeverageWithoutPnl !== undefined && nextLeverageWithoutPnl > maxAllowedLeverage) {
     return [t`Max leverage: ${(maxAllowedLeverage / BASIS_POINTS_DIVISOR).toFixed(1)}x`];
@@ -437,10 +437,12 @@ export function getIsMaxLeverageExceeded(
     ? marketInfo.minCollateralFactorForOpenInterestLong
     : marketInfo.minCollateralFactorForOpenInterestShort;
   let minCollateralFactor = bigMath.mulDiv(openInterest + sizeDeltaUsd, minCollateralFactorMultiplier, PRECISION);
-  const minCollateralFactorForMarket = marketInfo.minCollateralFactor;
+  const minCollateralFactorForMaxLeverage = marketInfo.maxLeverage > 0n
+    ? (PRECISION * PRECISION) / marketInfo.maxLeverage
+    : 0n;
 
-  if (minCollateralFactorForMarket > minCollateralFactor) {
-    minCollateralFactor = minCollateralFactorForMarket;
+  if (minCollateralFactorForMaxLeverage > minCollateralFactor) {
+    minCollateralFactor = minCollateralFactorForMaxLeverage;
   }
 
   if (minCollateralFactor === 0n) {
@@ -531,7 +533,7 @@ export function getDecreaseError(p: {
     }
   }
 
-  const maxAllowedLeverage = getMaxAllowedLeverageByMinCollateralFactor(marketInfo?.minCollateralFactor);
+  const maxAllowedLeverage = getMaxAllowedLeverageByMarketMaxLeverage(marketInfo?.maxLeverage);
 
   if (nextPositionValues?.nextLeverage !== undefined && nextPositionValues?.nextLeverage > maxAllowedLeverage) {
     return [t`Max leverage: ${(maxAllowedLeverage / BASIS_POINTS_DIVISOR).toFixed(1)}x`];
@@ -613,7 +615,7 @@ export function getEditCollateralError(p: {
     }
   }
 
-  const maxAllowedLeverage = getMaxAllowedLeverageByMinCollateralFactor(minCollateralFactor);
+  const maxAllowedLeverage = getMaxAllowedLeverageByMarketMaxLeverage(position?.marketInfo?.maxLeverage);
 
   if (nextLeverage !== undefined && nextLeverage > maxAllowedLeverage) {
     return [t`Max leverage: ${(maxAllowedLeverage / BASIS_POINTS_DIVISOR).toFixed(1)}x`];

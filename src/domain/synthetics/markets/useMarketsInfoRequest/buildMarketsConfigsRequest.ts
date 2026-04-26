@@ -177,13 +177,21 @@ export async function buildMarketsConfigsRequest(
           methodName: "getUint",
           params: [prebuiltHashedKeys.lentPositionImpactPoolAmount],
         },
-        minCollateralFactor: {
+        maxLeverage: {
           methodName: "getUint",
-          params: [prebuiltHashedKeys.minCollateralFactor],
+          params: [prebuiltHashedKeys.maxLeverage],
         },
-        minCollateralFactorForLiquidation: {
+        mmrTuning: {
           methodName: "getUint",
-          params: [prebuiltHashedKeys.minCollateralFactorForLiquidation],
+          params: [prebuiltHashedKeys.mmrTuning],
+        },
+        minMmr: {
+          methodName: "getUint",
+          params: [prebuiltHashedKeys.minMmr],
+        },
+        maxMmr: {
+          methodName: "getUint",
+          params: [prebuiltHashedKeys.maxMmr],
         },
         minCollateralFactorForOpenInterestLong: {
           methodName: "getUint",

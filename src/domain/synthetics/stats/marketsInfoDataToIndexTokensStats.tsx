@@ -5,7 +5,7 @@ import { getBorrowingFactorPerPeriod, getFundingFactorPerPeriod } from "domain/s
 import {
   MarketInfo,
   MarketsInfoData,
-  getMaxLeverageByMinCollateralFactor,
+  getMaxLeverageByMarketMaxLeverage,
   getUsedLiquidity,
 } from "domain/synthetics/markets";
 import { TokenData, getMidPrice } from "domain/synthetics/tokens";
@@ -122,7 +122,7 @@ export function marketsInfoData2IndexTokenStatsMap(marketsInfoData: MarketsInfoD
     indexTokenStats.totalOpenInterestShort += marketInfo.shortInterestUsd;
     indexTokenStats.maxUiAllowedLeverage = Math.max(
       indexTokenStats.maxUiAllowedLeverage,
-      Math.floor(getMaxLeverageByMinCollateralFactor(marketInfo.minCollateralFactor) / 1.5 / BASIS_POINTS_DIVISOR)
+      Math.floor(getMaxLeverageByMarketMaxLeverage(marketInfo.maxLeverage) / 1.5 / BASIS_POINTS_DIVISOR)
     );
     if (netFeeLong > indexTokenStats.bestNetFeeLong) {
       indexTokenStats.bestNetFeeLong = netFeeLong;

@@ -12,6 +12,7 @@ import {
   BASIS_POINTS_DIVISOR_BIGINT,
   expandDecimals,
   getBasisPoints,
+  PRECISION,
   roundUpDivision,
   USD_DECIMALS,
   MaxUint256,
@@ -409,10 +410,12 @@ export function getIsFullClose(p: {
       ? marketInfo.minCollateralFactorForOpenInterestLong
       : marketInfo.minCollateralFactorForOpenInterestShort;
 
-    const minCollateralFactorForMarket = marketInfo.minCollateralFactor;
+    const minCollateralFactorForMaxLeverage = marketInfo.maxLeverage > 0n
+      ? (PRECISION * PRECISION) / marketInfo.maxLeverage
+      : 0n;
 
-    if (minCollateralFactorForMarket > minCollateralFactor) {
-      minCollateralFactor = minCollateralFactorForMarket;
+    if (minCollateralFactorForMaxLeverage > minCollateralFactor) {
+      minCollateralFactor = minCollateralFactorForMaxLeverage;
     }
 
     const minCollateralUsdForLeverage = applyFactor(position.sizeInUsd, minCollateralFactor);

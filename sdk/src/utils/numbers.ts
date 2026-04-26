@@ -61,6 +61,11 @@ export function applyFactor(value: bigint, factor: bigint) {
   return (value * factor) / PRECISION;
 }
 
+export function toFactor(value: bigint, divisor: bigint): bigint {
+  if (value === 0n) return 0n;
+  return (value * PRECISION) / divisor;
+}
+
 export function numberToBigint(value: number, decimals: number) {
   const negative = value < 0;
   if (negative) value *= -1;

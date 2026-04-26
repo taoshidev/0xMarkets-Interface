@@ -254,9 +254,21 @@ export const requestIncreasePosition = prepare({
       type: "bigint",
       hex: "0x0a18f07d736b90be5500000000",
     },
-    minCollateralFactor: {
+    maxLeverage: {
       type: "bigint",
-      hex: "0x204fce5e3e25026110000000",
+      hex: "0x00",
+    },
+    mmrTuning: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    minMmr: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    maxMmr: {
+      type: "bigint",
+      hex: "0x00",
     },
     minCollateralFactorForOpenInterestLong: {
       type: "bigint",
@@ -359,10 +371,6 @@ export const requestIncreasePosition = prepare({
       hex: "0x00",
     },
     maxShortPoolUsdForDeposit: {
-      type: "bigint",
-      hex: "0x00",
-    },
-    minCollateralFactorForLiquidation: {
       type: "bigint",
       hex: "0x00",
     },
@@ -727,9 +735,21 @@ export const withdraw1Usd = prepare({
       type: "bigint",
       hex: "0x0a18f07d736b90be5500000000",
     },
-    minCollateralFactor: {
+    maxLeverage: {
       type: "bigint",
-      hex: "0x204fce5e3e25026110000000",
+      hex: "0x00",
+    },
+    mmrTuning: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    minMmr: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    maxMmr: {
+      type: "bigint",
+      hex: "0x00",
     },
     minCollateralFactorForOpenInterestLong: {
       type: "bigint",
@@ -832,10 +852,6 @@ export const withdraw1Usd = prepare({
       hex: "0x00",
     },
     maxShortPoolUsdForDeposit: {
-      type: "bigint",
-      hex: "0x00",
-    },
-    minCollateralFactorForLiquidation: {
       type: "bigint",
       hex: "0x00",
     },
@@ -1196,9 +1212,21 @@ export const deposit1Usd = prepare({
       type: "bigint",
       hex: "0x0a18f07d736b90be5500000000",
     },
-    minCollateralFactor: {
+    maxLeverage: {
       type: "bigint",
-      hex: "0x204fce5e3e25026110000000",
+      hex: "0x00",
+    },
+    mmrTuning: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    minMmr: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    maxMmr: {
+      type: "bigint",
+      hex: "0x00",
     },
     minCollateralFactorForOpenInterestLong: {
       type: "bigint",
@@ -1301,10 +1329,6 @@ export const deposit1Usd = prepare({
       hex: "0x00",
     },
     maxShortPoolUsdForDeposit: {
-      type: "bigint",
-      hex: "0x00",
-    },
-    minCollateralFactorForLiquidation: {
       type: "bigint",
       hex: "0x00",
     },
@@ -1631,9 +1655,21 @@ export const createOrderDecreaseLong = prepare({
       type: "bigint",
       hex: "0x0a18f07d736b90be5500000000",
     },
-    minCollateralFactor: {
+    maxLeverage: {
       type: "bigint",
-      hex: "0x204fce5e3e25026110000000",
+      hex: "0x00",
+    },
+    mmrTuning: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    minMmr: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    maxMmr: {
+      type: "bigint",
+      hex: "0x00",
     },
     minCollateralFactorForOpenInterestLong: {
       type: "bigint",
@@ -1737,10 +1773,6 @@ export const createOrderDecreaseLong = prepare({
       hex: "0x00",
     },
     maxShortPoolUsdForDeposit: {
-      type: "bigint",
-      hex: "0x00",
-    },
-    minCollateralFactorForLiquidation: {
       type: "bigint",
       hex: "0x00",
     },
@@ -2091,9 +2123,21 @@ export const cancelOrderIncreaseLong = prepare({
       type: "bigint",
       hex: "0x0a18f07d736b90be5500000000",
     },
-    minCollateralFactor: {
+    maxLeverage: {
       type: "bigint",
-      hex: "0x204fce5e3e25026110000000",
+      hex: "0x00",
+    },
+    mmrTuning: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    minMmr: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    maxMmr: {
+      type: "bigint",
+      hex: "0x00",
     },
     minCollateralFactorForOpenInterestLong: {
       type: "bigint",
@@ -2228,10 +2272,6 @@ export const cancelOrderIncreaseLong = prepare({
       hex: "0x00",
     },
     positionImpactPoolDistributionRate: {
-      type: "bigint",
-      hex: "0x00",
-    },
-    minCollateralFactorForLiquidation: {
       type: "bigint",
       hex: "0x00",
     },
@@ -2558,9 +2598,21 @@ export const createOrderIncreaseLong = prepare({
       type: "bigint",
       hex: "0x0a18f07d736b90be5500000000",
     },
-    minCollateralFactor: {
+    maxLeverage: {
       type: "bigint",
-      hex: "0x204fce5e3e25026110000000",
+      hex: "0x00",
+    },
+    mmrTuning: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    minMmr: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    maxMmr: {
+      type: "bigint",
+      hex: "0x00",
     },
     minCollateralFactorForOpenInterestLong: {
       type: "bigint",
@@ -2695,10 +2747,6 @@ export const createOrderIncreaseLong = prepare({
       hex: "0x00",
     },
     positionImpactPoolDistributionRate: {
-      type: "bigint",
-      hex: "0x00",
-    },
-    minCollateralFactorForLiquidation: {
       type: "bigint",
       hex: "0x00",
     },
@@ -3036,9 +3084,21 @@ export const executeOrderDecreaseShort = prepare({
       type: "bigint",
       hex: "0x0a18f07d736b90be5500000000",
     },
-    minCollateralFactor: {
+    maxLeverage: {
       type: "bigint",
-      hex: "0x204fce5e3e25026110000000",
+      hex: "0x00",
+    },
+    mmrTuning: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    minMmr: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    maxMmr: {
+      type: "bigint",
+      hex: "0x00",
     },
     minCollateralFactorForOpenInterestLong: {
       type: "bigint",
@@ -3173,10 +3233,6 @@ export const executeOrderDecreaseShort = prepare({
       hex: "0x00",
     },
     positionImpactPoolDistributionRate: {
-      type: "bigint",
-      hex: "0x00",
-    },
-    minCollateralFactorForLiquidation: {
       type: "bigint",
       hex: "0x00",
     },
@@ -3524,9 +3580,21 @@ export const executeOrderIncreaseLong = prepare({
       type: "bigint",
       hex: "0x0a18f07d736b90be5500000000",
     },
-    minCollateralFactor: {
+    maxLeverage: {
       type: "bigint",
-      hex: "0x204fce5e3e25026110000000",
+      hex: "0x00",
+    },
+    mmrTuning: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    minMmr: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    maxMmr: {
+      type: "bigint",
+      hex: "0x00",
     },
     minCollateralFactorForOpenInterestLong: {
       type: "bigint",
@@ -3661,10 +3729,6 @@ export const executeOrderIncreaseLong = prepare({
       hex: "0x00",
     },
     positionImpactPoolDistributionRate: {
-      type: "bigint",
-      hex: "0x00",
-    },
-    minCollateralFactorForLiquidation: {
       type: "bigint",
       hex: "0x00",
     },
@@ -4010,9 +4074,21 @@ export const frozenOrderIncreaseShort = prepare({
       type: "bigint",
       hex: "0x0a18f07d736b90be5500000000",
     },
-    minCollateralFactor: {
+    maxLeverage: {
       type: "bigint",
-      hex: "0x204fce5e3e25026110000000",
+      hex: "0x00",
+    },
+    mmrTuning: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    minMmr: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    maxMmr: {
+      type: "bigint",
+      hex: "0x00",
     },
     minCollateralFactorForOpenInterestLong: {
       type: "bigint",
@@ -4147,10 +4223,6 @@ export const frozenOrderIncreaseShort = prepare({
       hex: "0x00",
     },
     positionImpactPoolDistributionRate: {
-      type: "bigint",
-      hex: "0x00",
-    },
-    minCollateralFactorForLiquidation: {
       type: "bigint",
       hex: "0x00",
     },
@@ -4472,9 +4544,21 @@ export const undefinedOrder = prepare({
       type: "bigint",
       hex: "0x064f964e68233a76f520000000",
     },
-    minCollateralFactor: {
+    maxLeverage: {
       type: "bigint",
-      hex: "0x204fce5e3e25026110000000",
+      hex: "0x00",
+    },
+    mmrTuning: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    minMmr: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    maxMmr: {
+      type: "bigint",
+      hex: "0x00",
     },
     minCollateralFactorForOpenInterestLong: {
       type: "bigint",
@@ -4617,10 +4701,6 @@ export const undefinedOrder = prepare({
       hex: "0x00",
     },
     positionImpactPoolDistributionRate: {
-      type: "bigint",
-      hex: "0x00",
-    },
-    minCollateralFactorForLiquidation: {
       type: "bigint",
       hex: "0x00",
     },
@@ -4955,9 +5035,21 @@ export const liquidated = prepare({
       type: "bigint",
       hex: "0x0a18f07d736b90be5500000000",
     },
-    minCollateralFactor: {
+    maxLeverage: {
       type: "bigint",
-      hex: "0x204fce5e3e25026110000000",
+      hex: "0x00",
+    },
+    mmrTuning: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    minMmr: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    maxMmr: {
+      type: "bigint",
+      hex: "0x00",
     },
     minCollateralFactorForOpenInterestLong: {
       type: "bigint",
@@ -5092,10 +5184,6 @@ export const liquidated = prepare({
       hex: "0x00",
     },
     positionImpactPoolDistributionRate: {
-      type: "bigint",
-      hex: "0x00",
-    },
-    minCollateralFactorForLiquidation: {
       type: "bigint",
       hex: "0x00",
     },
@@ -5492,9 +5580,21 @@ export const increaseLongETH = prepare({
       type: "bigint",
       hex: "0x0a18f07d736b90be5500000000",
     },
-    minCollateralFactor: {
+    maxLeverage: {
       type: "bigint",
-      hex: "0x204fce5e3e25026110000000",
+      hex: "0x00",
+    },
+    mmrTuning: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    minMmr: {
+      type: "bigint",
+      hex: "0x00",
+    },
+    maxMmr: {
+      type: "bigint",
+      hex: "0x00",
     },
     minCollateralFactorForOpenInterestLong: {
       type: "bigint",
@@ -5629,10 +5729,6 @@ export const increaseLongETH = prepare({
       hex: "0x00",
     },
     positionImpactPoolDistributionRate: {
-      type: "bigint",
-      hex: "0x00",
-    },
-    minCollateralFactorForLiquidation: {
       type: "bigint",
       hex: "0x00",
     },
@@ -6126,7 +6222,10 @@ export const createOrderStopMarketLong = prepare({
     maxFundingFactorPerSecond: { type: "bigint", value: "22124377728363333333333" },
     maxPnlFactorForTradersLong: { type: "bigint", value: "900000000000000000000000000000" },
     maxPnlFactorForTradersShort: { type: "bigint", value: "900000000000000000000000000000" },
-    minCollateralFactor: { type: "bigint", value: "5000000000000000000000000000" },
+    maxLeverage: { type: "bigint", value: "0" },
+    mmrTuning: { type: "bigint", value: "0" },
+    minMmr: { type: "bigint", value: "0" },
+    maxMmr: { type: "bigint", value: "0" },
     minCollateralFactorForOpenInterestLong: { type: "bigint", value: "60000000000000000000" },
     minCollateralFactorForOpenInterestShort: { type: "bigint", value: "60000000000000000000" },
     positionFeeFactorForBalanceWasImproved: { type: "bigint", value: "400000000000000000000000000" },
@@ -6204,10 +6303,6 @@ export const createOrderStopMarketLong = prepare({
         minPrice: { type: "bigint", value: "95699884797904795000000000000000000" },
         maxPrice: { type: "bigint", value: "95699884797904795000000000000000000" },
       },
-    },
-    minCollateralFactorForLiquidation: {
-      type: "bigint",
-      hex: "0x00",
     },
     maxLendableImpactFactor: {
       type: "bigint",
@@ -6351,7 +6446,10 @@ export const executeOrderStopMarketLong = prepare({
     maxFundingFactorPerSecond: { type: "bigint", value: "22124377728363333333333" },
     maxPnlFactorForTradersLong: { type: "bigint", value: "900000000000000000000000000000" },
     maxPnlFactorForTradersShort: { type: "bigint", value: "900000000000000000000000000000" },
-    minCollateralFactor: { type: "bigint", value: "5000000000000000000000000000" },
+    maxLeverage: { type: "bigint", value: "0" },
+    mmrTuning: { type: "bigint", value: "0" },
+    minMmr: { type: "bigint", value: "0" },
+    maxMmr: { type: "bigint", value: "0" },
     minCollateralFactorForOpenInterestLong: { type: "bigint", value: "60000000000000000000" },
     minCollateralFactorForOpenInterestShort: { type: "bigint", value: "60000000000000000000" },
     positionFeeFactorForBalanceWasImproved: { type: "bigint", value: "400000000000000000000000000" },
@@ -6429,10 +6527,6 @@ export const executeOrderStopMarketLong = prepare({
         minPrice: { type: "bigint", value: "95424505866460967500000000000000000" },
         maxPrice: { type: "bigint", value: "95424505866460967500000000000000000" },
       },
-    },
-    minCollateralFactorForLiquidation: {
-      type: "bigint",
-      hex: "0x00",
     },
     maxLendableImpactFactor: {
       type: "bigint",
