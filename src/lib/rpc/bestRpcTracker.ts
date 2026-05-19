@@ -39,7 +39,7 @@ const BLOCK_LAGGING_THRESHOLD = 50; // Omit RPC if block number is lower than hi
 export const RPC_TRACKER_UPDATE_EVENT = "rpc-tracker-update-event";
 
 // DataStore field used for probing
-const PROBE_SAMPLE_FIELD = "minCollateralFactor";
+const PROBE_SAMPLE_FIELD = "maxLeverage";
 // Markets used for `PROBE_SAMPLE_FIELD` reading
 const PROBE_SAMPLE_MARKET: Record<ContractsChainId, Address> = {
   [BASE_SEPOLIA]: "0x0ec8334dAc31DdFC08a7ab35F3dB24ef94889554", // EUR/USD

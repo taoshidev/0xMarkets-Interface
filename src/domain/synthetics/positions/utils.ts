@@ -2,7 +2,7 @@ import { t } from "@lingui/macro";
 import { ethers } from "ethers";
 
 import { BASIS_POINTS_DIVISOR_BIGINT } from "config/factors";
-import { MarketInfo, getCappedPoolPnl, getMarketPnl, getPoolUsdWithoutPnl } from "domain/synthetics/markets";
+import { MarketInfo, getCappedPoolPnl, getDynamicMmr, getMarketPnl, getPoolUsdWithoutPnl } from "domain/synthetics/markets";
 import { Token } from "domain/tokens";
 import { CHART_PERIODS } from "lib/legacy";
 import {
@@ -135,7 +135,8 @@ export function getEstimatedLiquidationTimeInHours(
 
   if (isOpening || minCollateralUsd === undefined || !marketInfo) return;
 
-  let liquidationCollateralUsd = applyFactor(sizeInUsd, marketInfo.minCollateralFactor);
+  const dynamicMmr = getDynamicMmr(sizeInUsd, position.collateralUsd, marketInfo);
+  let liquidationCollateralUsd = applyFactor(sizeInUsd, dynamicMmr);
   if (liquidationCollateralUsd < minCollateralUsd) {
     liquidationCollateralUsd = minCollateralUsd;
   }

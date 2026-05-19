@@ -6,7 +6,7 @@ import {
   estimateOrderOraclePriceCount,
   getFeeItem,
 } from "domain/synthetics/fees";
-import { getMaxAllowedLeverageByMinCollateralFactor } from "domain/synthetics/markets";
+import { getMaxAllowedLeverageByMarketMaxLeverage } from "domain/synthetics/markets";
 import {
   isDecreaseOrderType,
   isIncreaseOrderType,
@@ -713,19 +713,19 @@ export const selectOrderEditorFindSwapPath = createSelector((q) => {
 
 export const selectOrderEditorMaxAllowedLeverage = createSelector((q) => {
   const order = q(selectOrderEditorOrder);
-  if (!order) return getMaxAllowedLeverageByMinCollateralFactor(undefined);
+  if (!order) return getMaxAllowedLeverageByMarketMaxLeverage(undefined);
 
-  const minCollateralFactor = q((s) => selectMarketsInfoData(s)?.[order.marketAddress]?.minCollateralFactor);
-  return getMaxAllowedLeverageByMinCollateralFactor(minCollateralFactor);
+  const maxLeverage = q((s) => selectMarketsInfoData(s)?.[order.marketAddress]?.maxLeverage);
+  return getMaxAllowedLeverageByMarketMaxLeverage(maxLeverage);
 });
 
 export const makeSelectOrderEditorMaxAllowedLeverage = createSelectorFactory((orderKey: string) =>
   createSelector((q) => {
     const order = q((state) => getByKey(selectOrdersInfoData(state), orderKey));
-    if (!order) return getMaxAllowedLeverageByMinCollateralFactor(undefined);
+    if (!order) return getMaxAllowedLeverageByMarketMaxLeverage(undefined);
 
-    const minCollateralFactor = q((s) => selectMarketsInfoData(s)?.[order.marketAddress]?.minCollateralFactor);
-    return getMaxAllowedLeverageByMinCollateralFactor(minCollateralFactor);
+    const maxLeverage = q((s) => selectMarketsInfoData(s)?.[order.marketAddress]?.maxLeverage);
+    return getMaxAllowedLeverageByMarketMaxLeverage(maxLeverage);
   })
 );
 

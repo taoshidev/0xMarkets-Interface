@@ -1169,16 +1169,6 @@ export function SyntheticsStats() {
                                 showDollar={false}
                               />
                               <StatsTooltipRow
-                                label="Min Collateral Factor"
-                                value={formatFactor(market.minCollateralFactor)}
-                                showDollar={false}
-                              />
-                              <StatsTooltipRow
-                                label="Min Collateral Factor for Liquidation"
-                                value={formatFactor(market.minCollateralFactorForLiquidation)}
-                                showDollar={false}
-                              />
-                              <StatsTooltipRow
                                 label="Min Collateral Factor OI Long"
                                 value={formatFactor(market.minCollateralFactorForOpenInterestLong)}
                                 showDollar={false}
@@ -1191,10 +1181,25 @@ export function SyntheticsStats() {
                               <StatsTooltipRow
                                 label="Max Leverage"
                                 value={
-                                  market.minCollateralFactor > 0
-                                    ? formatAmount((PRECISION / market.minCollateralFactor) * 100n, 2, 2)
+                                  market.maxLeverage > 0
+                                    ? formatAmount(market.maxLeverage, 30, 2) + "x"
                                     : "..."
                                 }
+                                showDollar={false}
+                              />
+                              <StatsTooltipRow
+                                label="MMR Tuning"
+                                value={formatFactor(market.mmrTuning)}
+                                showDollar={false}
+                              />
+                              <StatsTooltipRow
+                                label="Min MMR"
+                                value={formatFactor(market.minMmr)}
+                                showDollar={false}
+                              />
+                              <StatsTooltipRow
+                                label="Max MMR"
+                                value={formatFactor(market.maxMmr)}
                                 showDollar={false}
                               />
                               <StatsTooltipRow

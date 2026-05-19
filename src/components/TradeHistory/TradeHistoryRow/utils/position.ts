@@ -2,7 +2,7 @@ import { i18n } from "@lingui/core";
 import { t } from "@lingui/macro";
 import { MaxInt256 } from "ethers";
 
-import { getMarketFullName, getMarketIndexName, getMarketPoolName } from "domain/synthetics/markets";
+import { getDynamicMmr, getMarketFullName, getMarketIndexName, getMarketPoolName } from "domain/synthetics/markets";
 import { OrderType, isDecreaseOrderType, isIncreaseOrderType, isLiquidationOrderType } from "domain/synthetics/orders";
 import { convertToUsd, parseContractPrice } from "domain/synthetics/tokens/utils";
 import { getShouldUseMaxPrice } from "domain/synthetics/trade";
@@ -583,18 +583,15 @@ export const formatPositionMessage = (
     //#endregion StopLossDecrease
     //#region Liquidation
   } else if (ot === OrderType.Liquidation && ev === TradeActionType.OrderExecuted) {
-    const liqFactor = tradeAction.marketInfo.minCollateralFactorForLiquidation || tradeAction.marketInfo.minCollateralFactor;
-    const maxLeverage =
-      liqFactor === 0n
-        ? 0n
-        : PRECISION / liqFactor;
-    const formattedMaxLeverage = Number(maxLeverage).toFixed(1) + "x";
-
     const initialCollateralUsd = convertToUsd(
       tradeAction.initialCollateralDeltaAmount,
       tradeAction.initialCollateralToken?.decimals,
       tradeAction.collateralTokenPriceMin
     );
+
+    const dynamicMmr = getDynamicMmr(sizeDeltaUsd, initialCollateralUsd ?? 0n, tradeAction.marketInfo);
+    const maxLeverage = dynamicMmr === 0n ? 0n : PRECISION / dynamicMmr;
+    const formattedMaxLeverage = Number(maxLeverage).toFixed(1) + "x";
 
     const formattedInitialCollateral = formatTokenAmountWithUsd(
       tradeAction.initialCollateralDeltaAmount,
@@ -636,7 +633,7 @@ export const formatPositionMessage = (
     );
     const formattedPositionFee = formatUsd(positionFeeUsd === undefined ? undefined : -positionFeeUsd);
 
-    let liquidationCollateralUsd = applyFactor(sizeDeltaUsd, tradeAction.marketInfo.minCollateralFactorForLiquidation || tradeAction.marketInfo.minCollateralFactor);
+    let liquidationCollateralUsd = applyFactor(sizeDeltaUsd, dynamicMmr);
     if (liquidationCollateralUsd < minCollateralUsd) {
       liquidationCollateralUsd = minCollateralUsd;
     }

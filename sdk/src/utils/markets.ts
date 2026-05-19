@@ -3,7 +3,7 @@ import { getTokenVisualMultiplier, NATIVE_TOKEN_ADDRESS } from "configs/tokens";
 import { ContractMarketPrices, Market, MarketInfo } from "types/markets";
 import { Token, TokenPrices, TokensData } from "types/tokens";
 
-import { applyFactor, PRECISION } from "./numbers";
+import { applyFactor, PRECISION, toFactor } from "./numbers";
 import { getByKey } from "./objects";
 import { convertToContractTokenPrices, convertToUsd, getMidPrice } from "./tokens";
 
@@ -131,20 +131,37 @@ export function getCappedPoolPnl(p: { marketInfo: MarketInfo; poolUsd: bigint; p
   return poolPnl > maxPnl ? maxPnl : poolPnl;
 }
 
-export function getMaxLeverageByMinCollateralFactor(minCollateralFactor: bigint | undefined) {
-  if (minCollateralFactor === undefined) return 100 * BASIS_POINTS_DIVISOR;
-  if (minCollateralFactor === 0n) return 100 * BASIS_POINTS_DIVISOR;
+export function getMaxLeverageByMarketMaxLeverage(maxLeverage: bigint | undefined) {
+  if (maxLeverage === undefined || maxLeverage === 0n) return 100 * BASIS_POINTS_DIVISOR;
 
-  const x = Number(PRECISION / minCollateralFactor);
+  const x = Number(maxLeverage / PRECISION);
   const rounded = Math.round(x / 10) * 10;
   return rounded * BASIS_POINTS_DIVISOR;
 }
 
-export function getMaxAllowedLeverageByMinCollateralFactor(minCollateralFactor: bigint | undefined) {
-  const raw = getMaxLeverageByMinCollateralFactor(minCollateralFactor) / 1.5;
-  // Floor to nearest whole multiplier of BASIS_POINTS_DIVISOR (e.g. 500x, 200x, 100x)
+export function getMaxAllowedLeverageByMarketMaxLeverage(maxLeverage: bigint | undefined) {
+  const raw = getMaxLeverageByMarketMaxLeverage(maxLeverage) / 1.5;
   const wholeX = Math.floor(raw / BASIS_POINTS_DIVISOR);
   return wholeX * BASIS_POINTS_DIVISOR;
+}
+
+export function getDynamicMmr(
+  sizeInUsd: bigint,
+  collateralUsd: bigint,
+  marketInfo: Pick<MarketInfo, "maxLeverage" | "mmrTuning" | "minMmr" | "maxMmr">
+): bigint {
+  const { maxLeverage, mmrTuning, minMmr, maxMmr } = marketInfo;
+
+  if (maxLeverage === 0n) return maxMmr;
+  if (collateralUsd === 0n) return minMmr;
+
+  const currLeverage = toFactor(sizeInUsd, collateralUsd);
+  const leverageRatio = toFactor(currLeverage, maxLeverage);
+  const rawMmr = applyFactor(leverageRatio, mmrTuning);
+
+  if (rawMmr < minMmr) return minMmr;
+  if (rawMmr > maxMmr) return maxMmr;
+  return rawMmr;
 }
 
 export function getOppositeCollateral(marketInfo: MarketInfo, tokenAddress: string) {

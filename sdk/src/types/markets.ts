@@ -72,8 +72,10 @@ export type MarketInfo = Market &
     minPositionImpactPoolAmount: bigint;
     positionImpactPoolDistributionRate: bigint;
 
-    minCollateralFactor: bigint;
-    minCollateralFactorForLiquidation: bigint;
+    maxLeverage: bigint;
+    mmrTuning: bigint;
+    minMmr: bigint;
+    maxMmr: bigint;
     minCollateralFactorForOpenInterestLong: bigint;
     minCollateralFactorForOpenInterestShort: bigint;
 

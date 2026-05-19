@@ -256,8 +256,10 @@ export function mockMarketsInfoData(
       thresholdForStableFunding: 0n,
 
       totalBorrowingFees: 0n,
-      minCollateralFactor: 0n,
-      minCollateralFactorForLiquidation: 0n,
+      maxLeverage: 0n,
+      mmrTuning: 0n,
+      minMmr: 0n,
+      maxMmr: 0n,
 
       minCollateralFactorForOpenInterestLong: 0n,
       minCollateralFactorForOpenInterestShort: 0n,

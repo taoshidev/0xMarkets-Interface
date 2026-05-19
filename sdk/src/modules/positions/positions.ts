@@ -18,7 +18,7 @@ import {
   getContractMarketPrices,
   getMarketIndexName,
   getMarketPoolName,
-  getMaxAllowedLeverageByMinCollateralFactor,
+  getMaxAllowedLeverageByMarketMaxLeverage,
 } from "utils/markets";
 import type { MulticallRequestConfig } from "utils/multicall";
 import { basisPointsToFloat, getBasisPoints } from "utils/numbers";
@@ -642,7 +642,7 @@ export class Positions extends Module {
         pendingFundingFeesUsd: pendingFundingFeesUsd,
       });
 
-      const maxAllowedLeverage = getMaxAllowedLeverageByMinCollateralFactor(marketInfo.minCollateralFactor);
+      const maxAllowedLeverage = getMaxAllowedLeverageByMarketMaxLeverage(marketInfo.maxLeverage);
 
       const hasLowCollateral = (leverage !== undefined && leverage > maxAllowedLeverage) || false;
 

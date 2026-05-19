@@ -13,8 +13,8 @@ import {
   getTokenPoolType,
   getPoolUsdWithoutPnl,
   getCappedPoolPnl,
-  getMaxLeverageByMinCollateralFactor,
-  getMaxAllowedLeverageByMinCollateralFactor,
+  getMaxLeverageByMarketMaxLeverage,
+  getMaxAllowedLeverageByMarketMaxLeverage,
   getOppositeCollateral,
   getAvailableUsdLiquidityForCollateral,
   getReservedUsd,
@@ -176,23 +176,29 @@ describe("getCappedPoolPnl", () => {
   });
 });
 
-describe("getMaxLeverageByMinCollateralFactor", () => {
-  it("returns default if minCollateralFactor is undefined", () => {
-    expect(getMaxLeverageByMinCollateralFactor(undefined)).toBe(1000000);
+describe("getMaxLeverageByMarketMaxLeverage", () => {
+  it("returns default if maxLeverage is undefined", () => {
+    expect(getMaxLeverageByMarketMaxLeverage(undefined)).toBe(1000000);
   });
 
-  it("returns correct leverage for a given factor", () => {
-    expect(getMaxLeverageByMinCollateralFactor(1000000000000000000n)).toBe(10000000000000000);
+  it("returns default if maxLeverage is 0", () => {
+    expect(getMaxLeverageByMarketMaxLeverage(0n)).toBe(1000000);
+  });
+
+  it("returns correct leverage for a given maxLeverage", () => {
+    // 100 * PRECISION → 100x leverage → 100 * BPS = 1000000
+    expect(getMaxLeverageByMarketMaxLeverage(100n * 10n ** 30n)).toBe(1000000);
+    // 50 * PRECISION → 50x leverage, rounded to 50 → 500000
+    expect(getMaxLeverageByMarketMaxLeverage(50n * 10n ** 30n)).toBe(500000);
   });
 });
 
-describe("getMaxAllowedLeverageByMinCollateralFactor", () => {
+describe("getMaxAllowedLeverageByMarketMaxLeverage", () => {
   it("returns max leverage divided by 1.5, floored to whole multiplier", () => {
-    // 1e18 minCollateralFactor → 1e12 max leverage (1e30/1e18) → 1e12 * 10000 BPS = 1e16
-    // divided by 1.5 = 6666666666666666, floored to nearest 10000 = 6666666666660000
-    const raw = 10000000000000000 / 1.5;
+    // 100x maxLeverage → 100 BPS = 1000000, divided by 1.5 = 666666, floored to 660000
+    const raw = 1000000 / 1.5;
     const expected = Math.floor(raw / 10000) * 10000;
-    expect(getMaxAllowedLeverageByMinCollateralFactor(1000000000000000000n)).toBe(expected);
+    expect(getMaxAllowedLeverageByMarketMaxLeverage(100n * 10n ** 30n)).toBe(expected);
   });
 });
 

@@ -20,12 +20,15 @@ import {
 } from "../positions";
 import { convertToUsd, getIsEquivalentTokens } from "../tokens";
 
-vi.mock("../markets", () => ({
-  ...vi.importActual("../markets"),
-  getMarketPnl: vi.fn(),
-  getPoolUsdWithoutPnl: vi.fn(),
-  getCappedPoolPnl: vi.fn(),
-}));
+vi.mock("../markets", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("../markets")>();
+  return {
+    ...actual,
+    getMarketPnl: vi.fn(),
+    getPoolUsdWithoutPnl: vi.fn(),
+    getCappedPoolPnl: vi.fn(),
+  };
+});
 
 vi.mock("../tokens", () => ({
   ...vi.importActual("../tokens"),
@@ -207,7 +210,10 @@ describe("getLiquidationPrice", () => {
         decimals: 8,
         prices: { minPrice: expandDecimals(1, USD_DECIMALS), maxPrice: expandDecimals(1, USD_DECIMALS) },
       },
-      minCollateralFactorForLiquidation: 1000n, // 0.001
+      maxLeverage: 0n,
+      mmrTuning: 0n,
+      minMmr: 1000n, // 0.001 (used as MMR floor when maxLeverage is 0)
+      maxMmr: 1000n,
       maxPositionImpactFactorForLiquidations: 500n, // 0.005
       maxPositionImpactFactorPositive: 1000n, // 0.01
       maxPositionImpactFactorNegative: 1000n, // 0.01
