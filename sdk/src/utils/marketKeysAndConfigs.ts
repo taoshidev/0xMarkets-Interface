@@ -8,7 +8,11 @@ import {
   FUNDING_INCREASE_FACTOR_PER_SECOND,
   IS_MARKET_DISABLED_KEY,
   LENT_POSITION_IMPACT_POOL_AMOUNT_KEY,
+  LEVERAGE_LADDER_MAX_LEVERAGE_KEY,
+  LEVERAGE_LADDER_MAX_NOTIONAL_KEY,
+  LEVERAGE_LADDER_TIER_COUNT_KEY,
   MAX_FUNDING_FACTOR_PER_SECOND,
+  MAX_LADDER_TIERS,
   MAX_LENDABLE_IMPACT_FACTOR_FOR_WITHDRAWALS_KEY,
   MAX_LENDABLE_IMPACT_FACTOR_KEY,
   MAX_LENDABLE_IMPACT_USD_KEY,
@@ -48,6 +52,22 @@ import { hashDataMap } from "utils/hash";
 
 export function hashMarketConfigKeys(market: MarketConfig) {
   const marketAddress = market.marketTokenAddress;
+
+  // Leverage ladder tier rows are per-(market, tierIndex). The contract supports
+  // arbitrary length; we read up to MAX_LADDER_TIERS slots here. Trailing slots
+  // beyond the configured tierCount are zero on chain and ignored when parsed.
+  const ladderTierEntries: Record<string, [readonly string[], readonly unknown[]]> = {};
+  for (let i = 0; i < MAX_LADDER_TIERS; i++) {
+    ladderTierEntries[`leverageLadderMaxNotional_${i}`] = [
+      ["bytes32", "address", "uint256"],
+      [LEVERAGE_LADDER_MAX_NOTIONAL_KEY, marketAddress, BigInt(i)],
+    ];
+    ladderTierEntries[`leverageLadderMaxLeverage_${i}`] = [
+      ["bytes32", "address", "uint256"],
+      [LEVERAGE_LADDER_MAX_LEVERAGE_KEY, marketAddress, BigInt(i)],
+    ];
+  }
+
   return hashDataMap({
     isDisabled: [
       ["bytes32", "address"],
@@ -257,6 +277,11 @@ export function hashMarketConfigKeys(market: MarketConfig) {
       ["bytes32", "address"],
       [VIRTUAL_TOKEN_ID_KEY, market.shortTokenAddress],
     ],
+    leverageLadderTierCount: [
+      ["bytes32", "address"],
+      [LEVERAGE_LADDER_TIER_COUNT_KEY, marketAddress],
+    ],
+    ...ladderTierEntries,
   });
 }
 

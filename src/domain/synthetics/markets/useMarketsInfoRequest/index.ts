@@ -5,6 +5,7 @@ import { useMulticall } from "lib/multicall";
 import { getByKey } from "lib/objects";
 import { CONFIG_UPDATE_INTERVAL, FREQUENT_MULTICALL_REFRESH_INTERVAL } from "lib/timeConstants";
 import type { ContractsChainId } from "sdk/configs/chains";
+import { MAX_LADDER_TIERS } from "sdk/configs/dataStore";
 import { convertTokenAddress } from "sdk/configs/tokens";
 import type { MarketConfig, MarketValues } from "sdk/modules/markets/types";
 import type { MarketInfo, MarketsData, MarketsInfoData } from "sdk/types/markets";
@@ -45,6 +46,7 @@ export function useMarketsInfoRequest(
     chainId,
     isDependenciesLoading,
     marketsAddresses,
+    marketsData,
   });
 
   const mergedData = useMemo(() => {
@@ -245,10 +247,12 @@ function useMarketsConfigsRequest({
   chainId,
   isDependenciesLoading,
   marketsAddresses,
+  marketsData,
 }: {
   chainId: ContractsChainId;
   isDependenciesLoading: boolean;
   marketsAddresses: string[] | undefined;
+  marketsData: MarketsData | undefined;
 }) {
   const dataStoreAddress = getContract(chainId, "DataStore");
 
@@ -262,6 +266,7 @@ function useMarketsConfigsRequest({
     request: () =>
       buildMarketsConfigsRequest(chainId, {
         marketsAddresses,
+        marketsData,
         dataStoreAddress,
       }),
     parseResponse: (res) => {
@@ -345,6 +350,8 @@ function useMarketsConfigsRequest({
             virtualMarketId: dataStoreValues.virtualMarketId.returnValues[0],
             virtualLongTokenId: dataStoreValues.virtualLongTokenId.returnValues[0],
             virtualShortTokenId: dataStoreValues.virtualShortTokenId.returnValues[0],
+
+            leverageLadder: parseLeverageLadder(dataStoreValues),
           };
 
           return acc;
@@ -359,4 +366,24 @@ function useMarketsConfigsRequest({
   });
 
   return marketsConfigsQuery;
+}
+
+function parseLeverageLadder(
+  dataStoreValues: Record<string, any>
+): Array<{ maxNotionalUsd: bigint; maxLeverage: bigint }> {
+  const rawTierCount = dataStoreValues.leverageLadderTierCount?.returnValues?.[0];
+  const tierCount = Number(rawTierCount ?? 0n);
+  if (tierCount === 0) {
+    return [];
+  }
+
+  const ladder: Array<{ maxNotionalUsd: bigint; maxLeverage: bigint }> = [];
+  const tiers = Math.min(tierCount, MAX_LADDER_TIERS);
+  for (let i = 0; i < tiers; i++) {
+    ladder.push({
+      maxNotionalUsd: dataStoreValues[`leverageLadderMaxNotional_${i}`].returnValues[0] as bigint,
+      maxLeverage: dataStoreValues[`leverageLadderMaxLeverage_${i}`].returnValues[0] as bigint,
+    });
+  }
+  return ladder;
 }

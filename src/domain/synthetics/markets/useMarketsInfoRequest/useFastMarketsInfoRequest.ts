@@ -222,6 +222,10 @@ export function useFastMarketsInfoRequest(chainId: number) {
             virtualMarketId: mInfo.virtualMarketId,
             virtualLongTokenId: mInfo.virtualLongTokenId,
             virtualShortTokenId: mInfo.virtualShortTokenId,
+
+            // The fast path doesn't have ladder data — it shows up once the slow
+            // multicall populates the full MarketInfo. Default to empty (no ladder).
+            leverageLadder: [],
           };
 
           return acc;

@@ -30,6 +30,7 @@ export interface AccountStat {
   realizedPriceImpact: Scalars['BigInt']['output'];
   realizedSwapImpact: Scalars['BigInt']['output'];
   sumMaxSize: Scalars['BigInt']['output'];
+  totalDepositedUsd0: Scalars['BigInt']['output'];
   updatedAt: Scalars['Int']['output'];
   volume: Scalars['BigInt']['output'];
   wins: Scalars['Int']['output'];
@@ -120,6 +121,12 @@ export enum AccountStatOrderByInput {
   sumMaxSize_DESC = 'sumMaxSize_DESC',
   sumMaxSize_DESC_NULLS_FIRST = 'sumMaxSize_DESC_NULLS_FIRST',
   sumMaxSize_DESC_NULLS_LAST = 'sumMaxSize_DESC_NULLS_LAST',
+  totalDepositedUsd0_ASC = 'totalDepositedUsd0_ASC',
+  totalDepositedUsd0_ASC_NULLS_FIRST = 'totalDepositedUsd0_ASC_NULLS_FIRST',
+  totalDepositedUsd0_ASC_NULLS_LAST = 'totalDepositedUsd0_ASC_NULLS_LAST',
+  totalDepositedUsd0_DESC = 'totalDepositedUsd0_DESC',
+  totalDepositedUsd0_DESC_NULLS_FIRST = 'totalDepositedUsd0_DESC_NULLS_FIRST',
+  totalDepositedUsd0_DESC_NULLS_LAST = 'totalDepositedUsd0_DESC_NULLS_LAST',
   updatedAt_ASC = 'updatedAt_ASC',
   updatedAt_ASC_NULLS_FIRST = 'updatedAt_ASC_NULLS_FIRST',
   updatedAt_ASC_NULLS_LAST = 'updatedAt_ASC_NULLS_LAST',
@@ -268,6 +275,15 @@ export interface AccountStatWhereInput {
   sumMaxSize_lte?: InputMaybe<Scalars['BigInt']['input']>;
   sumMaxSize_not_eq?: InputMaybe<Scalars['BigInt']['input']>;
   sumMaxSize_not_in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
+  totalDepositedUsd0_eq?: InputMaybe<Scalars['BigInt']['input']>;
+  totalDepositedUsd0_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  totalDepositedUsd0_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  totalDepositedUsd0_in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
+  totalDepositedUsd0_isNull?: InputMaybe<Scalars['Boolean']['input']>;
+  totalDepositedUsd0_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  totalDepositedUsd0_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  totalDepositedUsd0_not_eq?: InputMaybe<Scalars['BigInt']['input']>;
+  totalDepositedUsd0_not_in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
   updatedAt_eq?: InputMaybe<Scalars['Int']['input']>;
   updatedAt_gt?: InputMaybe<Scalars['Int']['input']>;
   updatedAt_gte?: InputMaybe<Scalars['Int']['input']>;
@@ -3194,6 +3210,7 @@ export interface PeriodAccountStat {
   startUnrealizedPnl: Scalars['BigInt']['output'];
   startUnrealizedPriceImpact: Scalars['BigInt']['output'];
   sumMaxSize: Scalars['BigInt']['output'];
+  totalDepositedUsd0: Scalars['BigInt']['output'];
   volume: Scalars['BigInt']['output'];
   wins: Scalars['Int']['output'];
 }
@@ -3313,6 +3330,12 @@ export enum PeriodAccountStatOrderByInput {
   sumMaxSize_DESC = 'sumMaxSize_DESC',
   sumMaxSize_DESC_NULLS_FIRST = 'sumMaxSize_DESC_NULLS_FIRST',
   sumMaxSize_DESC_NULLS_LAST = 'sumMaxSize_DESC_NULLS_LAST',
+  totalDepositedUsd0_ASC = 'totalDepositedUsd0_ASC',
+  totalDepositedUsd0_ASC_NULLS_FIRST = 'totalDepositedUsd0_ASC_NULLS_FIRST',
+  totalDepositedUsd0_ASC_NULLS_LAST = 'totalDepositedUsd0_ASC_NULLS_LAST',
+  totalDepositedUsd0_DESC = 'totalDepositedUsd0_DESC',
+  totalDepositedUsd0_DESC_NULLS_FIRST = 'totalDepositedUsd0_DESC_NULLS_FIRST',
+  totalDepositedUsd0_DESC_NULLS_LAST = 'totalDepositedUsd0_DESC_NULLS_LAST',
   volume_ASC = 'volume_ASC',
   volume_ASC_NULLS_FIRST = 'volume_ASC_NULLS_FIRST',
   volume_ASC_NULLS_LAST = 'volume_ASC_NULLS_LAST',
@@ -3502,6 +3525,15 @@ export interface PeriodAccountStatWhereInput {
   sumMaxSize_lte?: InputMaybe<Scalars['BigInt']['input']>;
   sumMaxSize_not_eq?: InputMaybe<Scalars['BigInt']['input']>;
   sumMaxSize_not_in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
+  totalDepositedUsd0_eq?: InputMaybe<Scalars['BigInt']['input']>;
+  totalDepositedUsd0_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  totalDepositedUsd0_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  totalDepositedUsd0_in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
+  totalDepositedUsd0_isNull?: InputMaybe<Scalars['Boolean']['input']>;
+  totalDepositedUsd0_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  totalDepositedUsd0_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  totalDepositedUsd0_not_eq?: InputMaybe<Scalars['BigInt']['input']>;
+  totalDepositedUsd0_not_in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
   volume_eq?: InputMaybe<Scalars['BigInt']['input']>;
   volume_gt?: InputMaybe<Scalars['BigInt']['input']>;
   volume_gte?: InputMaybe<Scalars['BigInt']['input']>;
@@ -3720,6 +3752,12 @@ export enum PositionOrderByInput {
   accountStat_sumMaxSize_DESC = 'accountStat_sumMaxSize_DESC',
   accountStat_sumMaxSize_DESC_NULLS_FIRST = 'accountStat_sumMaxSize_DESC_NULLS_FIRST',
   accountStat_sumMaxSize_DESC_NULLS_LAST = 'accountStat_sumMaxSize_DESC_NULLS_LAST',
+  accountStat_totalDepositedUsd0_ASC = 'accountStat_totalDepositedUsd0_ASC',
+  accountStat_totalDepositedUsd0_ASC_NULLS_FIRST = 'accountStat_totalDepositedUsd0_ASC_NULLS_FIRST',
+  accountStat_totalDepositedUsd0_ASC_NULLS_LAST = 'accountStat_totalDepositedUsd0_ASC_NULLS_LAST',
+  accountStat_totalDepositedUsd0_DESC = 'accountStat_totalDepositedUsd0_DESC',
+  accountStat_totalDepositedUsd0_DESC_NULLS_FIRST = 'accountStat_totalDepositedUsd0_DESC_NULLS_FIRST',
+  accountStat_totalDepositedUsd0_DESC_NULLS_LAST = 'accountStat_totalDepositedUsd0_DESC_NULLS_LAST',
   accountStat_updatedAt_ASC = 'accountStat_updatedAt_ASC',
   accountStat_updatedAt_ASC_NULLS_FIRST = 'accountStat_updatedAt_ASC_NULLS_FIRST',
   accountStat_updatedAt_ASC_NULLS_LAST = 'accountStat_updatedAt_ASC_NULLS_LAST',

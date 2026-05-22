@@ -286,6 +286,8 @@ export function mockMarketsInfoData(
       virtualLongTokenId: zeroAddress,
       virtualShortTokenId: zeroAddress,
 
+      leverageLadder: [],
+
       ...(overrides[key] || {}),
     };
 

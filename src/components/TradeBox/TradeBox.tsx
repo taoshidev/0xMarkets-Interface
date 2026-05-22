@@ -91,6 +91,7 @@ import TokenIcon from "components/TokenIcon/TokenIcon";
 import TokenWithIcon from "components/TokenIcon/TokenWithIcon";
 import TokenSelector from "components/TokenSelector/TokenSelector";
 import Tooltip from "components/Tooltip/Tooltip";
+import TooltipWithPortal from "components/Tooltip/TooltipWithPortal";
 import { ValueTransition } from "components/ValueTransition/ValueTransition";
 
 import ArrowDownIcon from "img/ic_arrow_down.svg?react";
@@ -103,6 +104,7 @@ import TradeInfoIcon from "../TradeInfoIcon/TradeInfoIcon";
 import TwapRows from "../TwapRows/TwapRows";
 import { useDecreaseOrdersThatWillBeExecuted } from "./hooks/useDecreaseOrdersThatWillBeExecuted";
 import { useShowHighLeverageWarning } from "./hooks/useShowHighLeverageWarning";
+import { useShowLadderTierWarning } from "./hooks/useShowLadderTierWarning";
 import { useExpressTradingWarnings } from "./hooks/useShowOneClickTradingInfo";
 import { useTradeboxAcceptablePriceImpactValues } from "./hooks/useTradeboxAcceptablePriceImpactValues";
 import { useTradeboxTPSLReset } from "./hooks/useTradeboxTPSLReset";
@@ -233,6 +235,35 @@ export function TradeBox({ isMobile }: { isMobile: boolean }) {
   });
 
   const { showHighLeverageWarning, dismissHighLeverageWarning } = useShowHighLeverageWarning();
+  const { showLadderTierWarning, activeTierMaxLeverage, tierBoundaryUsd } = useShowLadderTierWarning(marketInfo);
+
+  const ladderTooltipContent = useMemo(() => {
+    const ladder = marketInfo?.leverageLadder;
+    if (!ladder || ladder.length === 0) return null;
+    const lastIdx = ladder.length - 1;
+    return (
+      <div className="text-12">
+        <div className="mb-6 font-medium">
+          <Trans>Leverage tiers</Trans>
+        </div>
+        {ladder.map((tier, i) => {
+          const isTail = i === lastIdx;
+          const range = isTail
+            ? t`> ${formatUsd(ladder[i - 1].maxNotionalUsd)}`
+            : t`≤ ${formatUsd(tier.maxNotionalUsd)}`;
+          return (
+            <div key={i} className="flex justify-between gap-16 py-2">
+              <span className="text-slate-300">{range}</span>
+              <span className="font-medium">{formatAmount(tier.maxLeverage, 30, 0)}x</span>
+            </div>
+          );
+        })}
+        <div className="mt-6 text-slate-300">
+          <Trans>Max leverage tightens as your position size grows.</Trans>
+        </div>
+      </div>
+    );
+  }, [marketInfo?.leverageLadder]);
 
   const setIsDismissedRef = useLatest(priceImpactWarningState.setIsDismissed);
 
@@ -1023,6 +1054,16 @@ export function TradeBox({ isMobile }: { isMobile: boolean }) {
                           isPositive={isLong}
                           isSlim
                         />
+                        {ladderTooltipContent && (
+                          <TooltipWithPortal
+                            position="left"
+                            variant="icon"
+                            content={ladderTooltipContent}
+                            handleClassName="flex items-center"
+                          >
+                            <span />
+                          </TooltipWithPortal>
+                        )}
                         <SuggestionInput
                           className="w-48 !rounded-8 py-5"
                           inputClassName="text-clip"
@@ -1037,6 +1078,21 @@ export function TradeBox({ isMobile }: { isMobile: boolean }) {
                     {showHighLeverageWarning && (
                       <AlertInfoCard type="info" onClose={dismissHighLeverageWarning}>
                         <Trans>Using high leverage increases the risk of liquidation.</Trans>
+                      </AlertInfoCard>
+                    )}
+                    {showLadderTierWarning && activeTierMaxLeverage !== undefined && (
+                      <AlertInfoCard type="info">
+                        {tierBoundaryUsd !== undefined ? (
+                          <Trans>
+                            For positions up to {formatUsd(tierBoundaryUsd)}, max leverage is{" "}
+                            {activeTierMaxLeverage}x. Larger positions trigger lower caps.
+                          </Trans>
+                        ) : (
+                          <Trans>
+                            Max leverage is {activeTierMaxLeverage}x at this position size. Reduce size or post more
+                            margin for higher leverage.
+                          </Trans>
+                        )}
                       </AlertInfoCard>
                     )}
                     {isTrigger && (

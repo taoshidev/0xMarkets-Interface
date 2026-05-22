@@ -4,25 +4,27 @@ import { ContractsChainId, BASE_SEPOLIA, LOCALHOST } from "./chains";
 
 export const CONTRACTS = {
   [BASE_SEPOLIA]: {
-    // Synthetics - Redeployed Mar 2026 (v1.13 rebrand)
+    // Layer 1 + pinned singletons live on House A (0x0cA7D71… DataStore);
+    // Layer 2/3 below were redeployed against it in May 2026 to ship the
+    // leverage ladder without touching MarketToken addresses.
     DataStore: "0x0cA7D71845cb485B7593bBdCbcac93d82d52d053",
     EventEmitter: "0x68001935Ec7C2e3980f99435db3CabC89dea602B",
-    SubaccountRouter: "0xE0b283Aa82c47970472153A139b50B108F6F2357",
-    ExchangeRouter: "0x394b791D74E6F2bd803b0Ef10AF9115fE380EA88",
+    SubaccountRouter: "0x99Aa90A736cF592fe0D6DD4c948CeE951e259d04",
+    ExchangeRouter: "0xF940b74a65be4cd6E9D8a874a072759a19CC15aA",
     DepositVault: "0x590d1d8e50A3a3d9F3448657D1Cb64D486978781",
     WithdrawalVault: "0xE47130E74CAEd3Cae1Bf2c7e1e0af0B592354b57",
     OrderVault: "0x76DE02F06979a24A87F2cD743Ab533a44EdcFb08",
     ShiftVault: "0xEF60117684991C41dea18de53446c437462d07cc",
 
-    SyntheticsReader: "0x4debCC0Cf123529C2a42beC0F8027B03DB1a8b9e",
+    SyntheticsReader: "0xA47f995B1eb4BB0B431bE7D257e0637a52bDF83E",
     SyntheticsRouter: "0xE92B08345125dc77eB071d1a2D513751C4D22714",
 
-    GlvReader: "0x903B6F1a02DD2eF528E00c5EE66942B2F4593fF1",
-    GlvRouter: "0xD2434Ea53F0b46200542d7CE886481D3cd07ACb3",
+    GlvReader: "0x037Fc657a470d29AA9eb11b1D8c6d72820c0e520",
+    GlvRouter: "0x916966Bd4611422Cfa68D284C78B0B434650cde0",
     GlvVault: "0x5fEb1eF511E953dec5E016bFF32F8987cE6eD33a",
 
-    GelatoRelayRouter: "0x88640FBD9aBfEE38D422B47Cb6Be410515d9C431",
-    SubaccountGelatoRelayRouter: "0x9c882295c1E692Ecac7CcAd79A285a3e738ee741",
+    GelatoRelayRouter: "0x11775fc8521bA024921e3E10fAE34350fFC8b37a",
+    SubaccountGelatoRelayRouter: "0x86E59890F68B3d38b0bF3FC11891E966b97414Cb",
 
     MultichainClaimsRouter: zeroAddress,
     MultichainGlvRouter: zeroAddress,
@@ -33,7 +35,7 @@ export const CONTRACTS = {
     MultichainVault: zeroAddress,
     LayerZeroProvider: zeroAddress,
 
-    ChainlinkPriceFeedProvider: "0x31060bBaD18D4a13Db2e66eD7b562968e93f1312",
+    ChainlinkPriceFeedProvider: "0xe0A7f2a21373128DB38b55a6FEb081C6BCDCC22E",
     ClaimHandler: zeroAddress,
 
     // External
@@ -46,7 +48,7 @@ export const CONTRACTS = {
 
     // V1 legacy (not deployed on Base Sepolia)
     Vault: zeroAddress,
-    Reader: "0x4debCC0Cf123529C2a42beC0F8027B03DB1a8b9e",
+    Reader: "0xA47f995B1eb4BB0B431bE7D257e0637a52bDF83E",
     PositionRouter: zeroAddress,
     ReferralStorage: "0x29D5533a26ac87C28972d277CEFf2EC00843c5A7",
     VaultReader: zeroAddress,
@@ -75,7 +77,7 @@ export const CONTRACTS = {
     ES_GMX_IOU: zeroAddress,
     OrderBook: zeroAddress,
     UniswapGmxEthPool: zeroAddress,
-    Timelock: "0x461B737B685cd9cF68f9735792d7d0035B7AD68E",
+    Timelock: "0xF5ECA46bD52E43E8ef34938EC036bF1A6dA723a2",
 
     // BASE_SEPOLIA specific tokens
     NATIVE_TOKEN: "0x4200000000000000000000000000000000000006",

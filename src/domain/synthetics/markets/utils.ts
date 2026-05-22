@@ -421,34 +421,14 @@ export function getIsZeroPriceImpactMarket(marketInfo: MarketInfo) {
   return marketInfo.positionImpactFactorNegative === 0n;
 }
 
+// Always ends with `cap` so the slider's hard limit equals the protocol's
+// allowed leverage. Math.floor (not Math.round) so a fractional cap never
+// produces a tick above the real limit.
 export function getTradeboxLeverageSliderMarks(maxLeverage: number) {
-  const allowedLeverage = Math.round(maxLeverage / BASIS_POINTS_DIVISOR);
-
-  if (allowedLeverage >= 125) {
-    return [0.1, 1, 2, 5, 10, 50, 100, allowedLeverage];
-  } else if (allowedLeverage >= 120) {
-    return [0.1, 1, 2, 5, 10, 30, 60, 120];
-  } else if (allowedLeverage >= 110) {
-    return [0.1, 1, 2, 5, 10, 25, 50, 100, 110];
-  } else if (allowedLeverage >= 100) {
-    return [0.1, 1, 2, 5, 10, 25, 50, 100];
-  } else if (allowedLeverage >= 90) {
-    return [0.1, 1, 2, 5, 10, 50, 90];
-  } else if (allowedLeverage >= 80) {
-    return [0.1, 1, 2, 5, 10, 50, 80];
-  } else if (allowedLeverage >= 75) {
-    return [0.1, 1, 2, 5, 10, 30, 50, 75];
-  } else if (allowedLeverage >= 70) {
-    return [0.1, 1, 2, 5, 10, 30, 50, 70];
-  } else if (allowedLeverage >= 60) {
-    return [0.1, 1, 2, 5, 10, 25, 50, 60];
-  } else if (allowedLeverage >= 50) {
-    return [0.1, 1, 2, 5, 10, 25, 50];
-  } else if (allowedLeverage >= 30) {
-    return [0.1, 1, 2, 5, 10, 30];
-  } else {
-    return [0.1, 1, 2, 5, 10];
-  }
+  const cap = Math.floor(maxLeverage / BASIS_POINTS_DIVISOR);
+  const intermediateTicks = [0.1, 1, 2, 5, 10, 25, 50, 100];
+  const ticksBelowCap = intermediateTicks.filter((t) => t < cap);
+  return [...ticksBelowCap, cap];
 }
 
 export const isMarketInfo = (market: GlvInfo | MarketInfo): market is MarketInfo => !isGlvInfo(market);

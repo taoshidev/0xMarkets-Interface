@@ -124,6 +124,11 @@ export type MarketInfo = Market &
     virtualMarketId: string;
     virtualLongTokenId: string;
     virtualShortTokenId: string;
+
+    // Per-market leverage ladder. Each tier caps max leverage as a function of
+    // post-trade notional. Empty array means no ladder is configured for the
+    // market — defer to the market-wide max leverage.
+    leverageLadder: Array<{ maxNotionalUsd: bigint; maxLeverage: bigint }>;
   };
 
 export type MarketsData = {

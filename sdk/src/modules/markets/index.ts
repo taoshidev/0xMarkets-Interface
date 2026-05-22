@@ -1,6 +1,7 @@
 import { zeroAddress } from "viem";
 
 import { getContract } from "configs/contracts";
+import { MAX_LADDER_TIERS } from "configs/dataStore";
 import { convertTokenAddress, getToken } from "configs/tokens";
 import { ClaimableFundingData, MarketInfo, MarketsData, MarketSdkConfig, MarketsInfoData } from "types/markets";
 import { TokensData } from "types/tokens";
@@ -275,6 +276,8 @@ export class Markets extends Module {
             virtualMarketId: dataStoreValues.virtualMarketId.returnValues[0],
             virtualLongTokenId: dataStoreValues.virtualLongTokenId.returnValues[0],
             virtualShortTokenId: dataStoreValues.virtualShortTokenId.returnValues[0],
+
+            leverageLadder: parseLeverageLadder(dataStoreValues),
           };
 
           return acc;
@@ -485,6 +488,25 @@ export class Markets extends Module {
       }
     );
   }
+}
+
+// Reads the per-market leverage ladder out of the multicall response.
+// Mirrors the parser in `0xMarkets-Interface/src/domain/synthetics/markets/useMarketsInfoRequest`.
+function parseLeverageLadder(
+  dataStoreValues: Record<string, { returnValues: any[] }>
+): Array<{ maxNotionalUsd: bigint; maxLeverage: bigint }> {
+  const tierCount = Number(dataStoreValues.leverageLadderTierCount?.returnValues?.[0] ?? 0n);
+  if (tierCount === 0) return [];
+
+  const ladder: Array<{ maxNotionalUsd: bigint; maxLeverage: bigint }> = [];
+  const tiers = Math.min(tierCount, MAX_LADDER_TIERS);
+  for (let i = 0; i < tiers; i++) {
+    ladder.push({
+      maxNotionalUsd: dataStoreValues[`leverageLadderMaxNotional_${i}`].returnValues[0] as bigint,
+      maxLeverage: dataStoreValues[`leverageLadderMaxLeverage_${i}`].returnValues[0] as bigint,
+    });
+  }
+  return ladder;
 }
 
 type PositionVolumeInfosResponse = {

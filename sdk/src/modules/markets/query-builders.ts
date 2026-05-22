@@ -1,6 +1,6 @@
 import { ContractsChainId } from "configs/chains";
 import { getContract } from "configs/contracts";
-import { CLAIMABLE_FUNDING_AMOUNT, MAX_PNL_FACTOR_FOR_TRADERS_KEY } from "configs/dataStore";
+import { CLAIMABLE_FUNDING_AMOUNT, MAX_LADDER_TIERS, MAX_PNL_FACTOR_FOR_TRADERS_KEY } from "configs/dataStore";
 import { MarketsData } from "types/markets";
 import { TokensData } from "types/tokens";
 import { hashDataMap } from "utils/hash";
@@ -468,9 +468,32 @@ export async function buildMarketsConfigsRequest(
           methodName: "getBytes32",
           params: [prebuiltHashedKeys.virtualLongTokenId],
         },
+        leverageLadderTierCount: {
+          methodName: "getUint",
+          params: [prebuiltHashedKeys.leverageLadderTierCount],
+        },
+        ...buildLadderTierCalls(prebuiltHashedKeys),
       },
     } satisfies ContractCallsConfig<any>;
   }
 
   return request;
+}
+
+// Generates leverage-ladder tier-row calls for indices 0..(MAX_LADDER_TIERS-1).
+// Trailing slots beyond the configured tierCount are zero on chain — callers
+// trim them based on the count read above.
+function buildLadderTierCalls(prebuiltHashedKeys: Record<string, string>) {
+  const calls: Record<string, { methodName: string; params: [string] }> = {};
+  for (let i = 0; i < MAX_LADDER_TIERS; i++) {
+    calls[`leverageLadderMaxNotional_${i}`] = {
+      methodName: "getUint",
+      params: [prebuiltHashedKeys[`leverageLadderMaxNotional_${i}`]],
+    };
+    calls[`leverageLadderMaxLeverage_${i}`] = {
+      methodName: "getUint",
+      params: [prebuiltHashedKeys[`leverageLadderMaxLeverage_${i}`]],
+    };
+  }
+  return calls;
 }

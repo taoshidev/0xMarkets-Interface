@@ -17,8 +17,11 @@ import {
 import {
   MarketInfo,
   getAvailableUsdLiquidityForPosition,
+  getLadderEquilibriumMaxLeverage,
+  getLadderMaxLeverageForNotional,
   getMaxAllowedLeverageByMinCollateralFactor,
   getTradeboxLeverageSliderMarks,
+  ladderMaxLeverageToBps,
 } from "domain/synthetics/markets";
 import { PreferredTradeTypePickStrategy, chooseSuitableMarket } from "domain/synthetics/markets/chooseSuitableMarket";
 import { DecreasePositionSwapType, isLimitOrderType, isSwapOrderType } from "domain/synthetics/orders";
@@ -1210,7 +1213,36 @@ export const selectTradeboxSelectedCollateralTokenSymbol = createSelector((q) =>
 
 export const selectTradeboxMaxLeverage = createSelector((q) => {
   const minCollateralFactor = q((s) => s.tradebox.marketInfo?.minCollateralFactor);
-  return getMaxAllowedLeverageByMinCollateralFactor(minCollateralFactor);
+  const baseMaxLeverage = getMaxAllowedLeverageByMinCollateralFactor(minCollateralFactor);
+
+  const marketInfo = q((s) => s.tradebox.marketInfo);
+  if (!marketInfo?.leverageLadder?.length) {
+    return baseMaxLeverage;
+  }
+
+  const amounts = q(selectTradeboxIncreasePositionAmounts);
+  const strategy = q(selectTradeboxLeverageStrategy);
+
+  // In Pay-driven mode, collateral is the stable input; using it for the
+  // ladder lookup avoids the feedback loop where the cap depends on a size
+  // that depends on the slider position. In Size-driven mode, the size is
+  // the stable input, so the original notional-based lookup is correct.
+  const ladderMaxLeverage =
+    strategy === "leverageByCollateral"
+      ? getLadderEquilibriumMaxLeverage(marketInfo, amounts?.initialCollateralUsd ?? 0n)
+      : getLadderMaxLeverageForNotional(marketInfo, amounts?.sizeDeltaUsd ?? 0n);
+
+  if (ladderMaxLeverage === undefined) return baseMaxLeverage;
+
+  const ladderMaxBps = ladderMaxLeverageToBps(ladderMaxLeverage);
+  // Floor to a whole-integer leverage so the slider's hard cap never sits
+  // between two integers (e.g. equilibrium 35.71x would let the user drag to
+  // 35.72x, which crosses a tier boundary and is rejected on-chain).
+  const flooredLadderBps = Math.max(
+    BASIS_POINTS_DIVISOR,
+    Math.floor(ladderMaxBps / BASIS_POINTS_DIVISOR) * BASIS_POINTS_DIVISOR
+  );
+  return Math.min(baseMaxLeverage, flooredLadderBps);
 });
 
 export const selectTradeboxLeverageSliderMarks = createSelector((q) => {

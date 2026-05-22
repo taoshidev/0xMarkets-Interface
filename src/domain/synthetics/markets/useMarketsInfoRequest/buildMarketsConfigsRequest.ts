@@ -1,24 +1,36 @@
+import type { MarketsData } from "sdk/types/markets";
+import { MAX_LADDER_TIERS } from "sdk/configs/dataStore";
 import { MarketConfigMulticallRequestConfig } from "sdk/modules/markets/types";
 import { HASHED_MARKET_CONFIG_KEYS } from "sdk/prebuilt";
+import { hashMarketConfigKeys } from "sdk/utils/marketKeysAndConfigs";
 
 export async function buildMarketsConfigsRequest(
   chainId: number,
   {
     marketsAddresses,
+    marketsData,
     dataStoreAddress,
   }: {
     marketsAddresses: string[] | undefined;
+    marketsData: MarketsData | undefined;
     dataStoreAddress: string;
   }
 ) {
   const request: MarketConfigMulticallRequestConfig = {};
   for (const marketAddress of marketsAddresses || []) {
-    const prebuiltHashedKeys = HASHED_MARKET_CONFIG_KEYS[chainId]?.[marketAddress];
+    let prebuiltHashedKeys: Record<string, string> | undefined =
+      HASHED_MARKET_CONFIG_KEYS[chainId]?.[marketAddress];
 
+    // Cache miss can happen for fork addresses or any market added after the
+    // last prebuild. Fall back to hashing on the fly.
     if (!prebuiltHashedKeys) {
-      throw new Error(
-        `No pre-built hashed config keys found for the market ${marketAddress}. Run \`yarn prebuild\` to generate them.`
-      );
+      const market = marketsData?.[marketAddress];
+      if (!market) {
+        throw new Error(
+          `No pre-built hashed config keys and no market data found for the market ${marketAddress}.`
+        );
+      }
+      prebuiltHashedKeys = hashMarketConfigKeys(market);
     }
 
     request[`${marketAddress}-dataStore`] = {
@@ -233,9 +245,31 @@ export async function buildMarketsConfigsRequest(
           methodName: "getBytes32",
           params: [prebuiltHashedKeys.virtualLongTokenId],
         },
+        leverageLadderTierCount: {
+          methodName: "getUint",
+          params: [prebuiltHashedKeys.leverageLadderTierCount],
+        },
+        ...buildLadderTierCalls(prebuiltHashedKeys),
       },
     };
   }
 
   return request;
+}
+
+// Reads up to MAX_LADDER_TIERS slots; the parser trims trailing empties using
+// the tierCount value above.
+function buildLadderTierCalls(prebuiltHashedKeys: Record<string, string>) {
+  const calls: Record<string, { methodName: string; params: [string] }> = {};
+  for (let i = 0; i < MAX_LADDER_TIERS; i++) {
+    calls[`leverageLadderMaxNotional_${i}`] = {
+      methodName: "getUint",
+      params: [prebuiltHashedKeys[`leverageLadderMaxNotional_${i}`]],
+    };
+    calls[`leverageLadderMaxLeverage_${i}`] = {
+      methodName: "getUint",
+      params: [prebuiltHashedKeys[`leverageLadderMaxLeverage_${i}`]],
+    };
+  }
+  return calls;
 }

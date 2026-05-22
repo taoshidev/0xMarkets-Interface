@@ -110,6 +110,16 @@ export const GASLESS_FEATURE_DISABLED_KEY = hashString("GASLESS_FEATURE_DISABLED
 export const GELATO_RELAY_FEE_MULTIPLIER_FACTOR_KEY = hashString("GELATO_RELAY_FEE_MULTIPLIER_FACTOR");
 export const REQUEST_EXPIRATION_TIME_KEY = hashString("REQUEST_EXPIRATION_TIME");
 
+// Leverage ladder — per-market tiered cap on max leverage as a function of post-trade notional.
+// `LEVERAGE_LADDER_TIER_COUNT` is per-market; the other two are per-(market, tierIndex).
+export const LEVERAGE_LADDER_TIER_COUNT_KEY = hashString("LEVERAGE_LADDER_TIER_COUNT");
+export const LEVERAGE_LADDER_MAX_NOTIONAL_KEY = hashString("LEVERAGE_LADDER_MAX_NOTIONAL");
+export const LEVERAGE_LADDER_MAX_LEVERAGE_KEY = hashString("LEVERAGE_LADDER_MAX_LEVERAGE");
+
+// The contract supports an arbitrary tier count per market; the spec defines 6
+// tiers, so 8 gives breathing room without an SDK rebuild for typical edits.
+export const MAX_LADDER_TIERS = 8;
+
 export const GMX_SIMULATION_ORIGIN = "0x" + keccakString("GMX SIMULATION ORIGIN").slice(-40);
 export const CLAIM_TERMS_KEY = hashString("CLAIM_TERMS");
 export const GENERAL_CLAIM_FEATURE_DISABLED = hashString("GENERAL_CLAIM_FEATURE_DISABLED");
