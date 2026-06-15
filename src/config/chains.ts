@@ -69,10 +69,11 @@ export const RPC_PROVIDERS: Record<AnyChainId, string[]> = {
     "https://base.drpc.org",
   ],
   [BASE_SEPOLIA]: [
-    "https://base-sepolia.core.chainstack.com/eb2a709e3101b602a19c3bebf81d1124",
+    "https://sepolia.base.org",
     "https://base-sepolia.drpc.org",
     "https://base-sepolia.therpc.io",
     "https://base-sepolia.rpc.ankr.com",
+    "https://base-sepolia.core.chainstack.com/eb2a709e3101b602a19c3bebf81d1124",
   ],
   [LOCALHOST]: [
     "http://127.0.0.1:8545",
@@ -82,9 +83,9 @@ export const RPC_PROVIDERS: Record<AnyChainId, string[]> = {
 export const FALLBACK_PROVIDERS: Record<AnyChainId, string[]> = {
   [SOURCE_BASE_MAINNET]: [getAlchemyBaseMainnetHttpUrl("fallback")],
   [BASE_SEPOLIA]: [
-    "https://sepolia.base.org",
-    "https://base-sepolia.core.chainstack.com/eb2a709e3101b602a19c3bebf81d1124",
     "https://base-sepolia.drpc.org",
+    "https://base-sepolia.therpc.io",
+    "https://base-sepolia.rpc.ankr.com",
   ],
   [LOCALHOST]: [
     "http://127.0.0.1:8545",

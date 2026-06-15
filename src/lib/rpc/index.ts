@@ -46,7 +46,7 @@ export function getWsProvider(chainId: AnyChainId): WebSocketProvider | JsonRpcP
   }
 
   if (chainId === BASE_SEPOLIA) {
-    return new ethers.WebSocketProvider("wss://base-sepolia.core.chainstack.com/eb2a709e3101b602a19c3bebf81d1124", network, {
+    return new ethers.WebSocketProvider("wss://base-sepolia.drpc.org", network, {
       staticNetwork: network,
     });
   }
