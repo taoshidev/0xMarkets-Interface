@@ -61,8 +61,7 @@ export function GeneralPerformanceDetails({ chainId, account }: { chainId: numbe
                       The PnL ($) compared to the capital used.
                       <br />
                       <br />
-                      The capital used is calculated as the highest value of [
-                      <i>sum of collateral of open positions - realized PnL + period start pending PnL</i>].
+                      The capital used is the total collateral deposited into positions during the period.
                     </Trans>
                   }
                 >
